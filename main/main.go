@@ -2,7 +2,7 @@ package main
 
 import (
 	"admin/routes/index"
-	"fmt"
+	"admin/routes/users"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -21,53 +21,20 @@ func main() {
 
 	app.Static("/public", "./public")
 
-	indexRouter := app.Group("/", func(c *fiber.Ctx) error {
-		return c.Next()
-	})
-
-	indexRouter.Get("/", func(c *fiber.Ctx) error {
-		user := index.GetSession(c).Get("User")
-
-		return c.Render("index", fiber.Map{
-			"Title": "Home",
-			"User":  user,
-		}, "layouts/main")
-	})
-
+	indexRouter := app.Group("/")
+	indexRouter.Get("/", index.HomeGetController)
 	indexRouter.Get("/sign-in", index.SignInGetController)
 	indexRouter.Post("/sign-in", index.SignInPostController)
-
 	indexRouter.Get("/sign-up", index.SignUpGetController)
 	indexRouter.Post("/sign-up", index.SignUpPostController)
-
-	indexRouter.Get("/account", func(c *fiber.Ctx) error {
-		user := index.GetSession(c).Get("User")
-
-		if user != nil {
-			return c.Render("account", fiber.Map{
-				"Title": "Account",
-				"User":  user,
-			}, "layouts/main")
-		}
-
-		return c.Redirect("/")
-	})
-
-	indexRouter.Get("/sign-out", func(c *fiber.Ctx) error {
-		user := index.GetSession(c).Get("User")
-		fmt.Println(user)
-
-		if user != nil {
-			if err := index.GetSession(c).Destroy(); err != nil {
-				panic(err)
-			}
-
-			return c.Redirect("/sign-in")
-		}
-
-		return c.Redirect("/")
-	})
-
+	indexRouter.Get("/account", index.AccountGetController)
+	indexRouter.Get("/sign-out", index.SignOutController)
 	indexRouter.Post("/validate-form/:form", index.FormValidationRouter)
+
+	siteRouter := app.Group("/site")
+	siteRouter.Get("/isak-tech", users.IsakTechGetHandler)
+	siteRouter.Get("/isak-tech-portal", users.IsakTechPortalGetHandler)
+	siteRouter.Get("/isak-tech-paste", users.IsakTechPasteGetHandler)
+
 	log.Fatal(app.Listen(":8084"))
 }

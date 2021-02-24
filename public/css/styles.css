@@ -12,47 +12,20 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-nav {
-  padding: 1em 2em;
-  width: 100%;
-  background-color: white;
-  border-bottom: 1px solid lightgray;
-}
-nav a {
-  text-decoration: none;
-  color: #363636;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
-nav a:not(:last-of-type) {
-  margin-right: 10px;
-}
-
-main {
+.container {
   padding: 2em;
 }
 
-form {
-  width: 400px;
+section #signIn-form .form-group,
+section #signIn-form .button-group,
+section #signUp-form .form-group,
+section #signUp-form .button-group {
+  margin: 25px 0;
 }
-form .form-group {
-  margin: 10px 0;
-  width: 100%;
-}
-form .form-group input {
-  display: block;
-  padding: 8px;
-  width: 100%;
-}
-form .button-group {
-  margin: 10px 0;
-}
-form .button-group button {
-  padding: 8px;
-  min-width: 140px;
-  margin: 0 0 0 auto;
-  display: block;
+section #signIn-form .button-group,
+section #signUp-form .button-group {
+  display: flex;
+  justify-content: flex-end;
 }
 
 /*# sourceMappingURL=styles.css.map */

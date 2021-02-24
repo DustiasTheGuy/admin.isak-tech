@@ -6,7 +6,34 @@ import (
 	"database/sql"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/session"
+	"github.com/gofiber/storage/mysql"
 )
+
+type SessionData struct {
+	ID       uint
+	Username string
+	Email    string
+}
+
+var Store = session.New(session.Config{
+	Storage: mysql.New(mysql.Config{
+		Username: "root",
+		Password: "password",
+		Database: "admin_db",
+		Table:    "fiber_storage",
+	}),
+})
+
+func GetSession(c *fiber.Ctx) *session.Session {
+	sess, err := Store.Get(c)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return sess
+}
 
 func FormValidationRouter(c *fiber.Ctx) error {
 	switch c.Params("form") {

@@ -12,51 +12,21 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-nav {
-    padding: 1em 2em;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    border-bottom: 1px solid lightgray;
-    
-    a {
-        text-decoration: none;
-        color: rgb(54, 54, 54);
-        text-transform: uppercase;
-        font-weight: 600;
-        letter-spacing: 2px;
-        
-        &:not(:last-of-type) {
-            margin-right: 10px;
-        }
-    }
-}
-
-main {
+.container {
     padding: 2em;
 }
 
-form {
-    width: 400px;
-    .form-group {
-        margin: 10px 0;
-        width: 100%;
-
-        input {
-            display: block;
-            padding: 8px;
-            width: 100%;
-        
+section {
+    #signIn-form,
+    #signUp-form {
+        .form-group,
+        .button-group {
+            margin: 25px 0;
         }
-    }
 
-    .button-group {
-        margin: 10px 0;
-
-        button {
-            padding: 8px;
-            min-width: 140px;
-            margin: 0 0 0 auto;
-            display: block;
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
         }
     }
 }

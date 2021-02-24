@@ -1,7 +1,7 @@
 package index
 
 import (
-	"admin/database"
+	models "admin/models/user"
 	"admin/routes"
 	"database/sql"
 
@@ -24,9 +24,7 @@ func FormValidationRouter(c *fiber.Ctx) error {
 }
 
 func SignUpFormValidation(c *fiber.Ctx) error {
-	db := database.Connect()
-	defer db.Close()
-	var user routes.User
+	var user models.User
 
 	if err := c.BodyParser(&user); err != nil {
 		return c.JSON(routes.HTTPResponse{
@@ -36,104 +34,47 @@ func SignUpFormValidation(c *fiber.Ctx) error {
 		})
 	}
 
-	row := db.QueryRow("SELECT * FROM users WHERE username=?", user.Username)
-	err := row.Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Created, &user.Admin)
+	_, err := user.GetUserByUsername()
 
-	switch {
-	case err == sql.ErrNoRows:
-		if len(user.Email) <= 8 {
-			return c.JSON(routes.HTTPResponse{
-				Message: "Email too short",
-				Success: false,
-				Data:    nil,
-			})
-
-		} else if len(user.Username) <= 4 {
-			return c.JSON(routes.HTTPResponse{
-				Message: "Username too short",
-				Success: false,
-				Data:    nil,
-			})
-
-		} else if len(user.Password) <= 8 {
-			return c.JSON(routes.HTTPResponse{
-				Message: "Password too short",
-				Success: false,
-				Data:    nil,
-			})
-
-		} else {
-			return c.JSON(routes.HTTPResponse{
-				Message: "Validation Success",
-				Success: true,
-				Data:    nil,
-			})
-		}
-	case err != nil:
+	if err == sql.ErrNoRows {
 		return c.JSON(routes.HTTPResponse{
-			Message: "Internal Server Error",
-			Success: false,
-			Data:    nil,
-		})
-	default:
-		return c.JSON(routes.HTTPResponse{
-			Message: "Username already in use",
-			Success: false,
-			Data:    nil,
-		})
-	}
-}
-
-func SignInFormValidation(c *fiber.Ctx) error {
-	db := database.Connect()
-	defer db.Close()
-	var user routes.User
-
-	if err := c.BodyParser(&user); err != nil {
-		return c.JSON(routes.HTTPResponse{
-			Message: "Unable to parse body",
-			Success: false,
-			Data:    nil,
-		})
-
-	}
-
-	if len(user.Username) <= 4 {
-		return c.JSON(routes.HTTPResponse{
-			Message: "Username too short",
-			Success: false,
-			Data:    nil,
-		})
-
-	} else if len(user.Password) <= 8 {
-		return c.JSON(routes.HTTPResponse{
-			Message: "Password too short",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
-	row := db.QueryRow("SELECT * FROM users WHERE username=?", user.Username)
-	err := row.Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Created, &user.Admin)
-
-	switch {
-	case err == sql.ErrNoRows:
-		return c.JSON(routes.HTTPResponse{
-			Message: "There's no user with that username",
-			Success: false,
-			Data:    nil,
-		})
-	case err != nil:
-		return c.JSON(routes.HTTPResponse{
-			Message: "Internal Server Error",
-			Success: false,
-			Data:    nil,
-		})
-	default:
-		return c.JSON(routes.HTTPResponse{
-			Message: "",
+			Message: "No user with that username",
 			Success: true,
 			Data:    nil,
 		})
 	}
+
+	return c.JSON(routes.HTTPResponse{
+		Message: "User with that username might already exist",
+		Success: false,
+		Data:    nil,
+	})
+}
+
+func SignInFormValidation(c *fiber.Ctx) error {
+	var user models.User
+
+	if err := c.BodyParser(&user); err != nil {
+		return c.JSON(routes.HTTPResponse{
+			Message: "Unable to parse body",
+			Success: false,
+			Data:    nil,
+		})
+	}
+
+	_, err := user.GetUserByUsername()
+
+	if err != nil {
+		return c.JSON(routes.HTTPResponse{
+			Message: "Error",
+			Success: false,
+			Data:    nil,
+		})
+	}
+
+	return c.JSON(routes.HTTPResponse{
+		Message: "",
+		Success: true,
+		Data:    nil,
+	})
 }

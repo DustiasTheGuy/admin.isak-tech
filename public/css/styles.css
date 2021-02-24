@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+nav {
+  padding: 1em 2em;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid lightgray;
+}
+nav a {
+  text-decoration: none;
+  color: #363636;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+nav a:not(:last-of-type) {
+  margin-right: 10px;
+}
+
+main {
+  padding: 2em;
+}
+
+form {
+  width: 400px;
+}
+form .form-group {
+  margin: 10px 0;
+  width: 100%;
+}
+form .form-group input {
+  display: block;
+  padding: 8px;
+  width: 100%;
+}
+form .button-group {
+  margin: 10px 0;
+}
+form .button-group button {
+  padding: 8px;
+  min-width: 140px;
+  margin: 0 0 0 auto;
+  display: block;
+}
+
+/*# sourceMappingURL=styles.css.map */

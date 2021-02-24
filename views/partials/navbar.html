@@ -10,7 +10,7 @@
 
         {{ if .User }}
         <li class="nav-item">
-          <a class="nav-link" href="/account">Account</a>
+          <a class="nav-link" href="/users/account">Account</a>
         </li>
         {{ else }}
         <li class="nav-item">
@@ -28,9 +28,9 @@
             Sites
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/site/isak-tech">Isak Tech</a></li>
-            <li><a class="dropdown-item" href="/site/isak-tech-portal">Isak Tech Portal</a></li>
-            <li><a class="dropdown-item" href="/site/isak-tech-paste">Isak Tech Paste</a></li>
+            <li><a class="dropdown-item" href="/site/isak-tech/main">Isak Tech</a></li>
+            <li><a class="dropdown-item" href="/site/isak-tech/portal">Isak Tech Portal</a></li>
+            <li><a class="dropdown-item" href="/site/isak-tech/paste">Isak Tech Paste</a></li>
           </ul>
         </li>
         {{ end }}
@@ -41,7 +41,7 @@
       <div class="d-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/sign-out">Sign Out</a>
+            <a class="nav-link" href="/users/sign-out">Sign Out</a>
           </li>
         </ul>
       </div>

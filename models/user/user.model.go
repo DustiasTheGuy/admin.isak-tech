@@ -9,6 +9,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// User contains all nessecary information about a user
 type User struct {
 	ID       uint      `json:"id"`
 	Username string    `json:"username"`
@@ -18,6 +19,7 @@ type User struct {
 	Admin    bool      `json:"admin"`
 }
 
+// HashPassword generates a hash from a string
 func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 4)
 
@@ -28,6 +30,7 @@ func HashPassword(password string) (string, error) {
 	return string(bytes), nil
 }
 
+// ComparePassword compares a hash and a string and checks the validity
 func ComparePassword(savedPassword string, password string) bool {
 	if err := bcrypt.CompareHashAndPassword([]byte(savedPassword), []byte(password)); err != nil {
 		fmt.Println(err)
@@ -37,6 +40,7 @@ func ComparePassword(savedPassword string, password string) bool {
 	return true
 }
 
+// GetUserByUsername select a user from database by its username
 func (u *User) GetUserByUsername() (User, error) {
 	var user User
 	db := database.Connect()
@@ -61,6 +65,7 @@ func (u *User) GetUserByUsername() (User, error) {
 	}
 }
 
+// CreateNewUser inserts a new user row into the database
 func (u *User) CreateNewUser() error {
 	db := database.Connect()
 	defer db.Close()

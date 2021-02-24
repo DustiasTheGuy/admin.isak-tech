@@ -6,12 +6,27 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func IsakTechGetHandler(c *fiber.Ctx) error {
+// IsakTechGetRouter routes traffic depending on the /:site parameter
+func IsakTechGetRouter(c *fiber.Ctx) error {
+	switch c.Params("site") {
+	case "main":
+		return SiteMainHandler(c) // isak-tech.tk
+	case "portal":
+		return SitePortalHandler(c) // portal.isak-tech.tk
+	case "paste":
+		return SitePasteHandler(c) // paste.isak-tech.tk
+	default:
+		return c.Redirect("/")
+	}
+}
+
+// SiteMainHandler for handling the - isak-tech.tk || main
+func SiteMainHandler(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
-		return c.Render("isak-tech", fiber.Map{
-			"Title": "Isak Tech",
+		return c.Render("sites/main", fiber.Map{
+			"Title": "Main",
 			"User":  user,
 			"Error": nil,
 		}, "layouts/main")
@@ -20,12 +35,13 @@ func IsakTechGetHandler(c *fiber.Ctx) error {
 	return c.Redirect("/sign-in")
 }
 
-func IsakTechPortalGetHandler(c *fiber.Ctx) error {
+// SitePortalHandler for handling the - portal.isak-tech.tk || portal
+func SitePortalHandler(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
-		return c.Render("isak-tech-portal", fiber.Map{
-			"Title": "Isak Tech Portal",
+		return c.Render("sites/portal", fiber.Map{
+			"Title": "Portal",
 			"User":  user,
 			"Error": nil,
 		}, "layouts/main")
@@ -34,12 +50,13 @@ func IsakTechPortalGetHandler(c *fiber.Ctx) error {
 	return c.Redirect("/sign-in")
 }
 
-func IsakTechPasteGetHandler(c *fiber.Ctx) error {
+// SitePasteHandler for handling the - paste.isak-tech.tk || paste
+func SitePasteHandler(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
-		return c.Render("isak-tech-paste", fiber.Map{
-			"Title": "Isak Tech Paste",
+		return c.Render("sites/paste", fiber.Map{
+			"Title": "Paste",
 			"User":  user,
 			"Error": nil,
 		}, "layouts/main")

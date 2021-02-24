@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// HomeGetController is currently doing nothing
 func HomeGetController(c *fiber.Ctx) error {
 	user := GetSession(c).Get("User")
 
@@ -16,7 +17,7 @@ func HomeGetController(c *fiber.Ctx) error {
 	}, "layouts/main")
 }
 
-// SignInGetController bla bla bla
+// SignInGetController is only used for rendering the signin template
 func SignInGetController(c *fiber.Ctx) error {
 	user := GetSession(c).Get("User")
 
@@ -31,7 +32,7 @@ func SignInGetController(c *fiber.Ctx) error {
 	}, "layouts/main")
 }
 
-// SignUpGetController bla bla
+// SignUpGetController is only for rendering the signup template
 func SignUpGetController(c *fiber.Ctx) error {
 	user := GetSession(c).Get("User")
 
@@ -46,6 +47,7 @@ func SignUpGetController(c *fiber.Ctx) error {
 	}, "layouts/main")
 }
 
+// SignUpPostController gets called when formdata has been validated in the SignUpFormValidation controller
 func SignUpPostController(c *fiber.Ctx) error {
 	var user models.User
 
@@ -60,7 +62,7 @@ func SignUpPostController(c *fiber.Ctx) error {
 	return c.Redirect("/")
 }
 
-// SignInPostController bla bla
+// SignInPostController gets called to generate a session when formdata has been validated in SignInFormValidation
 func SignInPostController(c *fiber.Ctx) error {
 	var tempUser models.User
 
@@ -91,7 +93,7 @@ func SignInPostController(c *fiber.Ctx) error {
 			return c.Redirect("/")
 		}
 
-		return c.Redirect("/account")
+		return c.Redirect("/users/account")
 	}
 
 	return c.Redirect("/sign-in")

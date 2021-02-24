@@ -10,12 +10,14 @@ import (
 	"github.com/gofiber/storage/mysql"
 )
 
+// SessionData contains useful information about a session
 type SessionData struct {
 	ID       uint
 	Username string
 	Email    string
 }
 
+// Store is a new mysql sessions storage
 var Store = session.New(session.Config{
 	Storage: mysql.New(mysql.Config{
 		Username: "root",
@@ -25,6 +27,7 @@ var Store = session.New(session.Config{
 	}),
 })
 
+// GetSession get the current session as a pointer
 func GetSession(c *fiber.Ctx) *session.Session {
 	sess, err := Store.Get(c)
 
@@ -35,6 +38,7 @@ func GetSession(c *fiber.Ctx) *session.Session {
 	return sess
 }
 
+// FormValidationRouter routes the incomming form validation post request
 func FormValidationRouter(c *fiber.Ctx) error {
 	switch c.Params("form") {
 	case "sign-in":
@@ -50,6 +54,7 @@ func FormValidationRouter(c *fiber.Ctx) error {
 	}
 }
 
+// SignUpFormValidation checks if a user with the requested username exists
 func SignUpFormValidation(c *fiber.Ctx) error {
 	var user models.User
 
@@ -78,6 +83,7 @@ func SignUpFormValidation(c *fiber.Ctx) error {
 	})
 }
 
+// SignInFormValidation checks if a user exists before making a form submission
 func SignInFormValidation(c *fiber.Ctx) error {
 	var user models.User
 

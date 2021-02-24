@@ -11,10 +11,7 @@ import (
 
 func main() {
 	index.Store.RegisterType(index.SessionData{})
-
 	engine := html.New("./views", ".html")
-	// Initialize default config
-
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
@@ -27,14 +24,14 @@ func main() {
 	indexRouter.Post("/sign-in", index.SignInPostController)
 	indexRouter.Get("/sign-up", index.SignUpGetController)
 	indexRouter.Post("/sign-up", index.SignUpPostController)
-	indexRouter.Get("/account", index.AccountGetController)
-	indexRouter.Get("/sign-out", index.SignOutController)
 	indexRouter.Post("/validate-form/:form", index.FormValidationRouter)
 
+	usersRouter := app.Group("/users")
+	usersRouter.Get("/account", users.AccountGetController)
+	usersRouter.Get("/sign-out", users.SignOutController)
+
 	siteRouter := app.Group("/site")
-	siteRouter.Get("/isak-tech", users.IsakTechGetHandler)
-	siteRouter.Get("/isak-tech-portal", users.IsakTechPortalGetHandler)
-	siteRouter.Get("/isak-tech-paste", users.IsakTechPasteGetHandler)
+	siteRouter.Get("/isak-tech/:site", users.IsakTechGetRouter)
 
 	log.Fatal(app.Listen(":8084"))
 }

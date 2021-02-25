@@ -1,6 +1,7 @@
 package users
 
 import (
+	postModels "admin/models/post"
 	"admin/routes/index"
 
 	"github.com/gofiber/fiber/v2"
@@ -23,11 +24,17 @@ func IsakTechGetRouter(c *fiber.Ctx) error {
 // SiteMainHandler for handling the - isak-tech.tk || main
 func SiteMainHandler(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
+	posts, err := postModels.GetAllPosts()
+
+	if err != nil {
+		panic(err)
+	}
 
 	if user != nil {
-		return c.Render("sites/main", fiber.Map{
+		return c.Render("sites/main/index", fiber.Map{
 			"Title": "Main",
 			"User":  user,
+			"Posts": posts,
 			"Error": nil,
 		}, "layouts/main")
 	}
@@ -40,7 +47,7 @@ func SitePortalHandler(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
-		return c.Render("sites/portal", fiber.Map{
+		return c.Render("sites/portal/index", fiber.Map{
 			"Title": "Portal",
 			"User":  user,
 			"Error": nil,
@@ -55,7 +62,7 @@ func SitePasteHandler(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
-		return c.Render("sites/paste", fiber.Map{
+		return c.Render("sites/paste/index", fiber.Map{
 			"Title": "Paste",
 			"User":  user,
 			"Error": nil,

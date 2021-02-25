@@ -1,0 +1,42 @@
+<style>
+    form .mb-3 textarea.form-control {
+        min-height: 320px;
+    }
+
+    form .button-group {
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+</style>
+
+<h1>Post</h1>
+
+
+<form>
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="email" class="form-control" value="{{ .Post.Title }}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Body</label>
+      <textarea class="form-control">
+          {{ .Post.Post }}
+      </textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select class="form-control" name="" id="">
+            <option value="Articles">Articles</option>
+            <option value="News">News</option>
+            <option value="Product Reviews">Product Reviews</option>
+            <option value="Guides">Guides</option>
+            <option value="Uncategorized">Uncategorized</option>
+        </select>
+        <div class="form-text">Current Category: {{ .Post.Category }}</div>
+    </div>
+    
+    <div class="button-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>

@@ -2,13 +2,22 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func Connect() *sql.DB {
-	db, err := sql.Open("mysql", "root:password@/admin_db?parseTime=true")
+type SQLConfig struct {
+	User     string
+	Password string
+	Database string
+}
+
+func Connect(config *SQLConfig) *sql.DB {
+	connectionURI := fmt.Sprintf("%s:%s@/%s?parseTime=true", config.User, config.Password, config.Database)
+
+	db, err := sql.Open("mysql", connectionURI)
 	if err != nil {
 		panic(err)
 	}

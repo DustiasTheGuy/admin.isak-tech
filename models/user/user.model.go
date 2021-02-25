@@ -43,7 +43,12 @@ func ComparePassword(savedPassword string, password string) bool {
 // GetUserByUsername select a user from database by its username
 func (u *User) GetUserByUsername() (User, error) {
 	var user User
-	db := database.Connect()
+	// "root:password@/admin_db?parseTime=true"
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "admin_db",
+	})
 	defer db.Close()
 
 	row := db.QueryRow("SELECT * FROM users WHERE username=?", u.Username)
@@ -67,7 +72,11 @@ func (u *User) GetUserByUsername() (User, error) {
 
 // CreateNewUser inserts a new user row into the database
 func (u *User) CreateNewUser() error {
-	db := database.Connect()
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "admin_db",
+	})
 	defer db.Close()
 
 	hash, err := HashPassword(u.Password)

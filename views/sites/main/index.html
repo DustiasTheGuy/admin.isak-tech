@@ -1,0 +1,40 @@
+<style>
+    .list-group-item, .list-group {
+        padding: .77em;
+    }
+
+    .d-flex.w-100.justify-content-between {
+        align-items: center;
+        padding: 0 .77em;
+    }
+
+</style>
+
+<section class="site-section text-center">
+    <h1 class="display-4">Isak Tech Panel</h1>
+    <p>site for administrating <a href="https://isak-tech.tk">isak-tech.tk</a></p>
+</section>
+
+<section>
+
+    <div class="list-group">
+        {{ range $index, $post := .Posts }}
+            <a href="/site/isak-tech/main/post/{{ $post.ID }}" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ $post.Title }}</h5>
+                    <small>{{ $post.Date }}</small>
+                </div>            
+                
+                <br>
+
+                <ul class="list-group">
+                    <li class="list-group-item">Unique ID: {{ $post.ID }}</li>
+                    <li class="list-group-item">Category: {{ $post.Category }}</li>
+                    <li class="list-group-item">Image URL: {{ $post.ImageURL }}</li>
+                    <li class="list-group-item">Total Images: {{ $post.TotalImages }}</li>
+                    <li class="list-group-item">Archived: {{ $post.Archived }}</li>
+                </ul>
+            </a>
+        {{ end }}
+    </div>
+</section>

@@ -32,6 +32,7 @@ func main() {
 
 	siteRouter := app.Group("/site")
 	siteRouter.Get("/isak-tech/:site", users.IsakTechGetRouter)
+	siteRouter.Get("/isak-tech/:site/post/:postID", users.PostGetController)
 
 	log.Fatal(app.Listen(":8084"))
 }

@@ -13,6 +13,37 @@
 </section>
 
 <section>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img height="700" src="https://lh3.googleusercontent.com/uq7caF9ywwyvf7jnKSOhDJFp7BYhzS4TCDt4hXMY3FxyzVQ4xDDvTPmZfVG0Mn2I3q7Mba5xzWVBMD2t_1kr1_HDT7wUvPTBq4xncvxsAOI8GHaUMOAVdUrU3BKiG9-vOjVlmPkegiPjK2l3igTq4qRe_VwjRyuGSAcgBZAA4JNJtsQ8iAtMW48KlftEcqauFeB2oMw9as07YqucGO9tdtonGUuIhtiUwo3t0mu-9C5qxFQPFJmJ1hdnvYz-NzVGdf-jrsv3tRpfA8Gc_M2gUj49BYCCZpCtT3yOdv_1Z0g04PzNOi66f95NtHS4Cgnq7ElbV46qocHhesvVdVht3TfSJV2Xq3-L_fwBiufNm7fPq6Tzg58IHs_v8PNhu7BV4a6SudUm1xKhKmJkEtNuLvoUsW5heTtBi4wTESuawhgmShcuD9NTc7qYFcrFup_ooSdbCym0aHFAeUateDKpj_yxoZYyLdnWewTYDOso1XjdxuESw8zxffA_3HEOLC_W2_-eG8xL27KXCPZ_QMT0jdzRIEy71QQgHwEAg9ZmPuREP5I2q_7xm4sGn8WFxelhWu7cgR_AfMoOQ2-A_T_dh2yfPsQDUhJCD9c0mUWLw9v92p4xhuxka-fGazcaq5gSu7uQmIqYGtBGiOv2IFkatnIxucpYzlxLhikJ_qQ8h6pkPk6ATk6cgC1HdVbO=w1892-h1039-no?authuser=0" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img height="700" src="https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img height="700" src="https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+</section>
+
+<section>
+    <h4>Posts</h4>
+
     <div class="accordion" id="accordionExample">
         {{ range $index, $post := .Posts }}
             <div class="accordion-item">

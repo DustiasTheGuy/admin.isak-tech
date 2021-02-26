@@ -22,7 +22,7 @@ var Store = session.New(session.Config{
 	Storage: mysql.New(mysql.Config{
 		Username: "root",
 		Password: "password",
-		Database: "admin_db",
+		Database: "isak_tech_admin",
 		Table:    "fiber_storage",
 	}),
 })

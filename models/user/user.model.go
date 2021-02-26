@@ -43,11 +43,11 @@ func ComparePassword(savedPassword string, password string) bool {
 // GetUserByUsername select a user from database by its username
 func (u *User) GetUserByUsername() (User, error) {
 	var user User
-	// "root:password@/admin_db?parseTime=true"
+	// "root:password@/isak_tech_admin?parseTime=true"
 	db := database.Connect(&database.SQLConfig{
 		User:     "root",
 		Password: "password",
-		Database: "admin_db",
+		Database: "isak_tech_admin",
 	})
 	defer db.Close()
 
@@ -75,7 +75,7 @@ func (u *User) CreateNewUser() error {
 	db := database.Connect(&database.SQLConfig{
 		User:     "root",
 		Password: "password",
-		Database: "admin_db",
+		Database: "isak_tech_admin",
 	})
 	defer db.Close()
 

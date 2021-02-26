@@ -19,6 +19,9 @@ body {
 section {
   margin: 2em 0;
 }
+section h4 {
+  margin: 13px 0;
+}
 
 section #signIn-form .form-group,
 section #signIn-form .button-group,

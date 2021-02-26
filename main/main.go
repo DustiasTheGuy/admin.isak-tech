@@ -3,15 +3,25 @@ package main
 import (
 	"admin/routes/index"
 	"admin/routes/users"
+	"fmt"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html"
 )
 
+func IsLast(index, length int) bool {
+	fmt.Printf("Index: %d\n", index)
+	fmt.Printf("Length: %d\n", length)
+
+	return index != length-1
+}
+
 func main() {
 	index.Store.RegisterType(index.SessionData{})
-	engine := html.New("./views", ".html")
+	//engine := html.New("./views", ".html")
+	engine := html.New("./views", ".html").AddFunc("IsLast", IsLast)
+
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
@@ -26,10 +36,6 @@ func main() {
 	indexRouter.Post("/sign-up", index.SignUpPostController)
 	indexRouter.Post("/validate-form/:form", index.FormValidationRouter)
 
-	indexRouter.Get("/test", func(c *fiber.Ctx) error {
-		return c.Redirect("/sign-in?err=abc dfg")
-	})
-
 	usersRouter := app.Group("/users")
 	usersRouter.Get("/account", users.AccountGetController)
 	usersRouter.Get("/sign-out", users.SignOutController)
@@ -41,6 +47,7 @@ func main() {
 	siteRouter.Get("/:site/post/:postID/add-image", users.AddImageGetController)
 	siteRouter.Post("/:site/post/:postID/add-image", users.AddImagePostController)
 	siteRouter.Get("/:site/remove-image/:postID/:imageID", users.RemoveImageController)
+	siteRouter.Get("/:site/remove-post/:postID", users.RemovePostController)
 
 	log.Fatal(app.Listen(":8084"))
 }

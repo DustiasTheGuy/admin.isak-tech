@@ -1,9 +1,9 @@
 const signUpSubmit = () => {
-    const form = document.getElementById('signUp-form');
-    const formData = new FormData(form);
-    const email = document.getElementById('email').value;
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    let form = document.getElementById('signUp-form');
+    let formData = new FormData(form);
+    let email = document.getElementById('email').value;
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
 
     HTTPPostRequest('/validate-form/sign-up', { email, username, password })
     .then(response => {
@@ -22,10 +22,10 @@ const signUpSubmit = () => {
 
 
 const signInSubmit = () => {
-    const form = document.getElementById('signIn-form');
-    const formData = new FormData(form);
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    let form = document.getElementById('signIn-form');
+    let formData = new FormData(form);
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
 
     HTTPPostRequest('/validate-form/sign-in', { username, password })
     .then(response => {
@@ -62,16 +62,22 @@ const updatePostSubmit = () => {
 }
 
 const deleteImageSubmit = (element) => {
-    const imageID = element.getAttribute('data-id');
-    const postID = element.getAttribute('data-postid');
+    let imageID = element.getAttribute('data-id');
+    let postID = element.getAttribute('data-postid');
 
     if(confirm('Confirm Delete Image: ' + imageID)) {
-        HTTPGetRequest('/site/main/remove-image/' + postID + '/' + imageID)
+        return HTTPGetRequest('/site/main/remove-image/' + postID + '/' + imageID)
         .then(response => response.success ? 
         window.location.reload() : errorHandler(response.message));
     }
 }
 
-const deletePostSubmit = () => {
-    console.log('Delete Post..')
+const deletePostSubmit = (element) => {
+    // /:site/remove-post/:postID
+    let id = element.getAttribute('data-id');
+
+    if(confirm('Confirm Delete Post ' + id)) {
+        console.log('Delete Post..')
+        return window.location.pathname = '/site/main/remove-post/' + id
+    }
 }

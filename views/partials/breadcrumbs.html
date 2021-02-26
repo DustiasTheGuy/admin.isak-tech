@@ -1,0 +1,18 @@
+<div class="text">
+    <h1 class="display-4">{{ .Title }}</h1>
+</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb" id="breadcrumb">
+        {{ range $i, $b := .Breadcrumbs }}
+
+
+            {{ if len $.Breadcrumbs | IsLast $i }}
+                <li class="breadcrumb-item"><a href="{{ $b.linkTo }}">{{ $b.text }}</a></li>
+            {{ else }}
+                <li class="breadcrumb-item active" aria-current="page"><a>{{ $b.text }}</a></li>
+            {{ end }}
+
+        {{ end }}
+    </ol>
+</nav>        

@@ -16,6 +16,10 @@ body {
   padding: 2em;
 }
 
+section {
+  margin: 2em 0;
+}
+
 section #signIn-form .form-group,
 section #signIn-form .button-group,
 section #signUp-form .form-group,
@@ -36,10 +40,17 @@ section #signUp-form .button-group {
   text-transform: capitalize;
 }
 
-.alert.alert-danger {
-  margin: 1em 0;
+.alert.alert-danger,
+.alert.alert-success {
+  transition: opacity 200ms linear;
 }
-.alert.alert-danger p {
+.alert.alert-danger:hover,
+.alert.alert-success:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.alert.alert-danger p,
+.alert.alert-success p {
   margin: 0;
 }
 

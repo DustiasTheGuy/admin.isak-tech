@@ -1,22 +1,16 @@
-<section class="site-section card">
-    <div class="text">
-        <h1 class="display-4">Isak Tech Panel</h1>
-    </div>
-
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb" id="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/site/main">Main</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a>Add Image</a></li>
-        </ol>
-    </nav>
-</section>
-
-{{ if .Error }}
+<section>
+    {{ if .Error }}
     <div class="alert alert-danger" role="alert">
         <p>{{ .Error }}</p>
     </div>
-{{ end }}
+    {{ end }}
+
+    {{ if .Success }}
+        <div class="alert alert-success" role="alert">
+            <p>{{ .Success }}</p>
+        </div>
+    {{ end }}
+</section>
 
 <section>
     <h3>{{ .Post.Title }}</h3>

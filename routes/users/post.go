@@ -28,8 +28,29 @@ func PostGetController(c *fiber.Ctx) error {
 		"Title": fmt.Sprintf("Post %d", post.ID),
 		"Post":  post,
 		"User":  user,
-		"Error": c.Query("err"),
+		"Breadcrumbs": []map[string]string{
+			{"text": "Home", "linkTo": "/"},
+			{"text": "Account", "linkTo": "/users/account"},
+			{"text": "Main", "linkTo": "/site/main"},
+			{"text": fmt.Sprintf("Post %d", post.ID), "linkTo": fmt.Sprintf("/site/main/post/%d", post.ID)},
+		},
+		"Error":   c.Query("err"),
+		"Success": c.Query("s"),
 	}, "layouts/main")
+}
+
+func RemovePostController(c *fiber.Ctx) error {
+	postID, err := strconv.ParseUint(c.Params("postID"), 10, 64)
+
+	if err != nil {
+		return c.Redirect("/site/main?err=invalid parameter recieved")
+	}
+
+	if err := postModel.RemovePost(postID); err != nil {
+		return c.Redirect(fmt.Sprintf("/site/main/post/%d?err=internal server error", postID))
+	}
+
+	return c.Redirect("/site/main?s=post has been deleted")
 }
 
 func UpdatePostController(c *fiber.Ctx) error {

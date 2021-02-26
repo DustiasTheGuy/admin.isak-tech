@@ -32,11 +32,7 @@ func RemoveImage(ImageID, postID uint64) error {
 		"UPDATE posts SET totalimages = totalimages - 1 WHERE id = ?",
 		postID)
 
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return err
 }
 
 func SaveNewImage(PostID uint64, URL string) error {
@@ -59,11 +55,7 @@ func SaveNewImage(PostID uint64, URL string) error {
 		"UPDATE posts SET imageurl = ?, totalimages = totalimages + 1 WHERE id = ?",
 		URL, PostID)
 
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return err
 }
 
 func GetImagesWithPostID(postID uint, db *sql.DB) ([]Image, error) {

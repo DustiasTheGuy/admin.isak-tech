@@ -1,11 +1,13 @@
-<section class="site-section card">
-    <div class="text">
-        <h1 class="display-4">Isak Tech Panel</h1>
-    </div>
-</section>
-
-{{ if .Error }}
+<section>
+    {{ if .Error }}
     <div class="alert alert-danger" role="alert">
         <p>{{ .Error }}</p>
     </div>
-{{ end }}
+    {{ end }}
+
+    {{ if .Success }}
+        <div class="alert alert-success" role="alert">
+            <p>{{ .Success }}</p>
+        </div>
+    {{ end }}
+</section>

@@ -35,11 +35,17 @@ func SiteMainHandler(c *fiber.Ctx) error {
 			"Title": "Main",
 			"User":  user,
 			"Posts": posts,
-			"Error": c.Query("err"),
+			"Breadcrumbs": []map[string]string{
+				{"text": "Home", "linkTo": "/"},
+				{"text": "Account", "linkTo": "/users/account"},
+				{"text": "Main", "linkTo": "/site/main"},
+			},
+			"Error":   c.Query("err"),
+			"Success": c.Query("s"),
 		}, "layouts/main")
 	}
 
-	return c.Redirect("/sign-in")
+	return c.Redirect("/sign-in?err=you must be signed in to view that page")
 }
 
 // SitePortalHandler for handling the - portal.isak-tech.tk || portal
@@ -51,6 +57,12 @@ func SitePortalHandler(c *fiber.Ctx) error {
 			"Title": "Portal",
 			"User":  user,
 			"Error": c.Query("err"),
+			"Breadcrumbs": []map[string]string{
+				{"text": "Home", "linkTo": "/"},
+				{"text": "Account", "linkTo": "/users/account"},
+				{"text": "Portal", "linkTo": "/site/portal"},
+			},
+			"Success": c.Query("s"),
 		}, "layouts/main")
 	}
 
@@ -66,6 +78,12 @@ func SitePasteHandler(c *fiber.Ctx) error {
 			"Title": "Paste",
 			"User":  user,
 			"Error": c.Query("err"),
+			"Breadcrumbs": []map[string]string{
+				{"text": "Home", "linkTo": "/"},
+				{"text": "Account", "linkTo": "/users/account"},
+				{"text": "Paste", "linkTo": "/site/paste"},
+			},
+			"Success": c.Query("s"),
 		}, "layouts/main")
 	}
 

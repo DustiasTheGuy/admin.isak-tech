@@ -27,11 +27,19 @@
 
         <a href="/sign-in">Already have an account?</a>
         
-        {{ if .Error }}
-            <div class="alert alert-danger" role="alert">
-                <p>{{ .Error }}</p>
-            </div>
-        {{ end }}
+        <section>
+            {{ if .Error }}
+                <div class="alert alert-danger" role="alert">
+                    <p>{{ .Error }}</p>
+                </div>
+            {{ end }}
+
+            {{ if .Success }}
+                <div class="alert alert-success" role="alert">
+                    <p>{{ .Success }}</p>
+                </div>
+            {{ end }}
+        </section>
 
         <div class="button-group">
             <button class="btn btn-primary" onclick="signUpSubmit()" type="button">Submit</button>

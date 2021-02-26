@@ -70,7 +70,15 @@ func AddImageGetController(c *fiber.Ctx) error {
 		"Title": "Add Image",
 		"User":  user,
 		"Post":  post,
-		"Error": c.Query("err"),
+		"Breadcrumbs": []map[string]string{
+			{"text": "Home", "linkTo": "/"},
+			{"text": "Account", "linkTo": "/users/account"},
+			{"text": "Main", "linkTo": "/site/main"},
+			{"text": fmt.Sprintf("Post %d", postID), "linkTo": fmt.Sprintf("/site/main/post/%d", postID)},
+			{"text": "Add Image", "linkTo": fmt.Sprintf("/site/main/post/%d/add-image", postID)},
+		},
+		"Error":   c.Query("err"),
+		"Success": c.Query("s"),
 	}, "layouts/main")
 }
 
@@ -92,5 +100,5 @@ func AddImagePostController(c *fiber.Ctx) error {
 	}
 
 	fmt.Println("Saved new image")
-	return c.Redirect(fmt.Sprintf("/site/main/post/%d/add-image", postID))
+	return c.Redirect(fmt.Sprintf("/site/main/post/%d/add-image?s=image has been saved", postID))
 }

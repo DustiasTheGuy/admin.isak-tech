@@ -6,8 +6,6 @@ import (
 	"time"
 )
 
-/* isak-tech structs */
-
 type Post struct {
 	ID          uint
 	Post        string
@@ -21,7 +19,18 @@ type Post struct {
 	Images      []imageModel.Image
 }
 
-/* isak-tech structs */
+func RemovePost(postID uint64) error {
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "isak_tech",
+	})
+	defer db.Close()
+
+	_, err := db.Exec("DELETE FROM posts WHERE id = ?", postID)
+
+	return err
+}
 
 // GetAllPosts is used for getting all posts from the database
 func GetAllPosts() ([]Post, error) {

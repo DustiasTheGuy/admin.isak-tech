@@ -12,10 +12,10 @@ func SignOutController(c *fiber.Ctx) error {
 
 	if user != nil {
 		if err := index.GetSession(c).Destroy(); err != nil {
-			panic(err)
+			return c.Redirect("/sign-in?err=session invalid")
 		}
 
-		return c.Redirect("/sign-in")
+		return c.Redirect("/sign-in?s=farewell user")
 	}
 
 	return c.Redirect("/?err=please sign in")

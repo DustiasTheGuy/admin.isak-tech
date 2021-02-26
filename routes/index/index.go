@@ -13,7 +13,11 @@ func HomeGetController(c *fiber.Ctx) error {
 	return c.Render("index", fiber.Map{
 		"Title": "Home",
 		"User":  user,
-		"Error": c.Query("err"),
+		"Breadcrumbs": []map[string]string{
+			{"text": "Home", "linkTo": "/"},
+		},
+		"Error":   c.Query("err"),
+		"Success": c.Query("s"),
 	}, "layouts/main")
 }
 
@@ -28,7 +32,12 @@ func SignInGetController(c *fiber.Ctx) error {
 	return c.Render("sign-in", fiber.Map{
 		"Title": "Sign In",
 		"User":  nil,
-		"Error": c.Query("err"),
+		"Breadcrumbs": []map[string]string{
+			{"text": "Home", "linkTo": "/"},
+			{"text": "Sign In", "linkTo": "/sign-in"},
+		},
+		"Error":   c.Query("err"),
+		"Success": c.Query("s"),
 	}, "layouts/main")
 }
 
@@ -43,7 +52,12 @@ func SignUpGetController(c *fiber.Ctx) error {
 	return c.Render("sign-up", fiber.Map{
 		"Title": "Sign Up",
 		"User":  nil,
-		"Error": c.Query("err"),
+		"Breadcrumbs": []map[string]string{
+			{"text": "Home", "linkTo": "/"},
+			{"text": "Sign Up", "linkTo": "/sign-up"},
+		},
+		"Error":   c.Query("err"),
+		"Success": c.Query("s"),
 	}, "layouts/main")
 }
 
@@ -59,7 +73,7 @@ func SignUpPostController(c *fiber.Ctx) error {
 		return c.Redirect("/?err=error while creating user")
 	}
 
-	return c.Redirect("/")
+	return c.Redirect("/?s=your account has been created")
 }
 
 // SignInPostController gets called to generate a session when formdata has been validated in SignInFormValidation
@@ -93,7 +107,7 @@ func SignInPostController(c *fiber.Ctx) error {
 			return c.Redirect("/?err=unable to retrieve session")
 		}
 
-		return c.Redirect("/users/account")
+		return c.Redirect("/users/account?s=you have been signed in")
 	}
 
 	return c.Redirect("/sign-in?err=an error has occured")

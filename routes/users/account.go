@@ -29,7 +29,12 @@ func AccountGetController(c *fiber.Ctx) error {
 		return c.Render("account", fiber.Map{
 			"Title": "Account",
 			"User":  user,
-			"Error": c.Query("err"),
+			"Breadcrumbs": []map[string]string{
+				{"text": "Home", "linkTo": "/"},
+				{"text": "Account", "linkTo": "/users/account"},
+			},
+			"Error":   c.Query("err"),
+			"Success": c.Query("s"),
 		}, "layouts/main")
 	}
 

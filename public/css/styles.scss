@@ -17,6 +17,10 @@ body {
 }
 
 section {
+    margin: 2em 0;
+}
+
+section {
     #signIn-form,
     #signUp-form {
         .form-group,
@@ -44,8 +48,14 @@ section {
     }
 }
 
-.alert.alert-danger {
-    margin: 1em 0;
+.alert.alert-danger,
+.alert.alert-success {
+    transition: opacity 200ms linear;
+
+    &:hover {
+        cursor: pointer;
+        opacity: .7;
+    }
 
     p {
         margin: 0;

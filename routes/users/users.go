@@ -17,7 +17,7 @@ func IsakTechGetRouter(c *fiber.Ctx) error {
 	case "paste":
 		return SitePasteHandler(c) // paste.isak-tech.tk
 	default:
-		return c.Redirect("/")
+		return c.Redirect("/?err=site does not exist")
 	}
 }
 
@@ -27,7 +27,7 @@ func SiteMainHandler(c *fiber.Ctx) error {
 	posts, err := postModels.GetAllPosts()
 
 	if err != nil {
-		panic(err)
+		return c.Redirect("/?err=error while querying posts")
 	}
 
 	if user != nil {
@@ -35,7 +35,7 @@ func SiteMainHandler(c *fiber.Ctx) error {
 			"Title": "Main",
 			"User":  user,
 			"Posts": posts,
-			"Error": nil,
+			"Error": c.Query("err"),
 		}, "layouts/main")
 	}
 
@@ -50,11 +50,11 @@ func SitePortalHandler(c *fiber.Ctx) error {
 		return c.Render("sites/portal/index", fiber.Map{
 			"Title": "Portal",
 			"User":  user,
-			"Error": nil,
+			"Error": c.Query("err"),
 		}, "layouts/main")
 	}
 
-	return c.Redirect("/sign-in")
+	return c.Redirect("/sign-in?err=please sign in")
 }
 
 // SitePasteHandler for handling the - paste.isak-tech.tk || paste
@@ -65,9 +65,9 @@ func SitePasteHandler(c *fiber.Ctx) error {
 		return c.Render("sites/paste/index", fiber.Map{
 			"Title": "Paste",
 			"User":  user,
-			"Error": nil,
+			"Error": c.Query("err"),
 		}, "layouts/main")
 	}
 
-	return c.Redirect("/sign-in")
+	return c.Redirect("/sign-in?err=please sign in")
 }

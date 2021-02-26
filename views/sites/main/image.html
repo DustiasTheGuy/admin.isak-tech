@@ -1,0 +1,36 @@
+<section class="site-section card">
+    <div class="text">
+        <h1 class="display-4">Isak Tech Panel</h1>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" id="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/site/main">Main</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a>Add Image</a></li>
+        </ol>
+    </nav>
+</section>
+
+{{ if .Error }}
+    <div class="alert alert-danger" role="alert">
+        <p>{{ .Error }}</p>
+    </div>
+{{ end }}
+
+<section>
+    <h3>{{ .Post.Title }}</h3>
+    <form action="/site/main/post/{{ .Post.ID }}/add-image" method="POST">
+        <div class="mb-3">
+          <label for="image" class="form-label">Image URL</label>
+          <input type="text" class="form-control" id="image" name="URL">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
+
+<section class="gallery">
+    {{ range $index, $image := .Post.Images }}
+        <img src="{{ $image.URL }}" onclick="deleteImageSubmit(this)" data-id="{{ $image.ID }}" data-postid="{{ $image.PostID }}">
+    {{ end }}
+</section>

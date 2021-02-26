@@ -14,7 +14,7 @@ func AccountGetController(c *fiber.Ctx) error {
 	x, ok := user.(index.SessionData)
 
 	if !ok {
-		panic("type assertion failed")
+		return c.Redirect("/?err=an error has occured")
 	}
 
 	tempUser := userModels.User{Username: x.Username}
@@ -22,16 +22,16 @@ func AccountGetController(c *fiber.Ctx) error {
 	user, err = tempUser.GetUserByUsername()
 
 	if err != nil {
-		panic(err)
+		return c.Redirect("/?err=session invalid")
 	}
 
 	if user != nil {
 		return c.Render("account", fiber.Map{
 			"Title": "Account",
 			"User":  user,
-			"Error": nil,
+			"Error": c.Query("err"),
 		}, "layouts/main")
 	}
 
-	return c.Redirect("/")
+	return c.Redirect("/?err=please sign in")
 }

@@ -2,6 +2,7 @@ package post
 
 import (
 	"admin/database"
+	imageModel "admin/models/image"
 	"time"
 )
 
@@ -17,15 +18,7 @@ type Post struct {
 	Archived    int8
 	ImageURL    string
 	TotalImages uint
-	Images      []Image
-}
-
-type Image struct {
-	ID        uint
-	URL       string
-	Date      time.Time
-	PostID    uint
-	Thumbnail int8
+	Images      []imageModel.Image
 }
 
 /* isak-tech structs */
@@ -63,8 +56,15 @@ func GetAllPosts() ([]Post, error) {
 			&post.TotalImages); err != nil {
 			return nil, err
 		}
+		images, err := imageModel.GetImagesWithPostID(post.ID, db)
 
+		if err != nil {
+			return nil, err
+		}
+
+		post.Images = images        // update images to slice populated with images from mysql
 		posts = append(posts, post) // append to posts slice
+
 		// i++
 	}
 
@@ -80,8 +80,7 @@ func GetPostById(ID uint64) (*Post, error) {
 	})
 	defer db.Close()
 
-	var post Post      // will be populated with data from mysql
-	var images []Image // will be populated with data from mysql
+	var post Post // will be populated with data from mysql
 
 	row := db.QueryRow("SELECT * FROM posts WHERE id=?", ID) // select one row with primary key
 
@@ -95,31 +94,34 @@ func GetPostById(ID uint64) (*Post, error) {
 		&post.Archived,
 		&post.ImageURL,
 		&post.TotalImages); err != nil {
-		return &Post{}, err
+		return nil, err
 	}
 
-	// query relevant images
-	rows, err := db.Query("SELECT * FROM images WHERE postid=?", post.ID) // select all images with postid
+	images, err := imageModel.GetImagesWithPostID(post.ID, db)
 
 	if err != nil {
-		return &Post{}, err
-	}
-
-	for rows.Next() { // loop images and append to images slice
-		var image Image // temporary variable
-		if err := rows.Scan(
-			&image.ID,
-			&image.URL,
-			&image.Date,
-			&image.PostID,
-			&image.Thumbnail); err != nil {
-			return &Post{}, err
-		}
-
-		images = append(images, image) // append to slice
+		return nil, err
 	}
 
 	post.Images = images // update images to slice populated with images from mysql
 
 	return &post, nil
+}
+
+func (p *Post) UpdatePostWithID() error {
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "isak_tech",
+	})
+	defer db.Close()
+
+	_, err := db.Exec("UPDATE posts SET title=?, post=?, category=?, archived=?, imageurl=? WHERE id=?",
+		p.Title, p.Post, p.Category, p.Archived, p.ImageURL, p.ID)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

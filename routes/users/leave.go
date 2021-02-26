@@ -18,5 +18,5 @@ func SignOutController(c *fiber.Ctx) error {
 		return c.Redirect("/sign-in")
 	}
 
-	return c.Redirect("/")
+	return c.Redirect("/?err=please sign in")
 }

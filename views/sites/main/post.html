@@ -1,42 +1,69 @@
-<style>
-    form .mb-3 textarea.form-control {
-        min-height: 320px;
-    }
+<section class="site-section card">
+    <div class="text">
+        <h1 class="display-4">Isak Tech Panel</h1>
+    </div>
 
-    form .button-group {
-        display: flex;
-        justify-content: flex-end;
-    }
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" id="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/site/main">Main</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a>Post {{ .Post.ID }}</a></li>
+        </ol>
+    </nav>
+</section>
+
+{{ if .Error }}
+    <div class="alert alert-danger" role="alert">
+        <p>{{ .Error }}</p>
+    </div>
+{{ end }}
+
+<section class="post-section">
+    <form>
+        <div class="mb-3">
+          <label class="form-label" for="title">Title</label>
+          <input type="text" class="form-control" id="title" value="{{ .Post.Title }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="body">Body</label>
+          <textarea type="text" class="form-control" id="body">{{ .Post.Post }}</textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="imageurl">Image URL</label>
+          <input type="text" class="form-control" id="imageurl" value="{{ .Post.ImageURL }}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-control" name="" id="category">
+                <option value="Articles">Articles</option>
+                <option value="News">News</option>
+                <option value="Product Reviews">Product Reviews</option>
+                <option value="Guides">Guides</option>
+                <option value="Uncategorized">Uncategorized</option>
+            </select>
+            <div class="form-text">Current Category: {{ .Post.Category }}</div>
+        </div>
     
-</style>
-
-<h1>Post</h1>
-
-
-<form>
-    <div class="mb-3">
-      <label class="form-label">Title</label>
-      <input type="email" class="form-control" value="{{ .Post.Title }}">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Body</label>
-      <textarea class="form-control">
-          {{ .Post.Post }}
-      </textarea>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Category</label>
-        <select class="form-control" name="" id="">
-            <option value="Articles">Articles</option>
-            <option value="News">News</option>
-            <option value="Product Reviews">Product Reviews</option>
-            <option value="Guides">Guides</option>
-            <option value="Uncategorized">Uncategorized</option>
-        </select>
-        <div class="form-text">Current Category: {{ .Post.Category }}</div>
-    </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="archived">
+            <label class="form-check-label">Archived</label>
+        </div>
     
-    <div class="button-group">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-</form>
+        <div class="hidden">
+            <span id="post-id">{{ .Post.ID }}</span>
+            <span id="archived-hidden">{{ .Post.Archived }}</span>
+        </div>
+    
+        <div class="button-group">
+            <button onclick="deletePostSubmit()" type="button" class="btn btn-danger">Delete</button>
+            <button onclick="updatePostSubmit()" type="button" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</section>
+<script>
+    (function() {
+        document.getElementById('archived').checked = 
+        parseInt(document.getElementById('archived-hidden').textContent) === 1 
+        ? true : false;
+    })();
+</script>

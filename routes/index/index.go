@@ -13,7 +13,7 @@ func HomeGetController(c *fiber.Ctx) error {
 	return c.Render("index", fiber.Map{
 		"Title": "Home",
 		"User":  user,
-		"Error": nil,
+		"Error": c.Query("err"),
 	}, "layouts/main")
 }
 
@@ -22,13 +22,13 @@ func SignInGetController(c *fiber.Ctx) error {
 	user := GetSession(c).Get("User")
 
 	if user != nil {
-		return c.Redirect("/")
+		return c.Redirect("/?err=error")
 	}
 
 	return c.Render("sign-in", fiber.Map{
 		"Title": "Sign In",
 		"User":  nil,
-		"Error": nil,
+		"Error": c.Query("err"),
 	}, "layouts/main")
 }
 
@@ -37,13 +37,13 @@ func SignUpGetController(c *fiber.Ctx) error {
 	user := GetSession(c).Get("User")
 
 	if user != nil {
-		return c.Redirect("/")
+		return c.Redirect("/?err=error")
 	}
 
 	return c.Render("sign-up", fiber.Map{
 		"Title": "Sign Up",
 		"User":  nil,
-		"Error": nil,
+		"Error": c.Query("err"),
 	}, "layouts/main")
 }
 
@@ -52,11 +52,11 @@ func SignUpPostController(c *fiber.Ctx) error {
 	var user models.User
 
 	if err := c.BodyParser(&user); err != nil {
-		return c.Redirect("/")
+		return c.Redirect("/?err=unable to parse body")
 	}
 
 	if err := user.CreateNewUser(); err != nil {
-		return c.Redirect("/")
+		return c.Redirect("/?err=error while creating user")
 	}
 
 	return c.Redirect("/")
@@ -67,20 +67,20 @@ func SignInPostController(c *fiber.Ctx) error {
 	var tempUser models.User
 
 	if err := c.BodyParser(&tempUser); err != nil {
-		return c.Redirect("/sign-in")
+		return c.Redirect("/sign-in?err=unable to parse body")
 	}
 
 	user, err := tempUser.GetUserByUsername()
 
 	if err != nil {
-		return c.Redirect("/sign-in")
+		return c.Redirect("/sign-in?err=internal server error")
 	}
 
 	if models.ComparePassword(user.Password, tempUser.Password) {
 		sess, err := Store.Get(c)
 
 		if err != nil {
-			return c.Redirect("/sign-in")
+			return c.Redirect("/sign-in?err=invalid session")
 		}
 
 		sess.Set("User", SessionData{
@@ -90,11 +90,11 @@ func SignInPostController(c *fiber.Ctx) error {
 		})
 
 		if err := sess.Save(); err != nil {
-			return c.Redirect("/")
+			return c.Redirect("/?err=unable to retrieve session")
 		}
 
 		return c.Redirect("/users/account")
 	}
 
-	return c.Redirect("/sign-in")
+	return c.Redirect("/sign-in?err=an error has occured")
 }

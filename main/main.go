@@ -26,13 +26,21 @@ func main() {
 	indexRouter.Post("/sign-up", index.SignUpPostController)
 	indexRouter.Post("/validate-form/:form", index.FormValidationRouter)
 
+	indexRouter.Get("/test", func(c *fiber.Ctx) error {
+		return c.Redirect("/sign-in?err=abc dfg")
+	})
+
 	usersRouter := app.Group("/users")
 	usersRouter.Get("/account", users.AccountGetController)
 	usersRouter.Get("/sign-out", users.SignOutController)
 
 	siteRouter := app.Group("/site")
-	siteRouter.Get("/isak-tech/:site", users.IsakTechGetRouter)
-	siteRouter.Get("/isak-tech/:site/post/:postID", users.PostGetController)
+	siteRouter.Get("/:site", users.IsakTechGetRouter)
+	siteRouter.Get("/:site/post/:postID", users.PostGetController)
+	siteRouter.Post("/:site/post/:postID", users.UpdatePostController)
+	siteRouter.Get("/:site/post/:postID/add-image", users.AddImageGetController)
+	siteRouter.Post("/:site/post/:postID/add-image", users.AddImagePostController)
+	siteRouter.Get("/:site/remove-image/:postID/:imageID", users.RemoveImageController)
 
 	log.Fatal(app.Listen(":8084"))
 }

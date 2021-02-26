@@ -14,7 +14,12 @@
 
         <a href="/sign-up">Don't have an account?</a>
 
-
+        {{ if .Error }}
+            <div class="alert alert-danger" role="alert">
+                <p>{{ .Error }}</p>
+            </div>
+        {{ end }}
+        
         <div class="button-group">
             <button class="btn btn-primary" onclick="signInSubmit()" type="button">Submit</button>
         </div>

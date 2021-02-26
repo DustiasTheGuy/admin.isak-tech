@@ -1,40 +1,53 @@
-<style>
-    .list-group-item, .list-group {
-        padding: .77em;
-    }
-
-    .d-flex.w-100.justify-content-between {
-        align-items: center;
-        padding: 0 .77em;
-    }
-
-</style>
-
-<section class="site-section text-center">
-    <h1 class="display-4">Isak Tech Panel</h1>
-    <p>site for administrating <a href="https://isak-tech.tk">isak-tech.tk</a></p>
+<section class="site-section card">
+    <div class="text">
+        <h1 class="display-4">Isak Tech Panel</h1>
+    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" id="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a>Main</a></li>
+        </ol>
+    </nav>
 </section>
 
-<section>
-
-    <div class="list-group">
-        {{ range $index, $post := .Posts }}
-            <a href="/site/isak-tech/main/post/{{ $post.ID }}" class="list-group-item list-group-item-action" aria-current="true">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ $post.Title }}</h5>
-                    <small>{{ $post.Date }}</small>
-                </div>            
-                
-                <br>
-
-                <ul class="list-group">
-                    <li class="list-group-item">Unique ID: {{ $post.ID }}</li>
-                    <li class="list-group-item">Category: {{ $post.Category }}</li>
-                    <li class="list-group-item">Image URL: {{ $post.ImageURL }}</li>
-                    <li class="list-group-item">Total Images: {{ $post.TotalImages }}</li>
-                    <li class="list-group-item">Archived: {{ $post.Archived }}</li>
-                </ul>
-            </a>
-        {{ end }}
+{{ if .Error }}
+    <div class="alert alert-danger" role="alert">
+        <p>{{ .Error }}</p>
     </div>
+{{ end }}
+
+<section>
+    <div class="accordion" id="accordionExample">
+        {{ range $index, $post := .Posts }}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="h-{{ $index }}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#d-{{ $index }}" aria-expanded="true" aria-controls="d-{{ $index }}">
+                    {{ $post.Title }}
+                    </button>
+                </h2>
+                <div id="d-{{ $index }}" class="accordion-collapse collapse" aria-labelledby="h-{{ $index }}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>Unique ID: {{ $post.ID }}</p>
+                        <p>Title: {{ $post.Title}} </p>
+                        <p>Created: {{ $post.Date }}</p>
+                        <p>Category: {{ $post.Category }}</p>
+                        <p>Image URL: {{ $post.ImageURL }}</p>
+                        <p>Total Images: {{ $post.TotalImages }}</p>
+                        <p>Archived: {{ $post.Archived }}</p>
+
+                        <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="/site/main/post/{{ $post.ID }}/add-image">Edit Images</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="/site/main/post/{{ $post.ID }}">Edit Post</a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        {{ end }}
+      </div>
 </section>

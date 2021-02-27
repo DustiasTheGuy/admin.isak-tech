@@ -15,16 +15,16 @@
 <section>
     <h4>Account Information</h4>
 
-    <ul>
-        <li>{{.User.ID}}</li>
-        <li>{{.User.Email}}</li>
-        <li>{{.User.Username}}</li>
-        <li>{{.User.Created}}</li>
-        <li>*************</li>
-    </ul>
+    <div class="list">
+        <p><i class="fas fa-id-card"></i> {{.User.ID}}</p>
+        <p><i class="fas fa-envelope"></i> {{.User.Email}}</p>
+        <p><i class="fas fa-user"></i> {{.User.Username}}</p>
+        <p><i class="fas fa-calendar"></i> {{ FormatDate .User.Created}}</p>
+        <p><i class="fas fa-key"></i> *************</p>
+    </div>
 </section>
 
-<section>
+<!-- <section>
     <h4>Quick Navigation</h4>
 
     <div class="grid">
@@ -53,4 +53,4 @@
             </div>
        </div>
     </div>
-</section>
+</section> -->

@@ -12,6 +12,8 @@ body {
     font-family: 'Poppins', sans-serif;
     width: 100%;
     height: 100%;
+    background-color: #23967F;
+    color: #043565;
 }
 
 main {
@@ -20,7 +22,7 @@ main {
     .content {
         width: 60%;
         margin: 0 auto;
-        padding: 1em;
+        padding: 1em 1em 3em 1em;
         background-color: #fff;
     }
 }
@@ -73,10 +75,10 @@ img {
     transition: all 325ms linear;
     margin: 0 .5em;
     cursor: pointer;
-    color: gray;
+    color: #FFFFFF;
     font-size: 45px;
     &:hover {
-        color: rgb(77, 77, 77);
+        color: #d4d4d4
     }
 }
 
@@ -114,38 +116,37 @@ img {
     }
 }
 
-a {
-    color: #f17324;
-    text-decoration: none;
-
-    &:hover {
-        color: #d87d45;
-        
-    }
-}
 
 .page-header {
     border: 1px solid lightgray;
     padding: 2em;
-    
+    background-color: #CE2D4F;
+    margin-bottom: 1em;
+    display: block;
+
     h1 {
         font-size: 4.5rem;
         margin: 0;
-        color: rgb(77, 77, 77);
+        color: rgb(255, 255, 255);
         font-weight: lighter;
     }
 
     nav {
         a {
             text-decoration: none;
-            color: rgb(77, 77, 77);
+            color: #bebebe;
             &:not(:last-of-type) {
-                color: #FF934F;
+                color: #ffffff;
+
+                &:hover {
+                    color: rgb(201, 201, 201);
+                }
+
                 &::after {
                     content: '>';
                     margin: 0 10px;
                     font-size: 14px;
-                    color: rgb(77, 77, 77);
+                    color: #ffffff;
                 }
             }
         }
@@ -153,6 +154,25 @@ a {
 }
 
 section {
+
+    .list {
+        padding: 1em;
+        p {
+            margin: 0;
+
+            i {
+                display: inline-block;
+                margin-right: 8px;
+                color: #CE2D4F;
+            }
+        }
+    }
+
+    h4 {
+        margin: 5px 0;
+        font-size: 2.1rem;
+    }
+
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -174,12 +194,19 @@ section {
 
             div {
                 padding: 1em;
-            
+
                 a {
                     display: inline-block;
+                    color: #043565;
+                    text-decoration: none;
 
                     &:first-of-type {
                         margin-right: 10px;
+                    }
+
+                    &:hover {
+                        color: #0b4075;
+                        
                     }
                 }
             }
@@ -206,6 +233,12 @@ section {
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 100%;
+            color: #CE2D4F;
+            text-decoration: none;
+
+            &:hover {
+                color: #CE2D4F;
+            }
         }
 
         .accordion-body {
@@ -222,9 +255,14 @@ section {
 
             a {
                 display: inline-block;
-                
+                color: #CE6D8B;
+
                 &:last-of-type {
                     margin-left: 13px;
+                }
+
+                &:hover {
+                    color: #99576c;
                 }
             }
         }
@@ -333,20 +371,71 @@ form {
     padding: 1em;
     color: #fff;
     margin: 1em 0;
-    
+    font-size: 22px;
+    position: relative;
+
     p {
         margin: 0;
         text-transform: capitalize;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &::after {
+            font-family: "Font Awesome 5 Free"; 
+            font-weight: 900; 
+        }
+    }
+
+    &::before {
+        transition: all 200ms linear;
+        background-color: rgba(177, 55, 55, 0);
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Font Awesome 5 Free"; 
+        content: '\f00d';
+        color: rgba(255, 255, 255, 0);
+        font-weight: 900;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
 
 .alert.alert-danger {
-    background-color: red;
+    background-color: #AF9164;
+
+    &:hover {
+        &::before {
+            background-color: rgba(223, 19, 19, 0.726);
+            color: #fff;
+        }
+    }
+
+    p::after {
+        content: "\f05a"; 
+    }
 }
 
 .alert.alert-success {
-    background-color: rgb(23, 153, 23);
+    background-color: #23967F;
+
+    &:hover {
+        &::before {
+            background-color: #466e668a;
+            color: #fff;
+        }
+    }
+    
+    p::after {
+        content: "\f058"; 
+    }
 }
 
 @media only screen and(max-width: 1750px) and (min-width: 1400px) {

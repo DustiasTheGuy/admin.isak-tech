@@ -28,8 +28,8 @@
               <p>Total Images: {{ $post.TotalImages }}</p>
               <p>Archived: {{ $post.Archived }}</p>
 
-              <a href="/site/main/post/{{ $post.ID }}/add-image">Edit Images</a>
-              <a href="/site/main/post/{{ $post.ID }}">Edit Post</a>
+              <a href="/site/main/post/{{ $post.ID }}/add-image">Edit Images <i class="fas fa-images"></i></a>
+              <a href="/site/main/post/{{ $post.ID }}">Edit Post <i class="fas fa-cog"></i></a>
             </div>
           </div>
         {{ end }}

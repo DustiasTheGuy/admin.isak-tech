@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   box-sizing: border-box;
 }
@@ -12,6 +13,8 @@ body {
   font-family: "Poppins", sans-serif;
   width: 100%;
   height: 100%;
+  background-color: #23967F;
+  color: #043565;
 }
 
 main {
@@ -20,7 +23,7 @@ main {
 main .content {
   width: 60%;
   margin: 0 auto;
-  padding: 1em;
+  padding: 1em 1em 3em 1em;
   background-color: #fff;
 }
 
@@ -69,11 +72,11 @@ img {
   transition: all 325ms linear;
   margin: 0 0.5em;
   cursor: pointer;
-  color: gray;
+  color: #FFFFFF;
   font-size: 45px;
 }
 #navbar-btn:hover {
-  color: #4d4d4d;
+  color: #d4d4d4;
 }
 
 #navbar-btn.open {
@@ -109,38 +112,51 @@ img {
   text-decoration: underline;
 }
 
-a {
-  color: #f17324;
-  text-decoration: none;
-}
-a:hover {
-  color: #d87d45;
-}
-
 .page-header {
   border: 1px solid lightgray;
   padding: 2em;
+  background-color: #CE2D4F;
+  margin-bottom: 1em;
+  display: block;
 }
 .page-header h1 {
   font-size: 4.5rem;
   margin: 0;
-  color: #4d4d4d;
+  color: white;
   font-weight: lighter;
 }
 .page-header nav a {
   text-decoration: none;
-  color: #4d4d4d;
+  color: #bebebe;
 }
 .page-header nav a:not(:last-of-type) {
-  color: #FF934F;
+  color: #ffffff;
+}
+.page-header nav a:not(:last-of-type):hover {
+  color: #c9c9c9;
 }
 .page-header nav a:not(:last-of-type)::after {
   content: ">";
   margin: 0 10px;
   font-size: 14px;
-  color: #4d4d4d;
+  color: #ffffff;
 }
 
+section .list {
+  padding: 1em;
+}
+section .list p {
+  margin: 0;
+}
+section .list p i {
+  display: inline-block;
+  margin-right: 8px;
+  color: #CE2D4F;
+}
+section h4 {
+  margin: 5px 0;
+  font-size: 2.1rem;
+}
 section .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -164,9 +180,14 @@ section .grid .grid-item div {
 }
 section .grid .grid-item div a {
   display: inline-block;
+  color: #043565;
+  text-decoration: none;
 }
 section .grid .grid-item div a:first-of-type {
   margin-right: 10px;
+}
+section .grid .grid-item div a:hover {
+  color: #0b4075;
 }
 
 .accordion .accordion-item {
@@ -186,6 +207,11 @@ section .grid .grid-item div a:first-of-type {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  color: #CE2D4F;
+  text-decoration: none;
+}
+.accordion .accordion-item a:hover {
+  color: #CE2D4F;
 }
 .accordion .accordion-item .accordion-body {
   overflow: hidden;
@@ -200,9 +226,13 @@ section .grid .grid-item div a:first-of-type {
 }
 .accordion .accordion-item .accordion-body a {
   display: inline-block;
+  color: #CE6D8B;
 }
 .accordion .accordion-item .accordion-body a:last-of-type {
   margin-left: 13px;
+}
+.accordion .accordion-item .accordion-body a:hover {
+  color: #99576c;
 }
 .accordion .accordion-item.open .accordion-body {
   max-height: 800px;
@@ -288,19 +318,62 @@ form .button-group {
   padding: 1em;
   color: #fff;
   margin: 1em 0;
+  font-size: 22px;
+  position: relative;
 }
 .alert.alert-success p,
 .alert.alert-danger p {
   margin: 0;
   text-transform: capitalize;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.alert.alert-success p::after,
+.alert.alert-danger p::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+.alert.alert-success::before,
+.alert.alert-danger::before {
+  transition: all 200ms linear;
+  background-color: rgba(177, 55, 55, 0);
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Font Awesome 5 Free";
+  content: "";
+  color: rgba(255, 255, 255, 0);
+  font-weight: 900;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .alert.alert-danger {
-  background-color: red;
+  background-color: #AF9164;
+}
+.alert.alert-danger:hover::before {
+  background-color: rgba(223, 19, 19, 0.726);
+  color: #fff;
+}
+.alert.alert-danger p::after {
+  content: "";
 }
 
 .alert.alert-success {
-  background-color: #179917;
+  background-color: #23967F;
+}
+.alert.alert-success:hover::before {
+  background-color: #466e668a;
+  color: #fff;
+}
+.alert.alert-success p::after {
+  content: "";
 }
 
 @media only screen and (max-width: 1750px) and (min-width: 1400px) {

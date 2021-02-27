@@ -15,10 +15,11 @@
 <section>
     <h3>{{ .Post.Title }}</h3>
     <form action="/site/main/post/{{ .Post.ID }}/add-image" method="POST">
-        <div class="mb-3">
-          <label for="image" class="form-label">Image URL</label>
-          <input type="text" class="form-control" id="image" name="URL">
+        <div>
+          <label for="image">Image URL</label>
+          <input type="text" id="image" name="URL">
         </div>
+        
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </section>

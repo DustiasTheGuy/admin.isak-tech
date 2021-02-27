@@ -3,7 +3,6 @@ package main
 import (
 	"admin/routes/index"
 	"admin/routes/users"
-	"fmt"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -11,8 +10,8 @@ import (
 )
 
 func IsLast(index, length int) bool {
-	fmt.Printf("Index: %d\n", index)
-	fmt.Printf("Length: %d\n", length)
+	// fmt.Printf("Index: %d\n", index)
+	// fmt.Printf("Length: %d\n", length)
 
 	return index != length-1
 }

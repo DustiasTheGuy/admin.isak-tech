@@ -1,6 +1,6 @@
 <section class="gallery">
     {{ range $index, $page := .Pages }}
-        <img src="https://portal.isak-tech.tk{{ $page.ImageURL }}">
+        <img src="https://portal.isak-tech.tk{{ $page.ImageURL }}" data-id="{{ $page.ID }}" onclick="navigate(this)">
     {{ end }}
 </section>
 
@@ -19,3 +19,8 @@
 </section>
 
 
+<script>
+    const navigate = (element) => 
+    window.location.pathname = '/site/portal/page/' + 
+    parseInt(element.getAttribute('data-id'));
+</script>

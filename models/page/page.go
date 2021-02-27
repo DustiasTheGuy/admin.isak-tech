@@ -6,7 +6,7 @@ import (
 )
 
 type Page struct {
-	ID          uint      `json:id`
+	ID          uint      `json:"id"`
 	URL         string    `json:"url"`
 	Description string    `json:"description"`
 	ImageURL    string    `json:"imgUrl"`
@@ -44,4 +44,27 @@ func GetAllPages() ([]Page, error) {
 	}
 
 	return pages, nil
+}
+
+func GetSinglePage(ID uint64) (*Page, error) {
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "isak_tech_portal",
+	})
+	defer db.Close()
+
+	row := db.QueryRow("SELECT * FROM pages WHERE id = ?", ID)
+
+	var page Page
+	if err := row.Scan(
+		&page.ID,
+		&page.URL,
+		&page.Description,
+		&page.ImageURL,
+		&page.Created); err != nil {
+		return nil, err
+	}
+
+	return &page, nil
 }

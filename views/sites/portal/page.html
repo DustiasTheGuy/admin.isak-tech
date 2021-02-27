@@ -1,0 +1,43 @@
+<section>
+    {{ if .Error }}
+    <div class="alert alert-danger" role="alert">
+        <p>{{ .Error }}</p>
+    </div>
+    {{ end }}
+
+    {{ if .Success }}
+        <div class="alert alert-success" role="alert">
+            <p>{{ .Success }}</p>
+        </div>
+    {{ end }}
+</section>
+
+<section>
+    <form action="/site/portal/page/{{ .Page.ID }}/update" method="POST">
+        <div class="form-group">
+            <label for="ID">ID</label>
+            <input type="text" id="ID" name="ID" value="{{ .Page.ID }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="Created">Created</label>
+            <input type="text" id="Created" name="Created" value="{{ FormatDate .Page.Created }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="URL">URL ( Link To )</label>
+            <input type="text" id="URL" name="URL" value="{{ .Page.URL }}">
+        </div>
+        <div class="form-group">
+            <label for="ImageURL">ImageURL</label>
+            <input type="text" id="ImageURL" name="ImageURL" value="{{ .Page.ImageURL }}">
+        </div>
+        <div class="form-group">
+            <label for="Description">Description</label>
+            <input type="text" id="Description" name="Description" value="{{ .Page.Description }}">
+        </div>
+
+        <div class="button-group">
+            <button type="button" class="btn btn-danger">Delete Page</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</section>

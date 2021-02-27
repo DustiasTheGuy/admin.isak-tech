@@ -66,7 +66,7 @@ const deleteImageSubmit = (element) => {
     let postID = element.getAttribute('data-postid');
 
     if(confirm('Confirm Delete Image: ' + imageID)) {
-        return HTTPGetRequest('/site/main/remove-image/' + postID + '/' + imageID)
+        return HTTPGetRequest('/site/main/post/' + postID + '/' + imageID + '/remove-image')
         .then(response => response.success ? 
         window.location.reload() : errorHandler(response.message));
     }
@@ -78,6 +78,11 @@ const deletePostSubmit = (element) => {
 
     if(confirm('Confirm Delete Post ' + id)) {
         console.log('Delete Post..')
-        return window.location.pathname = '/site/main/remove-post/' + id
+        return window.location.pathname = '/site/main/post/' + id + '/remove-post'
     }
 }
+
+/*
+    mainRouter.Get("/post/:postID/:imageID/remove-image", users.RemoveImageController)
+	mainRouter.Get("/post/:postID/remove-post", users.RemovePostController)
+*/

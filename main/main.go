@@ -25,44 +25,49 @@ func FormatDate(date time.Time) string {
 }
 
 func main() {
-	index.Store.RegisterType(index.SessionData{})
+	index.Store.RegisterType(index.SessionData{}) // register the struct that will be held in each session
 	//engine := html.New("./views", ".html")
 	engine := html.New("./views", ".html")
-	engine = engine.AddFunc("IsLast", IsLast)
-	engine = engine.AddFunc("FormatDate", FormatDate)
+	engine = engine.AddFunc("IsLast", IsLast)         // add custom template func to check if element is last in an array, primarily used to apply CSS to last element in a range
+	engine = engine.AddFunc("FormatDate", FormatDate) // format date for nicer display
 
 	app := fiber.New(fiber.Config{
-		Views: engine,
+		Views: engine, // assign the html view engine
 	})
 
-	app.Static("/public", "./public")
+	app.Static("/public", "./public") // serve static files from /public folder
 
-	indexRouter := app.Group("/")
-	indexRouter.Get("/", index.HomeGetController)
-	indexRouter.Get("/sign-in", index.SignInGetController)
-	indexRouter.Post("/sign-in", index.SignInPostController)
-	indexRouter.Get("/sign-up", index.SignUpGetController)
-	indexRouter.Post("/sign-up", index.SignUpPostController)
-	indexRouter.Post("/validate-form/:form", index.FormValidationRouter)
+	indexRouter := app.Group("/")                                        // group every route that ONLY can be accessed without a session or can always be accessed
+	indexRouter.Get("/", index.HomeGetController)                        // RENDER | display home page template
+	indexRouter.Get("/sign-in", index.SignInGetController)               // RENDER | display the user sign in template
+	indexRouter.Post("/sign-in", index.SignInPostController)             // POST   | request a new session with username and password
+	indexRouter.Get("/sign-up", index.SignUpGetController)               // RENDER | display the user sign up form template
+	indexRouter.Post("/sign-up", index.SignUpPostController)             // POST   | create a new user account
+	indexRouter.Post("/validate-form/:form", index.FormValidationRouter) // gets called through javascript to ensure form is valid before making a submit request
 
-	usersRouter := app.Group("/users")
-	usersRouter.Get("/account", users.AccountGetController)
-	usersRouter.Get("/sign-out", users.SignOutController)
+	usersRouter := app.Group("/users")                      // Group all routes related to a users account
+	usersRouter.Get("/account", users.AccountGetController) // RENDER | display users account information
+	usersRouter.Get("/sign-out", users.SignOutController)   // UPDATE | request to clear session
 
-	mainRouter := app.Group("/site/main")
-	mainRouter.Get("/", users.SiteMainController)
-	mainRouter.Get("/post/:postID", users.PostGetController)
-	mainRouter.Get("/post/:postID/add-image", users.AddImageGetController)
-	mainRouter.Post("/post/:postID", users.UpdatePostController)
-	mainRouter.Post("/post/:postID/add-image", users.AddImagePostController)
-	mainRouter.Get("/remove-image/:postID/:imageID", users.RemoveImageController)
-	mainRouter.Get("/remove-post/:postID", users.RemovePostController)
+	mainRouter := app.Group("/site/main")                                              // Group all routes that are related to just isak-tech.tk the main site
+	mainRouter.Get("/", users.MainGetController)                                       // RENDER | display all posts template
+	mainRouter.Get("/post/:postID", users.PostGetController)                           // RENDER | display single post template
+	mainRouter.Get("/post/:postID/add-image", users.AddImageGetController)             // RENDER | display add new image template
+	mainRouter.Post("/post/:postID/add-image", users.AddImagePostController)           // POST   | request add new image post request
+	mainRouter.Post("/post/:postID", users.UpdatePostController)                       // UPDATE | request existing post
+	mainRouter.Get("/post/:postID/:imageID/remove-image", users.RemoveImageController) // DELETE | request image get request ( might be changed to post request )
+	mainRouter.Get("/post/:postID/remove-post", users.RemovePostController)            // DELETE | request an existing post permanently
 
-	portalRouter := app.Group("/site/portal")
-	portalRouter.Get("/", users.SitePortalController)
+	// A page is a row in mysql that contains all data associated with a page that I find interesting
+	portalRouter := app.Group("/site/portal")                                 // Group all routes that are related to portal.isak-tech.tk
+	portalRouter.Get("/", users.PortalGetController)                          // RENDER | display all available pages template
+	portalRouter.Get("/page/:pageID", users.PortalGetPageController)          // RENDER | display a single page template
+	portalRouter.Post("/page/:pageID/update", users.PortalUpdateController)   // UPDATE | request update an existing page
+	portalRouter.Get("/page/:pageID/delete", users.PortalDeleteOneController) // DELETE | request delete an existing page permanently
+	portalRouter.Post("/page/add-page", users.PortalAddNewController)         // POST 	| request create a new page
 
-	pasteRouter := app.Group("/site/paste")
-	pasteRouter.Get("/", users.PasteGetController)
+	pasteRouter := app.Group("/site/paste")        // Group all routes that are related to paste.isak-tech.tk
+	pasteRouter.Get("/", users.PasteGetController) // RENDER | display all the pastes that have been submitted
 
-	log.Fatal(app.Listen(":8084"))
+	log.Fatal(app.Listen(":8084")) // attempt to listen for incomming requests, exit program with an error message
 }

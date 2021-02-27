@@ -8,7 +8,7 @@ import (
 )
 
 // SiteMainHandler for handling the - isak-tech.tk || main
-func SiteMainController(c *fiber.Ctx) error {
+func MainGetController(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 	posts, err := postModels.GetAllPosts()
 

@@ -16,6 +16,7 @@ body {
 
 main {
     width: 100%;
+
     .content {
         width: 60%;
         margin: 0 auto;
@@ -264,6 +265,7 @@ form {
     .form-group {
         display: flex;
         flex-direction: column;
+        margin: 20px 0;
 
         p {
             margin: 0;
@@ -291,9 +293,15 @@ form {
             min-height: 400px;
         }
     }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .gallery {
+    margin: 10px 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -333,7 +341,7 @@ form {
 }
 
 
-.alert.alert-success {
+.alert.alert-danger {
     background-color: red;
 }
 

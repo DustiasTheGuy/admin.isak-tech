@@ -22,7 +22,7 @@
             <div class="accordion-body">
               <p>Unique ID: {{ $post.ID }}</p>
               <p>Title: {{ $post.Title}} </p>
-              <p>Created: {{ $post.Date }}</p>
+              <p>Created: {{ FormatDate $post.Date }}</p>
               <p>Category: {{ $post.Category }}</p>
               <p>Image URL: {{ $post.ImageURL }}</p>
               <p>Total Images: {{ $post.TotalImages }}</p>

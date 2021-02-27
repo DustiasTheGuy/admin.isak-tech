@@ -1,3 +1,9 @@
+<section class="gallery">
+    {{ range $index, $page := .Pages }}
+        <img src="https://portal.isak-tech.tk{{ $page.ImageURL }}">
+    {{ end }}
+</section>
+
 <section>
     {{ if .Error }}
     <div class="alert alert-danger" role="alert">
@@ -11,3 +17,5 @@
         </div>
     {{ end }}
 </section>
+
+

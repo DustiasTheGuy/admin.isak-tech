@@ -4,6 +4,7 @@ import (
 	"admin/routes/index"
 	"admin/routes/users"
 	"log"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html"
@@ -16,10 +17,19 @@ func IsLast(index, length int) bool {
 	return index != length-1
 }
 
+func FormatDate(date time.Time) string {
+	// 2021-02-26 05:25:13 +0000 UTC
+	// fmt.Println(date)
+
+	return date.Format("Jan 2, 15.00")
+}
+
 func main() {
 	index.Store.RegisterType(index.SessionData{})
 	//engine := html.New("./views", ".html")
-	engine := html.New("./views", ".html").AddFunc("IsLast", IsLast)
+	engine := html.New("./views", ".html")
+	engine = engine.AddFunc("IsLast", IsLast)
+	engine = engine.AddFunc("FormatDate", FormatDate)
 
 	app := fiber.New(fiber.Config{
 		Views: engine,
@@ -39,14 +49,20 @@ func main() {
 	usersRouter.Get("/account", users.AccountGetController)
 	usersRouter.Get("/sign-out", users.SignOutController)
 
-	siteRouter := app.Group("/site")
-	siteRouter.Get("/:site", users.IsakTechGetRouter)
-	siteRouter.Get("/:site/post/:postID", users.PostGetController)
-	siteRouter.Post("/:site/post/:postID", users.UpdatePostController)
-	siteRouter.Get("/:site/post/:postID/add-image", users.AddImageGetController)
-	siteRouter.Post("/:site/post/:postID/add-image", users.AddImagePostController)
-	siteRouter.Get("/:site/remove-image/:postID/:imageID", users.RemoveImageController)
-	siteRouter.Get("/:site/remove-post/:postID", users.RemovePostController)
+	mainRouter := app.Group("/site/main")
+	mainRouter.Get("/", users.SiteMainController)
+	mainRouter.Get("/post/:postID", users.PostGetController)
+	mainRouter.Get("/post/:postID/add-image", users.AddImageGetController)
+	mainRouter.Post("/post/:postID", users.UpdatePostController)
+	mainRouter.Post("/post/:postID/add-image", users.AddImagePostController)
+	mainRouter.Get("/remove-image/:postID/:imageID", users.RemoveImageController)
+	mainRouter.Get("/remove-post/:postID", users.RemovePostController)
+
+	portalRouter := app.Group("/site/portal")
+	portalRouter.Get("/", users.SitePortalController)
+
+	pasteRouter := app.Group("/site/paste")
+	pasteRouter.Get("/", users.PasteGetController)
 
 	log.Fatal(app.Listen(":8084"))
 }

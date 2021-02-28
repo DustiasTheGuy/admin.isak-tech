@@ -1,0 +1,16 @@
+@media only screen and (max-width: 1400px) and (min-width: 875px) {
+  section .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 875px) {
+  main .content, main .content.open {
+    width: 100%;
+  }
+
+  section .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=mediaquery.css.map */

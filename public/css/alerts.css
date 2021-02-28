@@ -1,0 +1,64 @@
+@charset "UTF-8";
+.alert.alert-success,
+.alert.alert-danger {
+  padding: 1em;
+  color: #fff;
+  font-size: 22px;
+  position: relative;
+}
+.alert.alert-success p,
+.alert.alert-danger p {
+  margin: 0;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.alert.alert-success p::after,
+.alert.alert-danger p::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+.alert.alert-success::before,
+.alert.alert-danger::before {
+  transition: all 200ms linear;
+  background-color: rgba(177, 55, 55, 0);
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Font Awesome 5 Free";
+  content: "";
+  color: rgba(255, 255, 255, 0);
+  font-weight: 900;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert.alert-danger {
+  background-color: #AF9164;
+}
+.alert.alert-danger:hover::before {
+  background-color: rgba(223, 19, 19, 0.726);
+  color: #fff;
+}
+.alert.alert-danger p::after {
+  content: "";
+}
+
+.alert.alert-success {
+  background-color: #23967F;
+}
+.alert.alert-success:hover::before {
+  background-color: #466e668a;
+  color: #fff;
+}
+.alert.alert-success p::after {
+  content: "";
+}
+
+/*# sourceMappingURL=alerts.css.map */

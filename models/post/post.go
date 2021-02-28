@@ -2,7 +2,9 @@ package post
 
 import (
 	"admin/database"
+	"admin/models"
 	imageModel "admin/models/image"
+	"errors"
 	"time"
 )
 
@@ -28,6 +30,30 @@ func RemovePost(postID uint64) error {
 	defer db.Close()
 
 	_, err := db.Exec("DELETE FROM posts WHERE id = ?", postID)
+
+	return err
+}
+
+func (p *Post) SaveNewPost() error {
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "isak_tech",
+	})
+	defer db.Close()
+
+	if !models.CheckLength(p.Post, 25) {
+		return errors.New("You forgot to enter a post")
+	} else if !models.CheckLength(p.Title, 10) {
+		return errors.New("You forgot to enter a title")
+	} else if !models.CheckLength(p.Category, 10) {
+		return errors.New("You forgot to enter a category")
+	} else if !models.CheckLength(p.ImageURL, 10) {
+		return errors.New("You forgot to enter an image url")
+	}
+
+	_, err := db.Exec("INSERT INTO posts (post, title, category, userid, imageurl) VALUES (?, ?, ?, ?, ?)",
+		p.Post, p.Title, p.Category, p.UserID, p.ImageURL)
 
 	return err
 }

@@ -72,7 +72,6 @@ func AddImageGetController(c *fiber.Ctx) error {
 		"Post":  post,
 		"Breadcrumbs": []map[string]string{
 			{"text": "Home", "linkTo": "/"},
-			{"text": "Account", "linkTo": "/users/account"},
 			{"text": "Main", "linkTo": "/site/main"},
 			{"text": fmt.Sprintf("Post %d", postID), "linkTo": fmt.Sprintf("/site/main/post/%d", postID)},
 			{"text": "Add Image", "linkTo": fmt.Sprintf("/site/main/post/%d/add-image", postID)},

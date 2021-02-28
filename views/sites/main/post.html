@@ -11,7 +11,6 @@
         </div>
     {{ end }}
 </section>
-
 <section class="post-section">
     <form>
         <div class="form-group">
@@ -54,20 +53,3 @@
         </div>
     </form>
 </section>
-<script>
-    (function() {
-        document.getElementById('archived').checked = 
-        parseInt(document.getElementById('archived-hidden').textContent) === 1 
-        ? true : false;
-    })();
-
-    (function() {
-        let category = document.getElementById('post-category').textContent;
-        let options = document.getElementsByTagName('option');
-
-        for(let i = 0; i < options.length; i++) {
-            if(options[i].value === category) 
-            return options[i].selected = true;
-        }
-    })();
-</script>

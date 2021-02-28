@@ -1,7 +1,9 @@
-const serverAddr = 'http://localhost:8084'
+const env = (prod) => prod ? 
+'https://admin.isak-tech.tk' : 'http://localhost:8084';
+
 
 const HTTPPostRequest = (url, data) => {
-    return fetch(serverAddr + url, {
+    return fetch(env(false) + url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -9,9 +11,11 @@ const HTTPPostRequest = (url, data) => {
 }
 
 const HTTPGetRequest = (url) => {
-    return fetch(serverAddr + url, {
+    return fetch(env(false) + url, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     }).then(response => response.json());
 }
 
+const HTTPPutRequest = (url) => null;
+const HTTPDelRequest = (url) => null;

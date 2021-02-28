@@ -26,7 +26,6 @@ func PortalGetController(c *fiber.Ctx) error {
 			"Error": c.Query("err"),
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
-				{"text": "Account", "linkTo": "/users/account"},
 				{"text": "Portal", "linkTo": "/site/portal"},
 			},
 			"Pages":   pages,
@@ -59,7 +58,6 @@ func PortalGetPageController(c *fiber.Ctx) error {
 			"Error": c.Query("err"),
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
-				{"text": "Account", "linkTo": "/users/account"},
 				{"text": "Portal", "linkTo": "/site/portal"},
 				{"text": fmt.Sprintf("Page %d", pageID), "linkTo": fmt.Sprintf("/site/portal/page/%d", pageID)},
 			},
@@ -72,13 +70,102 @@ func PortalGetPageController(c *fiber.Ctx) error {
 }
 
 func PortalUpdateController(c *fiber.Ctx) error {
-	return c.Redirect(fmt.Sprintf("/site/portal/page/%s?err=page under construction", c.Params("pageID")))
+	fmt.Println("Request From: ", c.OriginalURL())
+	var p pageModel.Page
+	user := index.GetSession(c).Get("User")
+
+	if err := c.BodyParser(&p); err != nil {
+		return c.Redirect("/site/portal/page/add-page?err=unable to parse body")
+	}
+
+	if user != nil {
+		if err := p.UpdatePage(); err != nil {
+			return c.Redirect(fmt.Sprintf("/site/portal/page/add-page?err=%v", err))
+		}
+
+		return c.Redirect("/site/portal?s=page has been updated")
+	}
+
+	return c.Redirect("/?err=session invalid")
 }
 
 func PortalDeleteOneController(c *fiber.Ctx) error {
-	return nil
+	fmt.Println("Request From: ", c.OriginalURL())
+	user := index.GetSession(c).Get("User")
+
+	if user != nil {
+		id, err := strconv.ParseUint(c.Params("pageID"), 10, 64)
+
+		if err != nil {
+			return c.Redirect("/site/portal?err=invalid parameter recieved")
+		}
+
+		if err := pageModel.DeleteOnePage(id); err != nil {
+			return c.Redirect("/site/portal/?err=unable to delete post")
+		}
+
+		return c.Redirect("/site/portal?s=page has been deleted")
+	}
+
+	return c.Redirect("/?err=session invalid")
 }
 
-func PortalAddNewController(c *fiber.Ctx) error {
-	return nil
+func PortalAddNewGetController(c *fiber.Ctx) error {
+	user := index.GetSession(c).Get("User")
+
+	if user != nil {
+		return c.Render("sites/portal/add_new", fiber.Map{
+			"Title": "Add New",
+			"User":  user,
+			"Error": c.Query("err"),
+			"Breadcrumbs": []map[string]string{
+				{"text": "Home", "linkTo": "/"},
+				{"text": "Portal", "linkTo": "/site/portal"},
+				{"text": "Add New", "linkTo": "/site/portal/page/add-page"},
+			},
+			"Success": c.Query("s"),
+		}, "layouts/main")
+	}
+
+	return c.Redirect("/site/portal?err=an error has occured")
+}
+
+func PortalAddNewPostController(c *fiber.Ctx) error {
+	var p pageModel.Page
+	user := index.GetSession(c).Get("User")
+
+	if err := c.BodyParser(&p); err != nil {
+		return c.Redirect("/site/portal/page/add-page?err=unable to parse body")
+	}
+
+	if user != nil {
+
+		if err := p.SaveNewPage(); err != nil {
+			return c.Redirect(fmt.Sprintf("/site/portal/page/add-page?err=%v", err))
+		}
+
+		return c.Redirect("/site/portal?s=page has been saved")
+	}
+
+	return c.Redirect("/?err=an error has occured")
+}
+
+func PortalSiteInfoController(c *fiber.Ctx) error {
+	user := index.GetSession(c).Get("User")
+
+	if user != nil {
+		return c.Render("sites/portal/site_info", fiber.Map{
+			"Title": "Portal Site Info",
+			"User":  user,
+			"Error": c.Query("err"),
+			"Breadcrumbs": []map[string]string{
+				{"text": "Home", "linkTo": "/"},
+				{"text": "Portal", "linkTo": "/site/portal"},
+				{"text": "Site Info", "linkTo": "/site/portal/site-information"},
+			},
+			"Success": c.Query("s"),
+		}, "layouts/main")
+	}
+
+	return c.Redirect("/site/portal?err=an error has occured")
 }

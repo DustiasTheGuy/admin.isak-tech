@@ -24,19 +24,62 @@ func PostGetController(c *fiber.Ctx) error {
 		return c.Redirect("/site/main?err=post may have been moved or deleted")
 	}
 
-	return c.Render("sites/main/post", fiber.Map{
-		"Title": fmt.Sprintf("Post %d", post.ID),
-		"Post":  post,
-		"User":  user,
-		"Breadcrumbs": []map[string]string{
-			{"text": "Home", "linkTo": "/"},
-			{"text": "Account", "linkTo": "/users/account"},
-			{"text": "Main", "linkTo": "/site/main"},
-			{"text": fmt.Sprintf("Post %d", post.ID), "linkTo": fmt.Sprintf("/site/main/post/%d", post.ID)},
-		},
-		"Error":   c.Query("err"),
-		"Success": c.Query("s"),
-	}, "layouts/main")
+	if user != nil {
+		return c.Render("sites/main/post", fiber.Map{
+			"Title": fmt.Sprintf("Post %d", post.ID),
+			"Post":  post,
+			"User":  user,
+			"Breadcrumbs": []map[string]string{
+				{"text": "Home", "linkTo": "/"},
+				{"text": "Main", "linkTo": "/site/main"},
+				{"text": fmt.Sprintf("Post %d", post.ID), "linkTo": fmt.Sprintf("/site/main/post/%d", post.ID)},
+			},
+			"Error":   c.Query("err"),
+			"Success": c.Query("s"),
+		}, "layouts/main")
+	}
+
+	return c.Redirect("/sign-in?err=you must be signed in to view that page")
+}
+
+func AddNewGetController(c *fiber.Ctx) error {
+	user := index.GetSession(c).Get("User")
+
+	if user != nil {
+		return c.Render("sites/main/add_new", fiber.Map{
+			"Title": "New Post",
+			"User":  user,
+			"Breadcrumbs": []map[string]string{
+				{"text": "Home", "linkTo": "/"},
+				{"text": "Main", "linkTo": "/site/main"},
+				{"text": "Add New", "linkTo": "/site/main/add-new"},
+			},
+			"Error":   c.Query("err"),
+			"Success": c.Query("s"),
+		}, "layouts/main")
+	}
+
+	return c.Redirect("/sign-in?err=you must be signed in to view that page")
+}
+
+func AddNewPostController(c *fiber.Ctx) error {
+	user := index.GetSession(c).Get("User")
+
+	if user != nil {
+		var p postModel.Post
+
+		if err := c.BodyParser(&p); err != nil {
+			return c.Redirect("/site/main/post/add-new?err=unable to parse body")
+		}
+
+		if err := p.SaveNewPost(); err != nil {
+			return c.Redirect(fmt.Sprintf("/site/main/post/add-new?err=%v", err))
+		}
+
+		return c.Redirect("/site/main?s=saved new post")
+	}
+
+	return c.Redirect("/?err=you must be signed in to view that page")
 }
 
 func RemovePostController(c *fiber.Ctx) error {

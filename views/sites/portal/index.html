@@ -1,9 +1,3 @@
-<section class="gallery">
-    {{ range $index, $page := .Pages }}
-        <img src="https://portal.isak-tech.tk{{ $page.ImageURL }}" data-id="{{ $page.ID }}" onclick="navigate(this)">
-    {{ end }}
-</section>
-
 <section>
     {{ if .Error }}
     <div class="alert alert-danger" role="alert">
@@ -18,9 +12,8 @@
     {{ end }}
 </section>
 
-
-<script>
-    const navigate = (element) => 
-    window.location.pathname = '/site/portal/page/' + 
-    parseInt(element.getAttribute('data-id'));
-</script>
+<section class="gallery">
+    {{ range $index, $page := .Pages }}
+        <img src="{{ $page.ImageURL }}" data-id="{{ $page.ID }}" onclick="navigate(this)" href="/site/portal/page/{{ $page.ID }}">
+    {{ end }}
+</section>

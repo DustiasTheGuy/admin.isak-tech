@@ -23,8 +23,27 @@ func MainGetController(c *fiber.Ctx) error {
 			"Posts": posts,
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
-				{"text": "Account", "linkTo": "/users/account"},
 				{"text": "Main", "linkTo": "/site/main"},
+			},
+			"Error":   c.Query("err"),
+			"Success": c.Query("s"),
+		}, "layouts/main")
+	}
+
+	return c.Redirect("/sign-in?err=you must be signed in to view that page")
+}
+
+func MainSiteInfoController(c *fiber.Ctx) error {
+	user := index.GetSession(c).Get("User")
+
+	if user != nil {
+		return c.Render("sites/main/site_info", fiber.Map{
+			"Title": "Main Site Info",
+			"User":  user,
+			"Breadcrumbs": []map[string]string{
+				{"text": "Home", "linkTo": "/"},
+				{"text": "Main", "linkTo": "/site/main"},
+				{"text": "Site Info", "linkTo": "/site/main/site-information"},
 			},
 			"Error":   c.Query("err"),
 			"Success": c.Query("s"),

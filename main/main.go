@@ -51,23 +51,29 @@ func main() {
 
 	mainRouter := app.Group("/site/main")                                              // Group all routes that are related to just isak-tech.tk the main site
 	mainRouter.Get("/", users.MainGetController)                                       // RENDER | display all posts template
+	mainRouter.Post("/post/add-new", users.AddNewPostController)                       // POST   | create a new post, form submit
+	mainRouter.Get("/post/add-new", users.AddNewGetController)                         // RENDER | display the form where you can add a new post
 	mainRouter.Get("/post/:postID", users.PostGetController)                           // RENDER | display single post template
 	mainRouter.Get("/post/:postID/add-image", users.AddImageGetController)             // RENDER | display add new image template
 	mainRouter.Post("/post/:postID/add-image", users.AddImagePostController)           // POST   | request add new image post request
 	mainRouter.Post("/post/:postID", users.UpdatePostController)                       // UPDATE | request existing post
 	mainRouter.Get("/post/:postID/:imageID/remove-image", users.RemoveImageController) // DELETE | request image get request ( might be changed to post request )
 	mainRouter.Get("/post/:postID/remove-post", users.RemovePostController)            // DELETE | request an existing post permanently
+	mainRouter.Get("/site-information", users.MainSiteInfoController)                  // RENDER | display information about the site
 
 	// A page is a row in mysql that contains all data associated with a page that I find interesting
 	portalRouter := app.Group("/site/portal")                                 // Group all routes that are related to portal.isak-tech.tk
 	portalRouter.Get("/", users.PortalGetController)                          // RENDER | display all available pages template
+	portalRouter.Get("/page/add-page", users.PortalAddNewGetController)       // RENDER | request create a new page template
+	portalRouter.Post("/page/add-page", users.PortalAddNewPostController)     // CREATE | create a new page in mysql
 	portalRouter.Get("/page/:pageID", users.PortalGetPageController)          // RENDER | display a single page template
 	portalRouter.Post("/page/:pageID/update", users.PortalUpdateController)   // UPDATE | request update an existing page
 	portalRouter.Get("/page/:pageID/delete", users.PortalDeleteOneController) // DELETE | request delete an existing page permanently
-	portalRouter.Post("/page/add-page", users.PortalAddNewController)         // POST 	| request create a new page
+	portalRouter.Get("/site-information", users.PortalSiteInfoController)     // RENDER | display information about the site
 
-	pasteRouter := app.Group("/site/paste")        // Group all routes that are related to paste.isak-tech.tk
-	pasteRouter.Get("/", users.PasteGetController) // RENDER | display all the pastes that have been submitted
+	pasteRouter := app.Group("/site/paste")                             // Group all routes that are related to paste.isak-tech.tk
+	pasteRouter.Get("/", users.PasteGetController)                      // RENDER | display all the pastes that have been submitted
+	pasteRouter.Get("/site-information", users.PasteSiteInfoController) // RENDER | display information about the site
 
 	log.Fatal(app.Listen(":8084")) // attempt to listen for incomming requests, exit program with an error message
 }

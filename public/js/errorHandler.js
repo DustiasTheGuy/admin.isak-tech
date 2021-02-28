@@ -1,5 +1,5 @@
 const errorHandler = (error) => {
-    console.log(error);
+    return console.log(error);
 }
 
 (function() {
@@ -11,8 +11,10 @@ const errorHandler = (error) => {
                 alerts[i].style.display = 'none';
             });
         }
-        
+
+        return null
+
     } catch(err) {
-        console.log('Zero errors have occured')
+        return null
     }
 })();

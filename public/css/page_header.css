@@ -1,0 +1,33 @@
+.page-header {
+  padding: 2em;
+  background-color: #4E937A;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 225px;
+}
+.page-header h1 {
+  font-size: 4.5rem;
+  margin: 0;
+  color: white;
+  font-weight: lighter;
+}
+.page-header nav a {
+  text-decoration: none;
+  color: #333;
+}
+.page-header nav a:not(:last-of-type) {
+  color: #ffffff;
+}
+.page-header nav a:not(:last-of-type):hover {
+  color: #c9c9c9;
+}
+.page-header nav a:not(:last-of-type)::after {
+  content: ">";
+  margin: 0 10px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+/*# sourceMappingURL=page_header.css.map */

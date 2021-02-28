@@ -1,22 +1,45 @@
-<nav id="sidenav">
-  <div>
-      <a href="/">Home</a>
-    {{ if .User }}
-      <a href="/site/main">Isak Tech</a>
-      <a href="/site/portal">Isak Tech Portal</a>
-      <a href="/site/paste">Isak Tech Paste</a>
+<nav id="sidenav" class="open">
+  <a class="logo" href="/">
+    <img src="/public/images/0f8b5463-35b5-4dc4-89b8-ec7514557d1f_200x200.png" alt="">
+  </a>
+  
+  {{ if .User }}
+    <div>
+      <h4>Isak Tech</h4>
+      <a class="nav-link" href="/site/main"><span>Home</span></a>
+      <a class="nav-link" href="/site/main/post/add-new"><span>New Post</span></a>
+      <a class="nav-link" href="/site/main/site-information"><span>Site Information</span></a>
+      <a class="nav-link" href="#"><span>Analytics</span></a>
+    </div>
+
+    <div>
+      <h4>Portal</h4>
+      <a class="nav-link" href="/site/portal"><span>Home</span></a>
+      <a class="nav-link" href="/site/portal/page/add-page"><span>New Page</span></a>
+      <a class="nav-link" href="/site/portal/site-information"><span>Site Information</span></a>
+    </div>
+
+    <div>
+      <h4>Paste</h4>
+      <a class="nav-link" href="/site/paste"><span>Home</span></a>
+      <a class="nav-link" href="/site/paste/site-information"><span>Site Information</span></a>
+      <a class="nav-link" href="#"><span>API</span></a>
+    </div>
     {{ end }}
 
-    {{ if not .User }}
-      <a href="/sign-up">Sign Up</a>
-      <a href="/sign-in">Sign In</a>
-    {{ end }}
-
     {{ if .User }}
-      <a href="/users/account">Account</a>
-      <a href="/users/sign-out">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+      <div>
+        <h4>Account</h4>
+          <a class="nav-link" href="/users/account"><span>Account</span></a>
+          <a class="nav-link" href="/users/sign-out"><span>Sign Out</span> <i class="fas fa-sign-out-alt"></i></a>
+      </div>
+    {{ else }}
+      <div>
+        <h4>Account</h4>
+        <a class="nav-link" href="/sign-up"><span>Sign Up</span></a>
+        <a class="nav-link" href="/sign-in"><span>Sign In</span></a>
+      </div>
     {{ end }}
-  </div>
 </nav>
 
-<i id="navbar-btn" onclick="toggleSidenav()" class="fas fa-bars fa-2x"></i>
+<div onclick="toggleSidenav()" id="navbar-btn" class="open fas fa-bars"></div>

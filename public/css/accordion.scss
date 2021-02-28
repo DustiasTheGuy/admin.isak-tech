@@ -1,0 +1,84 @@
+.accordion {
+    .accordion-item {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        padding: 1em 2em;
+
+        &:first-of-type {
+            border-top: 1px solid lightgray;
+        }
+
+        &:not(:last-of-type) {
+            border-bottom: 1px solid lightgray;
+        }
+
+        a {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            color: #4E937A;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            span {
+                max-width: 80%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: inline-block;
+            }
+
+            &:hover {
+                color: #315246;
+            }
+
+            i {
+                transition: all 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+            }
+            
+            i.rotated {
+                transform: rotate(180deg);
+            }
+        }
+
+        .accordion-body {
+            overflow: hidden;
+            max-height: 0;
+            transition: all 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+            p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+            }
+
+            a {
+                display: inline-block;
+                color: #fff;
+                border: 1px solid #8de0c2;
+                padding: 6px 12px;
+                background-color: #4E937A;
+                &:last-of-type {
+                    margin-left: 13px;
+                }
+
+                &:hover {
+                    background-color: #38886b;
+                }
+            }
+        }
+    }
+
+    .accordion-item.open {
+        .accordion-body {
+            max-height: 800px;
+        }
+    }
+}

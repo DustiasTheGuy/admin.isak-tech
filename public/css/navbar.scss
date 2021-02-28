@@ -1,0 +1,81 @@
+#navbar-btn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: margin-left 325ms linear;
+    font-size: 42px;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #F2A359;
+    cursor: pointer;
+
+    &:hover {
+        color: #ca8443;
+    }
+}
+
+#navbar-btn.open {
+    margin-left: 310px;
+}
+
+#sidenav.open {
+    width: 300px;
+}
+
+#sidenav {
+    background-color: #333;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 0;
+    overflow: hidden;
+    transition: width 325ms linear;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .logo {
+        background-color: #F2A359;
+        height: 225px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 300px;
+        img {
+            object-fit: contain;
+            height: 100%;
+            display: block;
+            width: 280px;
+        }    
+    }
+
+    div {
+        border-bottom: 1px solid rgb(66, 66, 66);
+        width: 300px;
+        padding: .63em 0;
+        h4 {
+            text-transform: uppercase;
+            color: #4E937A;
+            font-size: 20px;
+            padding: .5em;
+            margin: 0;
+        }
+
+        a.active-link {
+            background-color: rgb(73, 73, 73);
+        }
+        
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+            text-decoration: none;
+            padding: .5em 1em;
+
+            &:hover {
+                background-color: rgb(73, 73, 73);
+            }
+        }
+    }
+}

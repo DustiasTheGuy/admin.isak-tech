@@ -10,15 +10,11 @@ import (
 func HomeGetController(c *fiber.Ctx) error {
 	user := GetSession(c).Get("User")
 
-	return c.Render("index", fiber.Map{
-		"Title": "Home",
-		"User":  user,
-		"Breadcrumbs": []map[string]string{
-			{"text": "Home", "linkTo": "/"},
-		},
-		"Error":   c.Query("err"),
-		"Success": c.Query("s"),
-	}, "layouts/main")
+	if user != nil {
+		return c.Redirect("/users/account")
+	}
+
+	return c.Redirect("/sign-in")
 }
 
 // SignInGetController is only used for rendering the signin template

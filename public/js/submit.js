@@ -73,16 +73,10 @@ const deleteImageSubmit = (element) => {
 }
 
 const deletePostSubmit = (element) => {
-    // /:site/remove-post/:postID
     let id = element.getAttribute('data-id');
-
+    
     if(confirm('Confirm Delete Post ' + id)) {
         console.log('Delete Post..')
         return window.location.pathname = '/site/main/post/' + id + '/remove-post'
     }
 }
-
-/*
-    mainRouter.Get("/post/:postID/:imageID/remove-image", users.RemoveImageController)
-	mainRouter.Get("/post/:postID/remove-post", users.RemovePostController)
-*/

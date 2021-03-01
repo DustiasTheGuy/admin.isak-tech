@@ -6,38 +6,38 @@
   {{ if .User }}
     <div>
       <h4>Isak Tech</h4>
-      <a class="nav-link" href="/site/main"><span>Home</span></a>
-      <a class="nav-link" href="/site/main/post/add-new"><span>New Post</span></a>
-      <a class="nav-link" href="/site/main/site-information"><span>Site Information</span></a>
-      <a class="nav-link" href="#"><span>Analytics</span></a>
+      <a class="nav-link" href="/site/main"><button>Posts</button></a>
+      <a class="nav-link" href="/site/main/post/add-new"><button>New Post</button></a>
+      <a class="nav-link" href="/site/main/site-information"><button>Site Information</button></a>
+      <a class="nav-link" href="/site/main/analytics"><button>Analytics</button></a>
     </div>
 
     <div>
       <h4>Portal</h4>
-      <a class="nav-link" href="/site/portal"><span>Home</span></a>
-      <a class="nav-link" href="/site/portal/page/add-page"><span>New Page</span></a>
-      <a class="nav-link" href="/site/portal/site-information"><span>Site Information</span></a>
+      <a class="nav-link" href="/site/portal"><button>Pages</button></a>
+      <a class="nav-link" href="/site/portal/page/add-page"><button>New Page</button></a>
+      <a class="nav-link" href="/site/portal/site-information"><button>Site Information</button></a>
     </div>
 
     <div>
       <h4>Paste</h4>
-      <a class="nav-link" href="/site/paste"><span>Home</span></a>
-      <a class="nav-link" href="/site/paste/site-information"><span>Site Information</span></a>
-      <a class="nav-link" href="#"><span>API</span></a>
+      <a class="nav-link" href="/site/paste"><button>Pastes</button></a>
+      <a class="nav-link" href="/site/paste/site-information"><button>Site Information</button></a>
+      <a class="nav-link" href="/site/paste/api"><button>API</button></a>
     </div>
     {{ end }}
 
     {{ if .User }}
       <div>
-        <h4>Account</h4>
-          <a class="nav-link" href="/users/account"><span>Account</span></a>
-          <a class="nav-link" href="/users/sign-out"><span>Sign Out</span> <i class="fas fa-sign-out-alt"></i></a>
+        <h4>{{ .User.Username }}</h4>
+          <a class="nav-link" href="/users/account"><button>Account</button></a>
+          <a class="nav-link" href="/users/sign-out"><button>Sign Out <i class="fas fa-sign-out-alt"></i></button></a>
       </div>
     {{ else }}
       <div>
         <h4>Account</h4>
-        <a class="nav-link" href="/sign-up"><span>Sign Up</span></a>
-        <a class="nav-link" href="/sign-in"><span>Sign In</span></a>
+        <a class="nav-link" href="/sign-up"><button>Sign Up</button></a>
+        <a class="nav-link" href="/sign-in"><button>Sign In</button></a>
       </div>
     {{ end }}
 </nav>

@@ -10,6 +10,7 @@ import (
 	"github.com/gofiber/template/html"
 )
 
+// IsLast is a tempalte function for checking if an element is last
 func IsLast(index, length int) bool {
 	// fmt.Printf("Index: %d\n", index)
 	// fmt.Printf("Length: %d\n", length)
@@ -17,6 +18,7 @@ func IsLast(index, length int) bool {
 	return index != length-1
 }
 
+// FormatDate is a template function for parsing dates and making them look nice
 func FormatDate(date time.Time) string {
 	// 2021-02-26 05:25:13 +0000 UTC
 	// fmt.Println(date)
@@ -60,6 +62,8 @@ func main() {
 	mainRouter.Get("/post/:postID/:imageID/remove-image", users.RemoveImageController) // DELETE | request image get request ( might be changed to post request )
 	mainRouter.Get("/post/:postID/remove-post", users.RemovePostController)            // DELETE | request an existing post permanently
 	mainRouter.Get("/site-information", users.MainSiteInfoController)                  // RENDER | display information about the site
+	mainRouter.Get("/analytics", users.AnalyticsGetController)                         // RENDER | show some analytics about the site
+	mainRouter.Get("/:action", users.ExecuteAction)
 
 	// A page is a row in mysql that contains all data associated with a page that I find interesting
 	portalRouter := app.Group("/site/portal")                                 // Group all routes that are related to portal.isak-tech.tk
@@ -74,6 +78,6 @@ func main() {
 	pasteRouter := app.Group("/site/paste")                             // Group all routes that are related to paste.isak-tech.tk
 	pasteRouter.Get("/", users.PasteGetController)                      // RENDER | display all the pastes that have been submitted
 	pasteRouter.Get("/site-information", users.PasteSiteInfoController) // RENDER | display information about the site
-
-	log.Fatal(app.Listen(":8084")) // attempt to listen for incomming requests, exit program with an error message
+	pasteRouter.Get("/api", users.APIGetController)                     // REDNER | display template how the api works
+	log.Fatal(app.Listen(":8084"))                                      // attempt to listen for incomming requests, exit program with an error message
 }

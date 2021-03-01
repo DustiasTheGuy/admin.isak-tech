@@ -91,13 +91,12 @@ func AddImagePostController(c *fiber.Ctx) error {
 	}
 
 	if err := c.BodyParser(&body); err != nil {
-		c.Redirect(fmt.Sprintf("/site/main/post/%d/add-image?err=unable to parse body", postID))
+		return c.Redirect(fmt.Sprintf("/site/main/post/%d/add-image?err=unable to parse body", postID))
 	}
 
 	if err := imageModel.SaveNewImage(postID, body.URL); err != nil {
-		c.Redirect(fmt.Sprintf("/site/main/post/%d/add-image?err=unable to save image", postID))
+		return c.Redirect(fmt.Sprintf("/site/main/post/%d/add-image?err=an error has occured, url might be too short", postID))
 	}
 
-	fmt.Println("Saved new image")
 	return c.Redirect(fmt.Sprintf("/site/main/post/%d/add-image?s=image has been saved", postID))
 }

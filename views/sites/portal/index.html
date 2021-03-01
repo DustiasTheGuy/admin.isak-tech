@@ -14,6 +14,14 @@
 
 <section class="gallery">
     {{ range $index, $page := .Pages }}
-        <img src="{{ $page.ImageURL }}" data-id="{{ $page.ID }}" onclick="navigate(this)" href="/site/portal/page/{{ $page.ID }}">
+        <div class="card">
+            <img src="{{ $page.ImageURL }}" data-id="{{ $page.ID }}">
+            <p>{{ $page.Description }}</p>
+            <p>{{ FormatDate $page.Created }}</p>
+            <div class="card-actions">
+                <a href="javascript:void()" onclick="deletePage(this)" data-id="{{ $page.ID }}">Delete Page</a>
+                <a href="/site/portal/page/{{ $page.ID }}">Edit Page</a>
+            </div>
+        </div>
     {{ end }}
 </section>

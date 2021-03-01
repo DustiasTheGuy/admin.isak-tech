@@ -2,7 +2,10 @@ package Image
 
 import (
 	"admin/database"
+	"admin/models"
 	"database/sql"
+	"errors"
+	"fmt"
 	"time"
 )
 
@@ -45,6 +48,11 @@ func SaveNewImage(PostID uint64, URL string) error {
 		Database: "isak_tech",
 	})
 	defer db.Close()
+
+	if !models.CheckLength(URL, 10) {
+		fmt.Println("Returning an error")
+		return errors.New("Image URL must be 10 characters long")
+	}
 
 	_, err := db.Exec(
 		"INSERT INTO images (url, postid) VALUES (?, ?)",

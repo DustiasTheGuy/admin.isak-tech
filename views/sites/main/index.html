@@ -21,13 +21,34 @@
               <i id="icon-{{ $index }}" class="fas fa-chevron-down"></i>
             </a>
             <div class="accordion-body">
-              <p>Unique ID: {{ $post.ID }}</p>
-              <p>Title: {{ $post.Title}} </p>
-              <p>Created: {{ FormatDate $post.Date }}</p>
-              <p>Category: {{ $post.Category }}</p>
-              <p>Image URL: {{ $post.ImageURL }}</p>
-              <p>Total Images: {{ $post.TotalImages }}</p>
-              <p>Archived: {{ $post.Archived }}</p>
+              <p>
+                <span>Unique ID</span>
+                <span>{{ $post.ID }}</span>
+              </p>
+              <p>
+                <span>Title</span>
+                <span>{{ $post.Title}}</span>
+              </p>
+              <p>
+                <span>Created</span> 
+                <span>{{ FormatDate $post.Date }}</span>
+              </p>
+              <p>
+                <span>Category</span>
+                <span>{{ $post.Category }}</span>
+              </p>
+              <p>
+                <span>Image URL</span>
+                <span>{{ $post.ImageURL }}</span>
+              </p>
+              <p>
+                <span>Total Images</span>
+                <span>{{ $post.TotalImages }}</span>
+              </p>
+              <p>
+                <span>Archived</span>
+                <span>{{ $post.Archived }}</span>
+              </p>
 
               <a href="/site/main/post/{{ $post.ID }}/add-image">Edit Images <i class="fas fa-images"></i></a>
               <a href="/site/main/post/{{ $post.ID }}">Edit Post <i class="fas fa-cog"></i></a>

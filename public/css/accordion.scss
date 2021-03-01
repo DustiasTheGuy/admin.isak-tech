@@ -57,6 +57,38 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 max-width: 100%;
+                display: flex;
+                align-items: center;
+                margin: 0 0 0 9px;
+                padding: 6px 0;
+
+                &:first-of-type {
+                    margin-top: 10px;
+                }
+
+                &:last-of-type {
+                    margin-bottom: 10px;
+                }
+
+                span {
+                    max-width: 50%;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    &:first-of-type {
+                        font-weight: 800;
+                        font-size: 16px;  
+                        &::after {
+                            content: ':';
+                            margin-right: 10px;
+                            display: inline-block;
+                        }
+                    }
+
+                    &:last-of-type {
+                        font-size: 14px;
+                    }
+                }
             }
 
             a {

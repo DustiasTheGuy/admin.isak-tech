@@ -10,6 +10,10 @@ const deletePage = (element) => { // requires a valid session or it will be reje
     }
 }
 
+const navOnClick = (element) => {
+    console.log(element);
+}
+
 (function() {
     try {
         return document.getElementById('archived').checked = 
@@ -38,6 +42,7 @@ const deletePage = (element) => { // requires a valid session or it will be reje
 
 (function() {
     let navLinks = document.getElementsByClassName('nav-link');
+    
     
     for(let i = 0; i < navLinks.length; i++) {
         if(navLinks[i].getAttribute('href') === window.location.pathname) {

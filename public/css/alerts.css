@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .alert.alert-success,
 .alert.alert-danger {
-  padding: 1em;
+  padding: 0.53em;
   color: #fff;
   font-size: 22px;
   position: relative;
@@ -11,13 +11,14 @@
   margin: 0;
   text-transform: capitalize;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
 }
 .alert.alert-success p::after,
 .alert.alert-danger p::after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
+  margin-left: 10px;
 }
 .alert.alert-success::before,
 .alert.alert-danger::before {
@@ -51,7 +52,7 @@
 }
 
 .alert.alert-success {
-  background-color: #23967F;
+  background-color: #F2A359;
 }
 .alert.alert-success:hover::before {
   background-color: #466e668a;

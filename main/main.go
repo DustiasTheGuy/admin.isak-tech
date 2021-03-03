@@ -50,6 +50,7 @@ func main() {
 	usersRouter := app.Group("/users")                      // Group all routes related to a users account
 	usersRouter.Get("/account", users.AccountGetController) // RENDER | display users account information
 	usersRouter.Get("/sign-out", users.SignOutController)   // UPDATE | request to clear session
+	usersRouter.Get("/:service/:action", users.ExecuteAction)
 
 	mainRouter := app.Group("/site/main")                                              // Group all routes that are related to just isak-tech.tk the main site
 	mainRouter.Get("/", users.MainGetController)                                       // RENDER | display all posts template
@@ -63,7 +64,6 @@ func main() {
 	mainRouter.Get("/post/:postID/remove-post", users.RemovePostController)            // DELETE | request an existing post permanently
 	mainRouter.Get("/site-information", users.MainSiteInfoController)                  // RENDER | display information about the site
 	mainRouter.Get("/analytics", users.AnalyticsGetController)                         // RENDER | show some analytics about the site
-	mainRouter.Get("/:action", users.ExecuteAction)
 
 	// A page is a row in mysql that contains all data associated with a page that I find interesting
 	portalRouter := app.Group("/site/portal")                                 // Group all routes that are related to portal.isak-tech.tk
@@ -79,5 +79,6 @@ func main() {
 	pasteRouter.Get("/", users.PasteGetController)                      // RENDER | display all the pastes that have been submitted
 	pasteRouter.Get("/site-information", users.PasteSiteInfoController) // RENDER | display information about the site
 	pasteRouter.Get("/api", users.APIGetController)                     // REDNER | display template how the api works
-	log.Fatal(app.Listen(":8084"))                                      // attempt to listen for incomming requests, exit program with an error message
+
+	log.Fatal(app.Listen(":8084")) // attempt to listen for incomming requests, exit program with an error message
 }

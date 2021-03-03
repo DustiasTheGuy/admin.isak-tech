@@ -4,12 +4,13 @@ import (
 	postModels "admin/models/post"
 	"admin/routes"
 	"admin/routes/index"
-	"errors"
-	"fmt"
 
-	serverManager "github.com/DustiasTheGuy/server_manager/service"
+	"github.com/DustiasTheGuy/servman/service"
 	"github.com/gofiber/fiber/v2"
 )
+
+// Services contains all running services
+var services []*service.Service
 
 // SiteMainHandler for handling the - isak-tech.tk || main
 func MainGetController(c *fiber.Ctx) error {
@@ -78,39 +79,74 @@ func AnalyticsGetController(c *fiber.Ctx) error {
 }
 
 func ExecuteAction(c *fiber.Ctx) error {
-	var b string
-	var err error
-
-	s := serverManager.Service{
-		Args:    []string{},
-		Service: "isak_tech",
-		ExePath: "nssm.exe",
-	}
+	var proccessID *int
+	var success bool
 
 	switch c.Params("action") {
 	case "start":
-		b, err = s.StartService()
+		proccessID, success = StartService(&service.Service{
+			Label:      "isak_tech",
+			ProccessID: nil,
+			Debug:      true,
+			Path:       "main.exe",
+			WorkingDir: "D:/Development/GO/isak_tech/server",
+		})
 	case "stop":
-		b, err = s.StopService()
-	case "restart":
-		b, err = s.RestartService()
+		proccessID, success = StopService("isak_tech")
+	case "status":
+		proccessID, success = StatusService()
 	default:
-		err = errors.New("Invalid Parameter Recieved")
 	}
 
-	if err != nil {
+	if !success {
 		return c.JSON(routes.HTTPResponse{
-			Message: "Unable to perform operation",
+			Message: "An error has occured",
 			Success: false,
 			Data:    nil,
 		})
 	}
 
-	fmt.Println(b)
-
 	return c.JSON(routes.HTTPResponse{
-		Message: "Success",
+		Message: "",
 		Success: true,
-		Data:    nil,
+		Data:    proccessID,
 	})
+}
+
+func StartService(s *service.Service) (*int, bool) {
+
+	for i := 0; i < len(services); i++ {
+		if services[i].Label == s.Label {
+			return nil, false
+		}
+	}
+
+	if err := s.StartService(); err != nil {
+		return nil, false
+	}
+
+	services = append(services, s)
+
+	return s.ProccessID, true
+}
+
+// StopService returns a proccessID and if a service was found
+func StopService(label string) (*int, bool) {
+	var foundService bool
+
+	for i := 0; i < len(services); i++ {
+		if services[i].Label == label {
+			services[i].KillService()
+			copy(services[i:], services[i+1:])
+			services[len(services)-1] = nil // or the zero value of T
+			services = services[:len(services)-1]
+			foundService = true
+		}
+	}
+
+	return nil, foundService
+}
+
+func StatusService() (*int, bool) {
+	return nil, false
 }

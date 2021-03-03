@@ -15,7 +15,7 @@
 <section class="gallery">
     {{ range $index, $page := .Pages }}
         <div class="card">
-            <img src="{{ $page.ImageURL }}" data-id="{{ $page.ID }}">
+            <img src="{{ $page.Thumbnail }}" data-id="{{ $page.ID }}">
             <p>{{ $page.Description }}</p>
             <p>{{ FormatDate $page.Created }}</p>
             <div class="card-actions">

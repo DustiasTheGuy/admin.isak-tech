@@ -10,9 +10,9 @@ import (
 // Page contains all data accociated with a page
 type Page struct {
 	ID          uint      `json:"id"`          // unique identifier
-	URL         string    `json:"url"`         // where should the user be taken when clicking
+	Href        string    `json:"href"`        // where should the user be taken when clicking
 	Description string    `json:"description"` // describe it, should be short and concise
-	ImageURL    string    `json:"imgUrl"`      // imageurl, self explainatory
+	Thumbnail   string    `json:"thumbnail"`   // imageurl, self explainatory
 	Created     time.Time `json:"created"`     // auto populated in mysql
 }
 
@@ -36,9 +36,9 @@ func GetAllPages() ([]Page, error) {
 
 		if err := rows.Scan(
 			&page.ID,
-			&page.URL,
+			&page.Href,
 			&page.Description,
-			&page.ImageURL,
+			&page.Thumbnail,
 			&page.Created); err != nil {
 			return nil, err
 		}
@@ -62,9 +62,9 @@ func GetSinglePage(ID uint64) (*Page, error) {
 	var page Page
 	if err := row.Scan(
 		&page.ID,
-		&page.URL,
+		&page.Href,
 		&page.Description,
-		&page.ImageURL,
+		&page.Thumbnail,
 		&page.Created); err != nil {
 		return nil, err
 	}
@@ -80,16 +80,16 @@ func (p *Page) SaveNewPage() error {
 	})
 	defer db.Close()
 
-	if !models.CheckLength(p.URL, 7) {
+	if !models.CheckLength(p.Href, 7) {
 		return errors.New("URL too short, minimum 7 characters")
 	} else if !models.CheckLength(p.Description, 10) {
 		return errors.New("Description too short, minimum 10 characters")
-	} else if !models.CheckLength(p.ImageURL, 10) {
+	} else if !models.CheckLength(p.Thumbnail, 10) {
 		return errors.New("Image URL too short, minimum 10 characters")
 	}
 
 	_, err := db.Exec("INSERT INTO pages (url, description, imageurl) VALUES (?, ?, ?)",
-		p.URL, p.Description, p.ImageURL)
+		p.Href, p.Description, p.Thumbnail)
 
 	return err
 }
@@ -102,16 +102,16 @@ func (p *Page) UpdatePage() error {
 	})
 	defer db.Close()
 
-	if !models.CheckLength(p.URL, 7) {
+	if !models.CheckLength(p.Href, 7) {
 		return errors.New("URL too short, minimum 7 characters")
 	} else if !models.CheckLength(p.Description, 10) {
 		return errors.New("Description too short, minimum 10 characters")
-	} else if !models.CheckLength(p.ImageURL, 10) {
+	} else if !models.CheckLength(p.Thumbnail, 10) {
 		return errors.New("Image URL too short, minimum 10 characters")
 	}
 
 	_, err := db.Exec("UPDATE pages SET url = ?, description = ?, imageurl = ? WHERE id = ?",
-		p.URL, p.Description, p.ImageURL, p.ID)
+		p.Href, p.Description, p.Thumbnail, p.ID)
 
 	return err
 }

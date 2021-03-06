@@ -86,9 +86,9 @@ const startSite = () => {
 
     return HTTPGetRequest('/users/start/' + site)
     .then(response => {
-        console.log(response)
-        if(response.success) 
-        return renderProcess(response.data, site);
+        return response.success ? 
+        renderProcess(response.data, site) : 
+        errorHandler(response.message);
     });
 }
 
@@ -100,12 +100,18 @@ const renderProcess = (process, site) => {
     div.classList.add('process');
     div.id = 'p-' + process.Service.ProcessID;
     div.innerHTML = `
-    <p>Process: ${process.Service.Label}</p>
-    <p>ProcessID: ${process.Service.ProcessID}</p>
-    <p>Server Address: <a href="${process.Config.ServerAddr}" target="_blank">${process.Config.ServerAddr}</a></p>
-    <p>Domain: <a href="${process.Config.Domain}" target="_blank">${process.Config.Domain}</a></p>
-    <p>Started: ${formatDate(new Date(process.Service.Started))}</p>
-    <a class="terminate" href="javascript:void(0)" onclick="stopSite(this)" data-pid="${process.Service.ProcessID}">Terminate</a>`;
+    <div class="process-body">
+        <p><span>Process Label:</span><span>${process.Service.Label}</span></p>
+        <p><span>Process ID:</span><span>${process.Service.ProcessID}</span></p>
+        <p><span>Server Address:</span><span><a href="${process.Config.ServerAddr}" target="_blank">${process.Config.ServerAddr}</a></span></p>
+        <p><span>Domain:</span><span><a href="${process.Config.Domain}" target="_blank">${process.Config.Domain}</a></span></p>
+        <p><span>Started:</span><span>${formatDate(new Date(process.Service.Started))}</span></p>
+    </div>
+    <div class="process-footer">
+        <a class="terminate" href="javascript:void(0)" onclick="stopSite(this)" data-pid="${process.Service.ProcessID}">Terminate</a>
+        <a href="#">Restart</a>
+    </div>`;
+
     processes.appendChild(div);
     return null
 }
@@ -139,11 +145,12 @@ const getProcesses = () => {
 }
 
 const formatDate = (date) => {
-    return date.toLocaleDateString('en-gb', 
-        {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        }
-      );
+    return moment(date).fromNow();
+    // return date.toLocaleDateString('en-gb', 
+    //     {
+    //       year: 'numeric',
+    //       month: 'long',
+    //       day: 'numeric'
+    //     }
+    //   );
 }

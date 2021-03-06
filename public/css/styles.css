@@ -223,15 +223,16 @@ section .grid .grid-item div a:hover {
 }
 .site-info-s1 form .form-group button {
   min-width: 140px;
-  border: none;
-  background-color: #F2A359;
-  color: #333;
+  background-color: #333;
+  color: #fff;
   border-radius: 4px;
   text-transform: uppercase;
   cursor: pointer;
+  font-weight: bold;
+  border: none;
 }
 .site-info-s1 form .form-group button:hover {
-  background-color: #cf8d4f;
+  background-color: #383838;
 }
 
 #processes {
@@ -242,22 +243,49 @@ section .grid .grid-item div a:hover {
 #processes .process {
   background-color: #333;
   color: #4E937A;
-  padding: 1em;
   display: block;
   margin: 0.25em;
   min-width: 400px;
   border-radius: 6px;
 }
-#processes .process a {
+#processes .process .process-body {
+  padding: 1em;
+}
+#processes .process .process-body p {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#processes .process .process-body a {
   color: #fff;
   text-decoration: none;
 }
-#processes .process a:hover {
+#processes .process .process-body a:hover {
   color: lightgray;
 }
-#processes .process a.terminate {
-  margin: 1em 0;
-  display: block;
+#processes .process .process-footer {
+  display: flex;
+  justify-content: space-between;
+}
+#processes .process .process-footer a {
+  padding: 0.6em;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+#processes .process .process-footer a:hover {
+  background-color: #3f3f3f;
+}
+#processes .process .process-footer a:first-of-type {
+  border-right: 1px solid #fff;
+  border-bottom-left-radius: 6px;
+}
+#processes .process .process-footer a:last-of-type {
+  border-bottom-right-radius: 6px;
 }
 
 /*# sourceMappingURL=styles.css.map */

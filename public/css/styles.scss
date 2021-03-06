@@ -260,15 +260,16 @@ section {
 
             button {
                 min-width: 140px;
-                border: none;
-                background-color: #F2A359;
-                color: #333;
+                background-color: #333;
+                color: #fff;
                 border-radius: 4px;
                 text-transform: uppercase;
                 cursor: pointer;
+                font-weight: bold;
+                border: none;
 
                 &:hover {
-                    background-color: #cf8d4f;
+                    background-color: rgb(56, 56, 56);
                 }
             }
         }
@@ -283,24 +284,57 @@ section {
     .process {
         background-color: #333;
         color: #4E937A;
-        padding: 1em;
         display: block;
         margin: .25em;
         min-width: 400px;
         border-radius: 6px;
 
-        a {
-            color: #fff;
-            text-decoration: none;
+        .process-body {
+            padding: 1em;
+            
+            p {
+                margin: 10px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
 
-            &:hover {
-                color: lightgray;
+            a {
+                color: #fff;
+                text-decoration: none;
+    
+                &:hover {
+                    color: lightgray;
+                }
             }
         }
 
-        a.terminate {
-            margin: 1em 0;
-            display: block;
+        .process-footer {
+            display: flex;
+            justify-content: space-between;
+
+            a {
+                padding: .6em;
+                color: #fff;
+                width: 100%;
+                text-align: center;
+                border-top: 1px solid #fff;
+                text-decoration: none;
+                text-transform: uppercase;
+                
+                &:hover {
+                    background-color: rgb(63, 63, 63);
+                }
+
+                &:first-of-type {
+                    border-right: 1px solid #fff;
+                    border-bottom-left-radius: 6px;
+                }
+                
+                &:last-of-type {
+                    border-bottom-right-radius: 6px;
+                }
+            }
         }
     }
 }

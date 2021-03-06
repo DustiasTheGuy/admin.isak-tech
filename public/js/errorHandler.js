@@ -1,6 +1,4 @@
-const errorHandler = (error) => {
-    return console.log(error);
-}
+const errorHandler = (error) => alert(error);
 
 (function() {
     try {

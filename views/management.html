@@ -1,0 +1,47 @@
+<section>
+    {{ if .Error }}
+        <div class="alert alert-danger" role="alert">
+            <p>{{ .Error }}</p>
+        </div>
+    {{ end }}
+
+    {{ if .Success }}
+        <div class="alert alert-success" role="alert">
+            <p>{{ .Success }}</p>
+        </div>
+    {{ end }}
+</section>
+
+<section class="site-info-s1">
+    <form>
+        <div class="form-group">
+            <select name="server" id="server">
+                <option value="isak_tech">Isak Tech</option>
+                <option value="portal">Portal</option>
+                <option value="paste">Paste</option>
+            </select>
+            <button type="button" onclick="startSite()">Start Process</button>
+        </div>
+    </form>
+</section>
+
+<section id="processes">
+    <!-- <div class="process">
+        <p>Process: Isak Tech</p>
+        <p>ProcessID: 24212</p>
+        <p>Started: 2021-03-06T10:07:20.8640497+01:00</p>
+        <a href="#">Terminate</a>
+    </div>
+    <div class="process">
+        <p>Process: Isak Tech</p>
+        <p>ProcessID: 24212</p>
+        <p>Started: 2021-03-06T10:07:20.8640497+01:00</p>
+        <a href="#">Terminate</a>
+    </div>
+    <div class="process">
+        <p>Process: Isak Tech</p>
+        <p>ProcessID: 24212</p>
+        <p>Started: 2021-03-06T10:07:20.8640497+01:00</p>
+        <a href="#">Terminate</a>
+    </div> -->
+</section>

@@ -10,10 +10,6 @@ const deletePage = (element) => { // requires a valid session or it will be reje
     }
 }
 
-const navOnClick = (element) => {
-    console.log(element);
-}
-
 (function() {
     try {
         return document.getElementById('archived').checked = 
@@ -43,7 +39,6 @@ const navOnClick = (element) => {
 (function() {
     let navLinks = document.getElementsByClassName('nav-link');
     
-    
     for(let i = 0; i < navLinks.length; i++) {
         if(navLinks[i].getAttribute('href') === window.location.pathname) {
             return navLinks[i].classList.add('active-link');
@@ -51,4 +46,4 @@ const navOnClick = (element) => {
     }
 })();
 
-const main = () => console.log('Page finished loading');
+const main = () => getProcesses();

@@ -80,3 +80,70 @@ const deletePostSubmit = (element) => {
         return window.location.pathname = '/site/main/post/' + id + '/remove-post'
     }
 }
+
+const startSite = () => {
+    let site = document.getElementById('server').value;
+
+    return HTTPGetRequest('/users/start/' + site)
+    .then(response => {
+        console.log(response)
+        if(response.success) 
+        return renderProcess(response.data, site);
+    });
+}
+
+const renderProcess = (process, site) => {
+    console.log(process)
+    let processes = document.getElementById('processes');
+
+    let div = document.createElement('div');
+    div.classList.add('process');
+    div.id = 'p-' + process.Service.ProcessID;
+    div.innerHTML = `
+    <p>Process: ${process.Service.Label}</p>
+    <p>ProcessID: ${process.Service.ProcessID}</p>
+    <p>Server Address: <a href="${process.Config.ServerAddr}" target="_blank">${process.Config.ServerAddr}</a></p>
+    <p>Domain: <a href="${process.Config.Domain}" target="_blank">${process.Config.Domain}</a></p>
+    <p>Started: ${formatDate(new Date(process.Service.Started))}</p>
+    <a class="terminate" href="javascript:void(0)" onclick="stopSite(this)" data-pid="${process.Service.ProcessID}">Terminate</a>`;
+    processes.appendChild(div);
+    return null
+}
+
+/*
+    type Process struct {
+        Service *service.Service
+        Config  *processConfig
+    }
+*/
+
+const stopSite = (el) => {
+    let pid = el.getAttribute('data-pid');
+
+    if(confirm('Are you sure you wish to terminate process: ' + pid)) {
+        return HTTPGetRequest('/users/stop/' + pid)
+        .then(response => {
+            console.log(response);
+            if(response.success) {
+                let processes = document.getElementById('processes');
+                processes.removeChild(document.getElementById('p-' + pid));
+            }
+        });
+    }
+}
+
+const getProcesses = () => {
+    return HTTPGetRequest('/users/get-processes')
+    .then(response => response.success && response.data != null ?
+    response.data.map(p => renderProcess(p, p.Label)) : console.log('err'));
+}
+
+const formatDate = (date) => {
+    return date.toLocaleDateString('en-gb', 
+        {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }
+      );
+}

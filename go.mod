@@ -3,7 +3,7 @@ module admin
 go 1.15
 
 require (
-	github.com/DustiasTheGuy/servman v0.0.0-20210303023521-e635666fde9d
+	github.com/DustiasTheGuy/servman v0.0.0-20210306063202-30028b7d3dab
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gofiber/fiber/v2 v2.5.0
 	github.com/gofiber/storage/mysql v0.0.0-20201214031209-9829073dd76f

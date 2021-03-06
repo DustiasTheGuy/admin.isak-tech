@@ -22,6 +22,10 @@ github.com/DustiasTheGuy/server_manager v0.0.0-20210301115925-54201f2ac771 h1:uc
 github.com/DustiasTheGuy/server_manager v0.0.0-20210301115925-54201f2ac771/go.mod h1:u6zy94glug3EzG5ypnLuZ1w2MqoZEM6am38dps5jG14=
 github.com/DustiasTheGuy/servman v0.0.0-20210303023521-e635666fde9d h1:MVq6jlDSR3CJmLnwL8xZAMY8+uzZHEpPwHDG/caPums=
 github.com/DustiasTheGuy/servman v0.0.0-20210303023521-e635666fde9d/go.mod h1:PGd/0PDBNIbev1E2C20eQcFnbF6KppXDz9z9EOhyzX0=
+github.com/DustiasTheGuy/servman v0.0.0-20210303045321-fb65be9b16fe h1:3fkdsCVUmEvD29cEhPUTUCtKZDX6P+uySo68TeWdGi0=
+github.com/DustiasTheGuy/servman v0.0.0-20210303045321-fb65be9b16fe/go.mod h1:PGd/0PDBNIbev1E2C20eQcFnbF6KppXDz9z9EOhyzX0=
+github.com/DustiasTheGuy/servman v0.0.0-20210306063202-30028b7d3dab h1:dOorCQXOhKzNYmukRMblmhKHJL+sA9bU2MZg4cuxSB8=
+github.com/DustiasTheGuy/servman v0.0.0-20210306063202-30028b7d3dab/go.mod h1:PGd/0PDBNIbev1E2C20eQcFnbF6KppXDz9z9EOhyzX0=
 github.com/Joker/hpp v0.0.0-20180418125244-6893e659854a/go.mod h1:MzD2WMdSxvbHw5fM/OXOFily/lipJWRc9C1px0Mt0ZE=
 github.com/Joker/hpp v1.0.0/go.mod h1:8x5n+M1Hp5hC0g8okX3sR3vFQwynaX/UgSOM9MeBKzY=
 github.com/Joker/jade v1.0.0/go.mod h1:efZIdO0py/LtcJRSa/j2WEklMSAw84WV0zZVMxNToB8=

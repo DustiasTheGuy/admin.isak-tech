@@ -10,6 +10,11 @@ import (
 	"github.com/gofiber/template/html"
 )
 
+/*
+	The word process and service are used interchangebly
+	throughout the project
+*/
+
 // IsLast is a tempalte function for checking if an element is last
 func IsLast(index, length int) bool {
 	// fmt.Printf("Index: %d\n", index)
@@ -34,7 +39,8 @@ func main() {
 	engine = engine.AddFunc("FormatDate", FormatDate) // format date for nicer display
 
 	app := fiber.New(fiber.Config{
-		Views: engine, // assign the html view engine
+		Views:     engine, // assign the html view engine
+		Immutable: true,
 	})
 
 	app.Static("/public", "./public") // serve static files from /public folder
@@ -47,10 +53,13 @@ func main() {
 	indexRouter.Post("/sign-up", index.SignUpPostController)             // POST   | create a new user account
 	indexRouter.Post("/validate-form/:form", index.FormValidationRouter) // gets called through javascript to ensure form is valid before making a submit request
 
-	usersRouter := app.Group("/users")                      // Group all routes related to a users account
-	usersRouter.Get("/account", users.AccountGetController) // RENDER | display users account information
-	usersRouter.Get("/sign-out", users.SignOutController)   // UPDATE | request to clear session
-	usersRouter.Get("/:service/:action", users.ExecuteAction)
+	usersRouter := app.Group("/users")                            // Group all routes related to a users account
+	usersRouter.Get("/account", users.AccountGetController)       // RENDER | display users account information
+	usersRouter.Get("/sign-out", users.SignOutController)         // UPDATE | request to clear session
+	usersRouter.Get("/start/:service", users.StartService)        // START  | start a new service
+	usersRouter.Get("/stop/:pid", users.StopService)              // STOP   | stop a running service
+	usersRouter.Get("/get-processes", users.GetProcesses)         // GET    | grab all running processes
+	usersRouter.Get("/management", users.ManagementGetController) // RENDER | Render the management template
 
 	mainRouter := app.Group("/site/main")                                              // Group all routes that are related to just isak-tech.tk the main site
 	mainRouter.Get("/", users.MainGetController)                                       // RENDER | display all posts template

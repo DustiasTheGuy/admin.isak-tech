@@ -13,6 +13,7 @@ body {
   width: 100%;
   height: 100%;
   color: #000;
+  background-color: #e7e7e7;
 }
 
 main {
@@ -104,7 +105,7 @@ section .list p:hover {
 section .list p i {
   display: inline-block;
   margin-right: 8px;
-  color: #CE2D4F;
+  color: #4E937A;
 }
 section h4 {
   margin: 5px 0;
@@ -209,18 +210,54 @@ section .grid .grid-item div a:hover {
   background-color: #4E937A;
 }
 
-.site-info-s1 {
+.site-info-s1 form {
+  padding: 1.5em 1.5em 1em 1.5em;
+}
+.site-info-s1 form .form-group {
+  flex-direction: row;
+  gap: 10px;
+  margin: 0;
+}
+.site-info-s1 form .form-group select {
+  flex-grow: 1;
+}
+.site-info-s1 form .form-group button {
+  min-width: 140px;
+  border: none;
+  background-color: #F2A359;
+  color: #333;
+  border-radius: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.site-info-s1 form .form-group button:hover {
+  background-color: #cf8d4f;
+}
+
+#processes {
   padding: 1.25em;
+  display: flex;
+  flex-wrap: wrap;
 }
-.site-info-s1 a {
-  text-decoration: none;
-  padding: 6px 12px;
-  border: 1px solid #474747;
+#processes .process {
   background-color: #333;
-  color: #fff;
+  color: #4E937A;
+  padding: 1em;
+  display: block;
+  margin: 0.25em;
+  min-width: 400px;
+  border-radius: 6px;
 }
-.site-info-s1 a:hover {
-  background-color: #3d3d3d;
+#processes .process a {
+  color: #fff;
+  text-decoration: none;
+}
+#processes .process a:hover {
+  color: lightgray;
+}
+#processes .process a.terminate {
+  margin: 1em 0;
+  display: block;
 }
 
 /*# sourceMappingURL=styles.css.map */

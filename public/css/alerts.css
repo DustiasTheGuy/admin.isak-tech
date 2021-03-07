@@ -5,6 +5,8 @@
   color: #fff;
   font-size: 22px;
   position: relative;
+  margin: 25px 0;
+  border-radius: 25px;
 }
 .alert.alert-success p,
 .alert.alert-danger p {
@@ -38,6 +40,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 25px;
 }
 
 .alert.alert-danger {

@@ -101,20 +101,37 @@ section {
     }
 
     .list {
-        p {
-            padding: 1em;
-            border-bottom: 1px solid lightgray;
-            margin: 0;
-            background-color: #fff;
+        background-color: #333;
+        margin-top: 1em;
+        padding: 2em;
+        border-radius: 25px;
 
-            &:hover {
-                background-color: rgb(240, 240, 240);
-            }
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            padding: 1em;
             
-            i {
-                display: inline-block;
-                margin-right: 8px;
-                color: #4E937A;
+            &:not(:last-of-type) {
+                border-bottom: 1px solid rgb(71, 71, 71);
+            }
+
+            .fa-edit {
+                cursor: pointer;
+
+                &:hover {
+                    color: rgb(70, 70, 70);
+                }
+            }
+
+            p {
+                margin: 0;
+
+                i {
+                    margin-right: 10px;
+                    color: #23967F;
+                }
             }
         }
     }
@@ -177,7 +194,7 @@ section {
 
             button {
                 min-width: 140px;
-                background-color: #333;
+                background-color: #4E937A;
                 color: #fff;
                 border-radius: 4px;
                 text-transform: uppercase;
@@ -186,28 +203,34 @@ section {
                 border: none;
 
                 &:hover {
-                    background-color: rgb(56, 56, 56);
+                    background-color: #56a085;
                 }
             }
         }
     }
 }
 
-#processes {
+#processes, .pastes, .analytics {
     padding: 1em 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: .25em;
-    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+
     .process {
         background-color: #333;
         color: #4E937A;
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         min-width: 400px;
-        border-radius: 6px;
+        border-radius: 25px;
 
         .process-body {
             padding: 1em;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
             
             p {
                 margin: 10px 0;
@@ -245,11 +268,11 @@ section {
 
                 &:first-of-type {
                     border-right: 1px solid #fff;
-                    border-bottom-left-radius: 6px;
+                    border-bottom-left-radius: 25px;
                 }
                 
                 &:last-of-type {
-                    border-bottom-right-radius: 6px;
+                    border-bottom-right-radius: 25px;
                 }
             }
         }
@@ -259,7 +282,6 @@ section {
 .gallery {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 2em 2em 2em;
 
     img {
         max-height: 400px;
@@ -271,5 +293,74 @@ section {
             opacity: .5;
             background-color: #931F1D;
         }
+    }
+}
+
+#api-container {
+    background-color: #333;
+    margin-top: 2em;
+    border-radius: 25px;
+
+    .api-route {
+        display: flex;
+        flex-direction: column;
+        padding: 1em;
+        color: #fff;
+        
+        &:not(:last-of-type) {
+            border-bottom: 1px solid rgb(61, 61, 61);
+        }
+        
+        div {
+            display: flex;
+            justify-content: space-between;
+            color: #4E937A;
+            font-size: 1.2rem;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+    }
+}
+
+.placeholder {
+    background-color: #333;
+    color: #4E937A;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    min-width: 400px;
+    border-radius: 25px;
+    min-height: 300px;
+    padding: 1em;
+
+    .title, .line, .button {
+        border-radius: 25px;
+    }
+
+    .title {
+        height: 30px;
+        width: 75%;
+        background-color: gray;
+        margin: 10px 0;
+    }
+
+    .line {
+        margin: 10px 0 10px 10px;
+        width: 55.25%;
+        height: 7.5px;
+        background-color: gray;
+
+        &:nth-child(odd) {
+            width: 35.75%;
+        }
+    }
+
+    .button {
+        height: 22.5px;
+        background-color: gray;
+        width: 50%;
+        margin: 20px 0;
     }
 }

@@ -87,19 +87,34 @@ section header a {
 section header a:hover {
   background-color: #2da78e;
 }
-section .list p {
+section .list {
+  background-color: #333;
+  margin-top: 1em;
+  padding: 2em;
+  border-radius: 25px;
+}
+section .list div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
   padding: 1em;
-  border-bottom: 1px solid lightgray;
+}
+section .list div:not(:last-of-type) {
+  border-bottom: 1px solid #474747;
+}
+section .list div .fa-edit {
+  cursor: pointer;
+}
+section .list div .fa-edit:hover {
+  color: #464646;
+}
+section .list div p {
   margin: 0;
-  background-color: #fff;
 }
-section .list p:hover {
-  background-color: #f0f0f0;
-}
-section .list p i {
-  display: inline-block;
-  margin-right: 8px;
-  color: #4E937A;
+section .list div p i {
+  margin-right: 10px;
+  color: #23967F;
 }
 section h4 {
   margin: 5px 0;
@@ -147,7 +162,7 @@ section .grid .grid-item div a:hover {
 }
 .site-info-s1 form .form-group button {
   min-width: 140px;
-  background-color: #333;
+  background-color: #4E937A;
   color: #fff;
   border-radius: 4px;
   text-transform: uppercase;
@@ -156,43 +171,49 @@ section .grid .grid-item div a:hover {
   border: none;
 }
 .site-info-s1 form .form-group button:hover {
-  background-color: #383838;
+  background-color: #56a085;
 }
 
-#processes {
+#processes, .pastes, .analytics {
   padding: 1em 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
 }
-#processes .process {
+#processes .process, .pastes .process, .analytics .process {
   background-color: #333;
   color: #4E937A;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   min-width: 400px;
-  border-radius: 6px;
+  border-radius: 25px;
 }
-#processes .process .process-body {
+#processes .process .process-body, .pastes .process .process-body, .analytics .process .process-body {
   padding: 1em;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
-#processes .process .process-body p {
+#processes .process .process-body p, .pastes .process .process-body p, .analytics .process .process-body p {
   margin: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-#processes .process .process-body a {
+#processes .process .process-body a, .pastes .process .process-body a, .analytics .process .process-body a {
   color: #fff;
   text-decoration: none;
 }
-#processes .process .process-body a:hover {
+#processes .process .process-body a:hover, .pastes .process .process-body a:hover, .analytics .process .process-body a:hover {
   color: lightgray;
 }
-#processes .process .process-footer {
+#processes .process .process-footer, .pastes .process .process-footer, .analytics .process .process-footer {
   display: flex;
   justify-content: space-between;
 }
-#processes .process .process-footer a {
+#processes .process .process-footer a, .pastes .process .process-footer a, .analytics .process .process-footer a {
   padding: 0.6em;
   color: #fff;
   width: 100%;
@@ -201,21 +222,20 @@ section .grid .grid-item div a:hover {
   text-decoration: none;
   text-transform: uppercase;
 }
-#processes .process .process-footer a:hover {
+#processes .process .process-footer a:hover, .pastes .process .process-footer a:hover, .analytics .process .process-footer a:hover {
   background-color: #3f3f3f;
 }
-#processes .process .process-footer a:first-of-type {
+#processes .process .process-footer a:first-of-type, .pastes .process .process-footer a:first-of-type, .analytics .process .process-footer a:first-of-type {
   border-right: 1px solid #fff;
-  border-bottom-left-radius: 6px;
+  border-bottom-left-radius: 25px;
 }
-#processes .process .process-footer a:last-of-type {
-  border-bottom-right-radius: 6px;
+#processes .process .process-footer a:last-of-type, .pastes .process .process-footer a:last-of-type, .analytics .process .process-footer a:last-of-type {
+  border-bottom-right-radius: 25px;
 }
 
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 2em 2em 2em;
 }
 .gallery img {
   max-height: 400px;
@@ -226,6 +246,66 @@ section .grid .grid-item div a:hover {
 .gallery img:hover {
   opacity: 0.5;
   background-color: #931F1D;
+}
+
+#api-container {
+  background-color: #333;
+  margin-top: 2em;
+  border-radius: 25px;
+}
+#api-container .api-route {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  color: #fff;
+}
+#api-container .api-route:not(:last-of-type) {
+  border-bottom: 1px solid #3d3d3d;
+}
+#api-container .api-route div {
+  display: flex;
+  justify-content: space-between;
+  color: #4E937A;
+  font-size: 1.2rem;
+}
+#api-container .api-route pre {
+  white-space: pre-wrap;
+}
+
+.placeholder {
+  background-color: #333;
+  color: #4E937A;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 400px;
+  border-radius: 25px;
+  min-height: 300px;
+  padding: 1em;
+}
+.placeholder .title, .placeholder .line, .placeholder .button {
+  border-radius: 25px;
+}
+.placeholder .title {
+  height: 30px;
+  width: 75%;
+  background-color: gray;
+  margin: 10px 0;
+}
+.placeholder .line {
+  margin: 10px 0 10px 10px;
+  width: 55.25%;
+  height: 7.5px;
+  background-color: gray;
+}
+.placeholder .line:nth-child(odd) {
+  width: 35.75%;
+}
+.placeholder .button {
+  height: 22.5px;
+  background-color: gray;
+  width: 50%;
+  margin: 20px 0;
 }
 
 /*# sourceMappingURL=styles.css.map */

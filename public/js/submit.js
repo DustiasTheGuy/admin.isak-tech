@@ -92,29 +92,6 @@ const startSite = () => {
     });
 }
 
-const renderProcess = (process, site) => {
-    console.log(process)
-    let processes = document.getElementById('processes');
-
-    let div = document.createElement('div');
-    div.classList.add('process');
-    div.id = 'p-' + process.Service.ProcessID;
-    div.innerHTML = `
-    <div class="process-body">
-        <p><span>Process Label:</span><span>${process.Service.Label}</span></p>
-        <p><span>Process ID:</span><span>${process.Service.ProcessID}</span></p>
-        <p><span>Server Address:</span><span><a href="${process.Config.ServerAddr}" target="_blank">${process.Config.ServerAddr}</a></span></p>
-        <p><span>Domain:</span><span><a href="${process.Config.Domain}" target="_blank">${process.Config.Domain}</a></span></p>
-        <p><span>Started:</span><span>${formatDate(new Date(process.Service.Started))}</span></p>
-    </div>
-    <div class="process-footer">
-        <a class="terminate" href="javascript:void(0)" onclick="stopSite(this)" data-pid="${process.Service.ProcessID}">Terminate</a>
-        <a href="#">Restart</a>
-    </div>`;
-
-    processes.appendChild(div);
-    return null
-}
 
 /*
     type Process struct {

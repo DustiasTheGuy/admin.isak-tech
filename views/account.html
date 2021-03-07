@@ -14,10 +14,25 @@
 
 <section>
     <div class="list">
-        <p><i class="fas fa-id-card"></i> {{.User.ID}}</p>
-        <p><i class="fas fa-envelope"></i> {{.User.Email}}</p>
-        <p><i class="fas fa-user"></i> {{.User.Username}}</p>
-        <p><i class="fas fa-calendar"></i> {{ FormatDate .User.Created}}</p>
-        <p><i class="fas fa-key"></i> *************</p>
+        <div>
+            <p><i class="fas fa-id-card"></i> {{.User.ID}}</p>
+            <i class="far fa-edit"></i>
+        </div>
+        <div>
+            <p><i class="fas fa-envelope"></i> {{.User.Email}}</p>
+            <i class="far fa-edit"></i>
+        </div>
+        <div>
+            <p><i class="fas fa-user"></i> {{.User.Username}}</p>
+            <i class="far fa-edit"></i>
+        </div>
+        <div>
+            <p><i class="fas fa-calendar"></i> {{ FormatDate .User.Created}}</p>
+            <i class="far fa-edit"></i>
+        </div>
+        <div>
+            <p><i class="fas fa-key"></i> *************</p>
+            <i class="far fa-edit"></i>
+        </div>
     </div>
 </section>

@@ -1,6 +1,6 @@
 <nav id="sidenav" class="open">
   <a class="logo" href="/">
-    <img src="/public/images/0f8b5463-35b5-4dc4-89b8-ec7514557d1f_200x200.png" alt="">
+    <img src="/public/images/907fdb70-2867-49d1-9ad5-80e689575b1a_200x200.png" alt="">
   </a>
   
   {{ if .User }}
@@ -32,7 +32,7 @@
         <h4>{{ .User.Username }}</h4>
           <a class="nav-link" href="/users/account"><button>Account</button></a>
           <a class="nav-link" href="/users/management"><button>Management</button></a>
-          <a class="nav-link" href="/users/sign-out"><button>Sign Out <i class="fas fa-sign-out-alt"></i></button></a>
+          <a class="nav-link" href="/users/sign-out"><button>Sign Out</button></a>
       </div>
     {{ else }}
       <div>
@@ -43,4 +43,4 @@
     {{ end }}
 </nav>
 
-<div onclick="toggleSidenav()" id="navbar-btn" class="open fas fa-bars"></div>
+<div onclick="toggleSidenav()" id="navbar-btn" class="open fas fa-chevron-right"></div>

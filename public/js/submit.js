@@ -144,13 +144,4 @@ const getProcesses = () => {
     response.data.map(p => renderProcess(p, p.Label)) : console.log('err'));
 }
 
-const formatDate = (date) => {
-    return moment(date).fromNow();
-    // return date.toLocaleDateString('en-gb', 
-    //     {
-    //       year: 'numeric',
-    //       month: 'long',
-    //       day: 'numeric'
-    //     }
-    //   );
-}
+const formatDate = (date) => moment(date).fromNow();

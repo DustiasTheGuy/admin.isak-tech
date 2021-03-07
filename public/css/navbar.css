@@ -1,25 +1,27 @@
 #navbar-btn {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   transition: margin-left 325ms linear;
-  font-size: 42px;
-  margin-left: 10px;
-  margin-top: 10px;
+  font-size: 22px;
   color: #4E937A;
   cursor: pointer;
   z-index: 2;
+  background-color: #333;
+  padding: 10px;
 }
 #navbar-btn:hover {
   color: #3d7561;
 }
 
 #navbar-btn.open {
-  margin-left: 310px;
+  margin-left: 300px;
+  transform: rotate(180deg);
 }
 
 #sidenav.open {
   width: 300px;
+  border-right: 1px solid #424242;
 }
 
 #sidenav {
@@ -36,12 +38,13 @@
   z-index: 2;
 }
 #sidenav .logo {
-  background-color: #5c5c5c;
+  background-color: #333333;
   height: 225px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 300px;
+  border-bottom: 1px solid #424242;
 }
 #sidenav .logo img {
   object-fit: contain;

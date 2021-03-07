@@ -1,0 +1,54 @@
+.table-container {
+  margin-top: 2em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #333;
+  border-radius: 5px;
+}
+table thead, table body {
+  width: 100%;
+  text-align: left;
+}
+table thead tr {
+  border-bottom: 1px solid #424242;
+}
+table thead tr th {
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #4e937a;
+  font-size: 1.1rem;
+}
+table tbody tr td {
+  color: white;
+}
+table tbody tr td a {
+  color: inherit;
+}
+table tbody tr td a:hover {
+  color: #6d6d6d;
+}
+table td.td-image {
+  width: 32px;
+  height: 32px;
+}
+table td.td-image img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+table th, table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  padding: 12px;
+  vertical-align: middle;
+}
+table tr:not(:last-of-type) {
+  border-bottom: 1px solid #424242;
+}
+
+/*# sourceMappingURL=table.css.map */

@@ -13,7 +13,7 @@ body {
   width: 100%;
   height: 100%;
   color: #000;
-  background-color: #e7e7e7;
+  background-color: #fff;
 }
 
 main {
@@ -23,17 +23,12 @@ main .content {
   width: 100%;
   margin: 0 0 0 auto;
   background-color: #fff;
-  min-height: 100vh;
   transition: width 325ms linear;
   overflow-x: hidden;
+  padding: 3em;
 }
 main .content.open {
   width: calc(100% - 300px);
-}
-
-img {
-  max-width: 100%;
-  max-height: 300px;
 }
 
 .btn {
@@ -47,7 +42,6 @@ img {
 section.body {
   height: 100%;
   overflow-x: hidden;
-  min-height: 100vh;
 }
 
 .btn-success {
@@ -143,76 +137,6 @@ section .grid .grid-item div a:hover {
   color: #0b4075;
 }
 
-.gallery {
-  padding: 6em;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  grid-auto-rows: minmax(50vh, auto);
-  gap: 4em;
-}
-.gallery .card {
-  background-color: #333;
-  padding: 2em;
-  color: #fff;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-.gallery .card img {
-  height: 50%;
-  width: 100%;
-  border-radius: 3px;
-  object-fit: cover;
-}
-.gallery .card p {
-  text-align: center;
-  text-transform: capitalize;
-  margin: 0;
-}
-.gallery .card p:first-of-type {
-  margin-top: 10px;
-  color: #4E937A;
-  font-size: 1.2rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-weight: bold;
-  max-width: 75%;
-}
-.gallery .card .card-actions {
-  display: flex;
-  gap: 30px;
-  width: 100%;
-  padding: 0 12px;
-}
-.gallery .card .card-actions a {
-  color: #fff;
-  border-style: solid;
-  border-width: 1px;
-  text-decoration: none;
-  padding: 5px;
-  width: 100%;
-  text-align: center;
-  border-radius: 3px;
-}
-.gallery .card .card-actions a:first-of-type {
-  border-color: #F2A359;
-}
-.gallery .card .card-actions a:first-of-type:hover {
-  background-color: #F2A359;
-}
-.gallery .card .card-actions a:last-of-type {
-  border-color: #4E937A;
-}
-.gallery .card .card-actions a:last-of-type:hover {
-  background-color: #4E937A;
-}
-
-.site-info-s1 form {
-  padding: 1.5em 1.5em 1em 1.5em;
-}
 .site-info-s1 form .form-group {
   flex-direction: row;
   gap: 10px;
@@ -236,15 +160,15 @@ section .grid .grid-item div a:hover {
 }
 
 #processes {
-  padding: 1.25em;
+  padding: 1em 0;
   display: flex;
   flex-wrap: wrap;
+  gap: 0.25em;
 }
 #processes .process {
   background-color: #333;
   color: #4E937A;
   display: block;
-  margin: 0.25em;
   min-width: 400px;
   border-radius: 6px;
 }
@@ -286,6 +210,22 @@ section .grid .grid-item div a:hover {
 }
 #processes .process .process-footer a:last-of-type {
   border-bottom-right-radius: 6px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2em 2em 2em;
+}
+.gallery img {
+  max-height: 400px;
+  flex-grow: 1;
+  position: relative;
+  cursor: pointer;
+}
+.gallery img:hover {
+  opacity: 0.5;
+  background-color: #931F1D;
 }
 
 /*# sourceMappingURL=styles.css.map */

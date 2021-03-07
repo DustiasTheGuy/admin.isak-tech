@@ -12,48 +12,42 @@
     {{ end }}
 </section>
 
-<section>
-    <div class="accordion">
-        {{ range $index, $post := .Posts }}
-          <div class="accordion-item" id="accordion-{{ $index }}">
-            <a href="javascript:void(0)" onclick="openAccordion(this)" data-ref="{{ $index }}">
-              <span>{{ $post.Title }}</span>
-              <i id="icon-{{ $index }}" class="fas fa-chevron-down"></i>
-            </a>
-            <div class="accordion-body">
-              <p>
-                <span>Unique ID</span>
-                <span>{{ $post.ID }}</span>
-              </p>
-              <p>
-                <span>Title</span>
-                <span>{{ $post.Title}}</span>
-              </p>
-              <p>
-                <span>Created</span> 
-                <span>{{ FormatDate $post.Date }}</span>
-              </p>
-              <p>
-                <span>Category</span>
-                <span>{{ $post.Category }}</span>
-              </p>
-              <p>
-                <span>Image URL</span>
-                <span>{{ $post.ImageURL }}</span>
-              </p>
-              <p>
-                <span>Total Images</span>
-                <span>{{ $post.TotalImages }}</span>
-              </p>
-              <p>
-                <span>Archived</span>
-                <span>{{ $post.Archived }}</span>
-              </p>
-
-              <a href="/site/main/post/{{ $post.ID }}/add-image">Edit Images <i class="fas fa-images"></i></a>
-              <a href="/site/main/post/{{ $post.ID }}">Edit Post <i class="fas fa-cog"></i></a>
-            </div>
-          </div>
-        {{ end }}
-    </div>
+<section class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Thumbnail</th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Created</th>
+        <th>Image URL</th>
+        <th>Total Images</th>
+        <th>Archived</th>
+        <th><i class="fas fa-images"></i></th>
+        <th><i class="fas fa-cog"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range $index, $post := .Posts }}
+      <tr>
+        <td class="td-image"><img src="{{ $post.ImageURL }}"></td>
+        <td>{{ $post.ID }}</td>
+        <td>{{ $post.Title}}</td>
+        <td>{{ $post.Category }}</td>
+        <td>{{ FormatDate $post.Date }}</td>
+        <td>{{ $post.ImageURL }}</td>
+        <td>{{ $post.TotalImages }}</td>
+        <td>{{ $post.Archived }}</td> 
+        <td title="Edit Images"><a href="/site/main/post/{{ $post.ID }}/add-image"><i class="fas fa-images"></i></a></td>
+        <td title="Edit Post"><a href="/site/main/post/{{ $post.ID }}"><i class="fas fa-cog"></i></a></td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
 </section>
+
+  <!--
+        <a href="/site/main/post/postid/add-image">Edit Images <i class="fas fa-images"></i></a>
+        <a href="/site/main/post/postid">Edit Post <i class="fas fa-cog"></i></a>
+  -->

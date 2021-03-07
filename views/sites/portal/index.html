@@ -12,16 +12,35 @@
     {{ end }}
 </section>
 
-<section class="gallery">
-    {{ range $index, $page := .Pages }}
-        <div class="card">
-            <img src="{{ $page.Thumbnail }}" data-id="{{ $page.ID }}">
-            <p>{{ $page.Description }}</p>
-            <p>{{ FormatDate $page.Created }}</p>
-            <div class="card-actions">
-                <a href="javascript:void()" onclick="deletePage(this)" data-id="{{ $page.ID }}">Delete Page</a>
-                <a href="/site/portal/page/{{ $page.ID }}">Edit Page</a>
-            </div>
-        </div>
-    {{ end }}
+<section class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Thumbnail</th>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Created</th>
+                    <th><i class="fas fa-cog"></i></th>
+                    <th><i class="fas fa-trash"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range $index, $page := .Pages }}
+                <tr>
+                    <td class="td-image"><img src="{{ $page.Thumbnail }}" data-id="{{ $page.ID }}"></td>
+                    <td>{{ $page.ID }}</td>
+                    <td>{{ $page.Description }}</td>
+                    <td>{{ FormatDate $page.Created }}</td>
+                    <td title="Edit Page"><a href="/site/portal/page/{{ $page.ID }}"><i class="fas fa-cog"></i></a></td>
+                    <td title="Delete Images"><a href="javascript:void()" onclick="deletePage(this)" data-id="{{ $page.ID }}"><i class="fas fa-trash"></i></a></td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
 </section>
+
+<!--
+
+        <a href="javascript:void()" onclick="deletePage(this)" data-id="pageid">Delete Page</a>
+        <a href="/site/portal/page/pageid">Edit Page</a>
+-->

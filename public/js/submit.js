@@ -93,12 +93,12 @@ const startSite = () => {
 }
 
 
-/*
-    type Process struct {
-        Service *service.Service
-        Config  *processConfig
+const deletePage = (element) => { // requires a valid session or it will be rejected
+    if(confirm('Confirm Delete Page ' + element.getAttribute('data-id'))) {
+        return window.location.pathname = '/site/portal/page/' + 
+        element.getAttribute('data-id') + '/delete';
     }
-*/
+}
 
 const stopSite = (el) => {
     let pid = el.getAttribute('data-pid');
@@ -120,5 +120,3 @@ const getProcesses = () => {
     .then(response => response.success && response.data != null ?
     response.data.map(p => renderProcess(p, p.Label)) : console.log('err'));
 }
-
-const formatDate = (date) => moment(date).fromNow();

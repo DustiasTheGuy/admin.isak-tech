@@ -33,10 +33,17 @@ form .form-group.row {
 form .form-group.row label {
   margin: 0 0 0 10px;
 }
+form .form-group.focused label {
+  bottom: 100%;
+  transform: translateY(0);
+  margin-bottom: 10px;
+  left: 0;
+}
 form .form-group {
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
+  margin: 3em 0;
+  position: relative;
 }
 form .form-group p {
   margin: 0;
@@ -45,9 +52,13 @@ form .form-group p {
 }
 form .form-group label {
   display: block;
-  margin-bottom: 12px;
   color: #4E937A;
   font-weight: 600;
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  left: 10px;
+  transition: all 200ms linear;
 }
 form .form-group input, form .form-group select, form .form-group textarea {
   padding: 0.8em;

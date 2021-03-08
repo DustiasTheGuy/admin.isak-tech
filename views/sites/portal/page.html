@@ -14,7 +14,7 @@
 
 <section>
     <form action="/site/portal/page/{{ .Page.ID }}/update" method="POST">
-        <div class="form-group">
+        <div class="form-group focused">
             <label for="ID">ID</label>
             <input type="text" id="ID" name="ID" value="{{ .Page.ID }}" disabled>
         </div>
@@ -23,11 +23,11 @@
             <input type="text" id="Created" name="Created" value="{{ FormatDate .Page.Created }}" disabled>
         </div>
         <div class="form-group">
-            <label for="Href">URL ( Link To )</label>
+            <label for="Href">Href</label>
             <input type="text" id="Href" name="Href" value="{{ .Page.Href }}">
         </div>
         <div class="form-group">
-            <label for="Thumbnail">ImageURL</label>
+            <label for="Thumbnail">Thumbnail</label>
             <input type="text" id="Thumbnail" name="Thumbnail" value="{{ .Page.Thumbnail }}">
         </div>
         <div class="form-group">

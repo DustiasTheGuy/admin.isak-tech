@@ -256,7 +256,7 @@ section .grid .grid-item div a:hover {
 #api-container .api-route {
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding: 2em;
   color: #fff;
 }
 #api-container .api-route:not(:last-of-type) {

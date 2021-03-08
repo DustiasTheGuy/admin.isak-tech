@@ -17,5 +17,3 @@ const HTTPGetRequest = (url) => {
     }).then(response => response.json());
 }
 
-const HTTPPutRequest = (url) => null;
-const HTTPDelRequest = (url) => null;

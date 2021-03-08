@@ -1,5 +1,4 @@
-const APIRoutes=[{path:"/api/posts",method:"GET",data:null},{path:"/api/post/:id",method:"GET",data:null},{path:"/api/paginate/:page/:limit",method:"GET",data:null},{path:"/api/delete",method:"DELETE",data:{id:"uint64"}},{path:"/api/new",method:"POST",data:{title:"string",body:"string",tags:"[]string"}},{path:"/api/update",method:"PUT",data:{id:"uint64",title:"string",body:"string",tags:"[]string"}}];
-
+//#region 
 const renderProcess = (process) => {
     let processes = document.getElementById('processes');
     let placeholders = document.getElementsByClassName('placeholder');
@@ -28,7 +27,10 @@ const renderProcess = (process) => {
     processes.appendChild(div);
     return null
 }
+//#endregion
 
+//#region 
+const APIRoutes=[{path:"/api/posts",method:"GET",data:null},{path:"/api/post/:id",method:"GET",data:null},{path:"/api/paginate/:page/:limit",method:"GET",data:null},{path:"/api/delete",method:"DELETE",data:{id:"uint64"}},{path:"/api/new",method:"POST",data:{title:"string",body:"string",tags:"[]string"}},{path:"/api/update",method:"PUT",data:{id:"uint64",title:"string",body:"string",tags:"[]string"}}];
 
 const renderAPIRoutes = () => {
     let apiContainer = document.getElementById('api-container');
@@ -48,3 +50,4 @@ const renderAPIRoutes = () => {
         apiContainer.appendChild(div);
     })
 }
+//#endregion

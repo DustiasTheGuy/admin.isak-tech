@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration - {{.Title}}</title>
     <link rel="icon" type="image/x-icon" href="/public/images/favicon.ico">
+    <link rel="stylesheet" href="/public/css/placeholder.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
@@ -19,7 +20,7 @@
     <link rel="stylesheet" href="/public/css/table.css">
 </head>
 
-<body onload="main()">
+<body>
 
     <div>
         {{template "partials/navbar" .}}
@@ -41,7 +42,7 @@
     <script src="/public/js/http.js"></script>
     <script src="/public/js/submit.js"></script>
     <script src="/public/js/render.js"></script>
-
+    <script src="/public/js/components.js"></script>
     <script src="/public/js/init.js"></script>
     <script src="/public/js/main.js"></script>
 </body>

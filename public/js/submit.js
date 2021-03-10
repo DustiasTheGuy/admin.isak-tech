@@ -5,7 +5,7 @@ const signUpSubmit = () => {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    HTTPPostRequest('/validate-form/sign-up', { email, username, password })
+    HTTPPostRequest(getServerAddr(false) + '/validate-form/sign-up', { email, username, password })
     .then(response => {
         console.log(response);
 
@@ -27,7 +27,7 @@ const signInSubmit = () => {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    HTTPPostRequest('/validate-form/sign-in', { username, password })
+    HTTPPostRequest(getServerAddr(false) + '/validate-form/sign-in', { username, password })
     .then(response => {
         if(response.success) {
             formData.append('username', username);
@@ -50,7 +50,7 @@ const updatePostSubmit = () => {
     }
 
     if(confirm('Confirm Update')) {
-        HTTPPostRequest('/site/main/post/' + data.ID, data)
+        HTTPPostRequest(getServerAddr(false) + '/site/main/post/' + data.ID, data)
         .then(response => {
             if(response.success) {
                 return window.location.href = '/site/main' 
@@ -66,7 +66,7 @@ const deleteImageSubmit = (element) => {
     let postID = element.getAttribute('data-postid');
 
     if(confirm('Confirm Delete Image: ' + imageID)) {
-        return HTTPGetRequest('/site/main/post/' + postID + '/' + imageID + '/remove-image')
+        return HTTPGetRequest(getServerAddr(false) + '/site/main/post/' + postID + '/' + imageID + '/remove-image')
         .then(response => response.success ? 
         window.location.reload() : errorHandler(response.message));
     }
@@ -84,7 +84,7 @@ const deletePostSubmit = (element) => {
 const startSite = () => {
     let site = document.getElementById('server').value;
 
-    return HTTPGetRequest('/users/start/' + site)
+    return HTTPGetRequest(getServerAddr(false) + '/users/start/' + site)
     .then(response => {
         return response.success ? 
         renderProcess(response.data, site) : 
@@ -104,7 +104,7 @@ const stopSite = (el) => {
     let pid = el.getAttribute('data-pid');
 
     if(confirm('Are you sure you wish to terminate process: ' + pid)) {
-        return HTTPGetRequest('/users/stop/' + pid)
+        return HTTPGetRequest(getServerAddr(false) + '/users/stop/' + pid)
         .then(response => {
             console.log(response);
             if(response.success) {
@@ -116,7 +116,7 @@ const stopSite = (el) => {
 }
 
 const getProcesses = () => {
-    return HTTPGetRequest('/users/get-processes')
+    return HTTPGetRequest(getServerAddr(false) + '/users/get-processes')
     .then(response => response.success && response.data != null ?
     response.data.map(p => renderProcess(p, p.Label)) : console.log('err'));
 }

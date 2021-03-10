@@ -21,9 +21,10 @@ func PortalGetController(c *fiber.Ctx) error {
 
 	if user != nil {
 		return c.Render("sites/portal/index", fiber.Map{
-			"Title": "Portal",
-			"User":  user,
-			"Error": c.Query("err"),
+			"Title":    "Portal",
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"User":     user,
+			"Error":    c.Query("err"),
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
 				{"text": "Portal", "linkTo": "/site/portal"},
@@ -53,9 +54,10 @@ func PortalGetPageController(c *fiber.Ctx) error {
 
 	if user != nil {
 		return c.Render("sites/portal/page", fiber.Map{
-			"Title": fmt.Sprintf("Page %d", pageID),
-			"User":  user,
-			"Error": c.Query("err"),
+			"Title":    fmt.Sprintf("Page %d", pageID),
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"User":     user,
+			"Error":    c.Query("err"),
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
 				{"text": "Portal", "linkTo": "/site/portal"},
@@ -115,9 +117,10 @@ func PortalAddNewGetController(c *fiber.Ctx) error {
 
 	if user != nil {
 		return c.Render("sites/portal/add_new", fiber.Map{
-			"Title": "Add New",
-			"User":  user,
-			"Error": c.Query("err"),
+			"Title":    "Add New",
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"User":     user,
+			"Error":    c.Query("err"),
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
 				{"text": "Portal", "linkTo": "/site/portal"},
@@ -155,9 +158,10 @@ func PortalSiteInfoController(c *fiber.Ctx) error {
 
 	if user != nil {
 		return c.Render("sites/portal/site_info", fiber.Map{
-			"Title": "Portal Site Info",
-			"User":  user,
-			"Error": c.Query("err"),
+			"Title":    "Portal Site Info",
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"User":     user,
+			"Error":    c.Query("err"),
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
 				{"text": "Portal", "linkTo": "/site/portal"},

@@ -26,8 +26,9 @@ func SignInGetController(c *fiber.Ctx) error {
 	}
 
 	return c.Render("sign-in", fiber.Map{
-		"Title": "Sign In",
-		"User":  nil,
+		"Title":    "Sign In",
+		"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+		"User":     nil,
 		"Breadcrumbs": []map[string]string{
 			{"text": "Home", "linkTo": "/"},
 			{"text": "Sign In", "linkTo": "/sign-in"},
@@ -46,8 +47,9 @@ func SignUpGetController(c *fiber.Ctx) error {
 	}
 
 	return c.Render("sign-up", fiber.Map{
-		"Title": "Sign Up",
-		"User":  nil,
+		"Title":    "Sign Up",
+		"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+		"User":     nil,
 		"Breadcrumbs": []map[string]string{
 			{"text": "Home", "linkTo": "/"},
 			{"text": "Sign Up", "linkTo": "/sign-up"},

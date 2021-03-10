@@ -1,0 +1,30 @@
+<section>
+    {{ if .Error }}
+    <div class="alert alert-danger" role="alert">
+        <p>{{ .Error }}</p>
+    </div>
+    {{ end }}
+
+    {{ if .Success }}
+        <div class="alert alert-success" role="alert">
+            <p>{{ .Success }}</p>
+        </div>
+    {{ end }}
+</section>
+
+<section class="table-container">
+
+    <div class="table">
+      <div class="table-head">
+        <div class="table-row" id="t-head">        
+            <span>ID</span>
+            <span>Href</span>
+            <span>Created</span>
+            <span>IP</span>
+        </div>
+      </div>
+      <div class="table-body">
+ 
+      </div>
+    </div>
+  </section>

@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// SiteMainHandler for handling the - isak-tech.tk || main
+// MainGetController for handling the - isak-tech.tk || main
 func MainGetController(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 	posts, err := postModels.GetAllPosts()
@@ -18,9 +18,10 @@ func MainGetController(c *fiber.Ctx) error {
 
 	if user != nil {
 		return c.Render("sites/main/index", fiber.Map{
-			"Title": "Main",
-			"User":  user,
-			"Posts": posts,
+			"Title":    "Main",
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"User":     user,
+			"Posts":    posts,
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
 				{"text": "Main", "linkTo": "/site/main"},
@@ -38,8 +39,9 @@ func MainSiteInfoController(c *fiber.Ctx) error {
 
 	if user != nil {
 		return c.Render("sites/main/site_info", fiber.Map{
-			"Title": "Main Site Info",
-			"User":  user,
+			"Title":    "Main Site Info",
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"User":     user,
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
 				{"text": "Main", "linkTo": "/site/main"},
@@ -57,13 +59,14 @@ func AnalyticsGetController(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
-		return c.Render("sites/main/analytics", fiber.Map{
-			"Title": "Analytics",
-			"User":  user,
+		return c.Render("analytics", fiber.Map{
+			"Title":    "Analytics",
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"User":     user,
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
-				{"text": "Main", "linkTo": "/site/main"},
-				{"text": "Analytics", "linkTo": "/site/main/analytics"},
+				{"text": "Account", "linkTo": "/users/account"},
+				{"text": "Analytics", "linkTo": "/users/account/analytics"},
 			},
 			"Error":   c.Query("err"),
 			"Success": c.Query("s"),

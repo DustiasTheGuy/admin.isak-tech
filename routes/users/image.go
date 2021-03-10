@@ -67,9 +67,10 @@ func AddImageGetController(c *fiber.Ctx) error {
 	}
 
 	return c.Render("sites/main/image", fiber.Map{
-		"Title": "Add Image",
-		"User":  user,
-		"Post":  post,
+		"Title":    "Add Image",
+		"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+		"User":     user,
+		"Post":     post,
 		"Breadcrumbs": []map[string]string{
 			{"text": "Home", "linkTo": "/"},
 			{"text": "Main", "linkTo": "/site/main"},

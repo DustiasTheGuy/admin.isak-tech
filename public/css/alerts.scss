@@ -5,7 +5,7 @@
     font-size: 22px;
     position: relative;
     margin: 25px 0;
-    border-radius: 25px;
+    border-radius: 17px;
     p {
         margin: 0;
         text-transform: capitalize;
@@ -43,11 +43,11 @@
 
 
 .alert.alert-danger {
-    background-color: #AF9164;
+    background-color: #8b1a2d;
 
     &:hover {
         &::before {
-            background-color: rgba(223, 19, 19, 0.726);
+            background-color: #8b1a2da8;
             color: #fff;
         }
     }
@@ -58,7 +58,7 @@
 }
 
 .alert.alert-success {
-    background-color: #F2A359;
+    background-color: #4E937A;
 
     &:hover {
         &::before {

@@ -16,8 +16,8 @@
         <div class="table">
             <div class="table-head">
                 <div class="table-row" id="t-head">
-                    <span>Thumbnail</span>
-                    <span>ID</span>
+                    <span style="width:20%;">Thumbnail</span>
+                    <span style="width:10%;">ID</span>
                     <span>Description</span>
                     <span>Created</span>
                 </div>
@@ -31,8 +31,8 @@
                         <a href="javascript:void()" onclick="deletePage(this)" data-id="{{ $page.ID }}"><i class="fas fa-trash"></i></a>
                     </div>
 
-                    <span class="thumbnail span-image"><img src="{{ $page.Thumbnail }}" data-id="{{ $page.ID }}"></span>
-                    <span class="id">{{ $page.ID }}</span>
+                    <span style="width:20%;" class="thumbnail span-image"><img src="{{ $page.Thumbnail }}" data-id="{{ $page.ID }}"></span>
+                    <span style="width:10%;" class="id">{{ $page.ID }}</span>
                     <span class="description">{{ $page.Description }}</span>
                     <span class="created">{{ $page.Created }}</span>
                 </div>

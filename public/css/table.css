@@ -17,8 +17,9 @@
 .table .table-head .table-row,
 .table .table-body .table-row {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 3fr 1fr 1fr 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   padding: 16px;
   gap: 10px;
 }
@@ -30,9 +31,13 @@
 .table .table-head .table-row span,
 .table .table-body .table-row span {
   display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 100%;
   align-items: center;
-  white-space: nowrap;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: #fff;
   transition: color 200ms linear;
 }
@@ -83,6 +88,7 @@
   height: 100%;
   display: flex;
   justify-content: space-evenly;
+  top: 0;
 }
 .table .table-body .table-row .actions a {
   display: flex;

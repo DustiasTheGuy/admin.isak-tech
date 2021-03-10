@@ -1,3 +1,4 @@
+
 const navigate = (element) => {
     return window.location.pathname = '/site/portal/page/' + 
     parseInt(element.getAttribute('data-id'));
@@ -10,8 +11,9 @@ const navigate = (element) => {
         ? true : false;
 
     } catch(err) {
-        return console.log(new Error('Element could not be found'));
+        return;
     }
+    
 })();
 
 (function() {
@@ -25,7 +27,7 @@ const navigate = (element) => {
         }
 
     } catch(err) {
-        return console.log(new Error('Element could not be found'));
+        return;
     }
 })();
 
@@ -70,11 +72,17 @@ const formGroupFocusOut = (e) =>
 (function() {
     let formGroups = document.getElementsByClassName('form-group');
     for(let i = 0; i < formGroups.length; i++) {
-        
-        formGroups[i].childNodes[3] != undefined ? 
-        formGroups[i].childNodes[3].value >= 0 ? true : false 
-        != undefined ? formGroups[i].classList.add('focused') : // pretty much if the input has something add focused to it's form-group
-        undefined : undefined;
+
+        formGroups[i].childNodes.forEach(el => {
+            let isFormElement = 
+            el.tagName === "INPUT" || 
+            el.tagName === "SELECT" || 
+            el.tagName === "TEXTAREA";
+
+            if(isFormElement && el.value.length > 0) {
+                formGroups[i].classList.add('focused');
+            }
+        });
 
         formGroups[i].addEventListener('focusin', (e) =>  e.path[1].classList.add('focused'));
         formGroups[i].addEventListener('focusout', (e) => formGroupFocusOut(e) ? e.path[1].classList.remove('focused') : '');

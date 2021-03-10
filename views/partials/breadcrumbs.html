@@ -1,5 +1,6 @@
 <section class="page-header">
     <h1>{{ .Title }}</h1>
+    <p>{{ .Subtitle }}</p>
     <nav>
         {{ range $i, $b := .Breadcrumbs }}
             {{ if len $.Breadcrumbs | IsLast $i }}

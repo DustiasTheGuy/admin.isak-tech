@@ -60,6 +60,7 @@ func main() {
 	usersRouter.Get("/stop/:pid", users.StopService)              // STOP   | stop a running service
 	usersRouter.Get("/get-processes", users.GetProcesses)         // GET    | grab all running processes
 	usersRouter.Get("/management", users.ManagementGetController) // RENDER | Render the management template
+	usersRouter.Get("/analytics", users.AnalyticsGetController)   // RENDER | show some analytics about the site
 
 	mainRouter := app.Group("/site/main")                                              // Group all routes that are related to just isak-tech.tk the main site
 	mainRouter.Get("/", users.MainGetController)                                       // RENDER | display all posts template
@@ -72,7 +73,6 @@ func main() {
 	mainRouter.Get("/post/:postID/:imageID/remove-image", users.RemoveImageController) // DELETE | request image get request ( might be changed to post request )
 	mainRouter.Get("/post/:postID/remove-post", users.RemovePostController)            // DELETE | request an existing post permanently
 	mainRouter.Get("/site-information", users.MainSiteInfoController)                  // RENDER | display information about the site
-	mainRouter.Get("/analytics", users.AnalyticsGetController)                         // RENDER | show some analytics about the site
 
 	// A page is a row in mysql that contains all data associated with a page that I find interesting
 	portalRouter := app.Group("/site/portal")                                 // Group all routes that are related to portal.isak-tech.tk

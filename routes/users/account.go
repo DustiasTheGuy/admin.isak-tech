@@ -27,8 +27,9 @@ func AccountGetController(c *fiber.Ctx) error {
 
 	if user != nil {
 		return c.Render("account", fiber.Map{
-			"Title": "Account",
-			"User":  user,
+			"Title":    "Account",
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"User":     user,
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
 				{"text": "Account", "linkTo": "/users/account"},

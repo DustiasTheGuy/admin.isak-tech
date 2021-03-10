@@ -26,9 +26,10 @@ func PostGetController(c *fiber.Ctx) error {
 
 	if user != nil {
 		return c.Render("sites/main/post", fiber.Map{
-			"Title": fmt.Sprintf("Post %d", post.ID),
-			"Post":  post,
-			"User":  user,
+			"Title":    fmt.Sprintf("Post %d", post.ID),
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"Post":     post,
+			"User":     user,
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
 				{"text": "Main", "linkTo": "/site/main"},
@@ -47,8 +48,9 @@ func AddNewGetController(c *fiber.Ctx) error {
 
 	if user != nil {
 		return c.Render("sites/main/add_new", fiber.Map{
-			"Title": "New Post",
-			"User":  user,
+			"Title":    "New Post",
+			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+			"User":     user,
 			"Breadcrumbs": []map[string]string{
 				{"text": "Home", "linkTo": "/"},
 				{"text": "Main", "linkTo": "/site/main"},

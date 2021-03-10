@@ -164,7 +164,7 @@ section .grid .grid-item div a:hover {
   min-width: 140px;
   background-color: #4E937A;
   color: #fff;
-  border-radius: 4px;
+  border-radius: 10px;
   text-transform: uppercase;
   cursor: pointer;
   font-weight: bold;
@@ -281,31 +281,32 @@ section .grid .grid-item div a:hover {
   min-width: 400px;
   border-radius: 25px;
   min-height: 300px;
-  padding: 1em;
+  padding: 3em;
+  gap: 20px;
+  overflow: hidden;
+  position: relative;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+  animation-timing-function: linear;
+  animation-name: placeholderAnimate;
+  background-size: 1300px;
+  background: linear-gradient(to right, #333 2%, #3f3f3f 18%, #464646 33%);
 }
 .placeholder .title, .placeholder .line, .placeholder .button {
-  border-radius: 25px;
-}
-.placeholder .title {
-  height: 30px;
-  width: 75%;
-  background-color: gray;
-  margin: 10px 0;
-}
-.placeholder .line {
-  margin: 10px 0 10px 10px;
-  width: 55.25%;
-  height: 7.5px;
-  background-color: gray;
-}
-.placeholder .line:nth-child(odd) {
-  width: 35.75%;
-}
-.placeholder .button {
   height: 22.5px;
+  width: 100%;
   background-color: gray;
-  width: 50%;
-  margin: 20px 0;
+}
+
+@keyframes placeholderAnimate {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

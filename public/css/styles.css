@@ -93,28 +93,44 @@ section .list {
   padding: 2em;
   border-radius: 25px;
 }
-section .list div {
+section .list .details {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border-bottom: 1px solid #414141;
+  color: #4E937A;
+}
+section .list details {
+  padding: 1em 0;
+}
+section .list details .body {
+  padding: 1em 0;
+}
+section .list details .body p {
+  margin: 0;
   color: #fff;
-  padding: 1em;
 }
-section .list div:not(:last-of-type) {
-  border-bottom: 1px solid #474747;
+section .list details:not(:last-of-type) {
+  border-bottom: 1px solid #414141;
 }
-section .list div .fa-edit {
+section .list details summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  outline: none;
   cursor: pointer;
 }
-section .list div .fa-edit:hover {
-  color: #464646;
+section .list details summary::-webkit-details-marker {
+  display: none;
 }
-section .list div p {
+section .list details summary p {
   margin: 0;
+  color: #4E937A;
 }
-section .list div p i {
-  margin-right: 10px;
-  color: #23967F;
+section .list details summary .far.fa-edit {
+  color: #fff;
+  transition: all 200ms linear;
+}
+section .list details summary .far.fa-edit:hover {
+  color: #adadad;
 }
 section h4 {
   margin: 5px 0;

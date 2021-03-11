@@ -1,8 +1,6 @@
 package users
 
 import (
-	userModels "admin/models/user"
-	"admin/routes"
 	"admin/routes/index"
 
 	"github.com/gofiber/fiber/v2"
@@ -10,14 +8,6 @@ import (
 
 // PasteGetController for handling the - paste.isak-tech.tk || paste
 func PasteGetController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
@@ -38,14 +28,6 @@ func PasteGetController(c *fiber.Ctx) error {
 }
 
 func PasteSiteInfoController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
@@ -67,14 +49,6 @@ func PasteSiteInfoController(c *fiber.Ctx) error {
 }
 
 func APIGetController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {

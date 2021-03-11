@@ -3,7 +3,6 @@ package users
 import (
 	imageModel "admin/models/image"
 	postModel "admin/models/post"
-	userModels "admin/models/user"
 	"admin/routes"
 	"fmt"
 
@@ -14,14 +13,6 @@ import (
 )
 
 func RemoveImageController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 2) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	ImageID, err := strconv.ParseUint(c.Params("imageID"), 10, 64)
 
 	if err != nil {
@@ -58,14 +49,6 @@ func RemoveImageController(c *fiber.Ctx) error {
 }
 
 func AddImageGetController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	user := index.GetSession(c).Get("User")
 	postID, err := strconv.ParseUint(c.Params("postID"), 10, 64)
 
@@ -100,14 +83,6 @@ func AddImageGetController(c *fiber.Ctx) error {
 }
 
 func AddImagePostController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 1) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	var body imageModel.Image
 
 	postID, err := strconv.ParseUint(c.Params("postID"), 10, 64)

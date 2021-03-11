@@ -2,7 +2,6 @@ package users
 
 import (
 	postModel "admin/models/post"
-	userModels "admin/models/user"
 	"admin/routes"
 	"admin/routes/index"
 	"fmt"
@@ -12,10 +11,6 @@ import (
 )
 
 func PostGetController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.Redirect("/site/main?err=You lack the nessecary privileges")
-	}
-
 	id, err := strconv.ParseUint(c.Params("postID"), 10, 64)
 	user := index.GetSession(c).Get("User")
 
@@ -49,10 +44,6 @@ func PostGetController(c *fiber.Ctx) error {
 }
 
 func AddNewGetController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.Redirect("/site/main?err=You lack the nessecary privileges")
-	}
-
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
@@ -74,11 +65,6 @@ func AddNewGetController(c *fiber.Ctx) error {
 }
 
 func AddNewPostController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 1) {
-		return c.Redirect("/site/main?err=You lack the nessecary privileges")
-
-	}
-
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
@@ -99,11 +85,6 @@ func AddNewPostController(c *fiber.Ctx) error {
 }
 
 func RemovePostController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 2) {
-		return c.Redirect("/site/main?err=You lack the nessecary privileges")
-
-	}
-
 	postID, err := strconv.ParseUint(c.Params("postID"), 10, 64)
 
 	if err != nil {
@@ -118,14 +99,6 @@ func RemovePostController(c *fiber.Ctx) error {
 }
 
 func UpdatePostController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 2) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	var post postModel.Post
 
 	if err := c.BodyParser(&post); err != nil {

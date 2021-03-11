@@ -2,8 +2,6 @@ package users
 
 import (
 	postModels "admin/models/post"
-	userModels "admin/models/user"
-	"admin/routes"
 	"admin/routes/index"
 
 	"github.com/gofiber/fiber/v2"
@@ -11,14 +9,6 @@ import (
 
 // MainGetController for handling the - isak-tech.tk || main
 func MainGetController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	user := index.GetSession(c).Get("User")
 	posts, err := postModels.GetAllPosts()
 
@@ -45,14 +35,6 @@ func MainGetController(c *fiber.Ctx) error {
 }
 
 func MainSiteInfoController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
@@ -74,14 +56,6 @@ func MainSiteInfoController(c *fiber.Ctx) error {
 }
 
 func AnalyticsGetController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {

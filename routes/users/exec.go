@@ -134,13 +134,6 @@ func StartService(c *fiber.Ctx) error {
 
 // StopService stop a service with its pid
 func StopService(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 3) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
 
 	fmt.Printf("Stop - %s\n", c.Params("pid"))
 	pid, err := strconv.ParseInt(c.Params("pid"), 10, 64)

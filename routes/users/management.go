@@ -2,21 +2,12 @@ package users
 
 import (
 	userModels "admin/models/user"
-	"admin/routes"
 	"admin/routes/index"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func ManagementGetController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	var err error
 	user := index.GetSession(c).Get("User")
 	x, ok := user.(index.SessionData)

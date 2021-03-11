@@ -2,6 +2,8 @@ package users
 
 import (
 	pageModel "admin/models/page"
+	userModels "admin/models/user"
+	"admin/routes"
 	"admin/routes/index"
 	"fmt"
 	"strconv"
@@ -11,6 +13,14 @@ import (
 
 // SitePortalHandler for handling the - portal.isak-tech.tk || portal
 func PortalGetController(c *fiber.Ctx) error {
+	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
+		return c.JSON(routes.HTTPResponse{
+			Message: "You lack the nessecary privileges",
+			Success: false,
+			Data:    nil,
+		})
+	}
+
 	user := index.GetSession(c).Get("User")
 
 	pages, err := pageModel.GetAllPages()
@@ -38,6 +48,14 @@ func PortalGetController(c *fiber.Ctx) error {
 }
 
 func PortalGetPageController(c *fiber.Ctx) error {
+	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
+		return c.JSON(routes.HTTPResponse{
+			Message: "You lack the nessecary privileges",
+			Success: false,
+			Data:    nil,
+		})
+	}
+
 	user := index.GetSession(c).Get("User")
 
 	pageID, err := strconv.ParseUint(c.Params("pageID"), 10, 64)
@@ -72,6 +90,14 @@ func PortalGetPageController(c *fiber.Ctx) error {
 }
 
 func PortalUpdateController(c *fiber.Ctx) error {
+	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 2) {
+		return c.JSON(routes.HTTPResponse{
+			Message: "You lack the nessecary privileges",
+			Success: false,
+			Data:    nil,
+		})
+	}
+
 	fmt.Println("Request From: ", c.OriginalURL())
 	var p pageModel.Page
 	user := index.GetSession(c).Get("User")
@@ -92,6 +118,14 @@ func PortalUpdateController(c *fiber.Ctx) error {
 }
 
 func PortalDeleteOneController(c *fiber.Ctx) error {
+	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 3) {
+		return c.JSON(routes.HTTPResponse{
+			Message: "You lack the nessecary privileges",
+			Success: false,
+			Data:    nil,
+		})
+	}
+
 	fmt.Println("Request From: ", c.OriginalURL())
 	user := index.GetSession(c).Get("User")
 
@@ -113,6 +147,14 @@ func PortalDeleteOneController(c *fiber.Ctx) error {
 }
 
 func PortalAddNewGetController(c *fiber.Ctx) error {
+	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
+		return c.JSON(routes.HTTPResponse{
+			Message: "You lack the nessecary privileges",
+			Success: false,
+			Data:    nil,
+		})
+	}
+
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
@@ -134,6 +176,14 @@ func PortalAddNewGetController(c *fiber.Ctx) error {
 }
 
 func PortalAddNewPostController(c *fiber.Ctx) error {
+	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 1) {
+		return c.JSON(routes.HTTPResponse{
+			Message: "You lack the nessecary privileges",
+			Success: false,
+			Data:    nil,
+		})
+	}
+
 	var p pageModel.Page
 	user := index.GetSession(c).Get("User")
 
@@ -154,6 +204,10 @@ func PortalAddNewPostController(c *fiber.Ctx) error {
 }
 
 func PortalSiteInfoController(c *fiber.Ctx) error {
+	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
+		return c.Redirect("/site/portal?err=You lack the nessecary privileges")
+	}
+
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {

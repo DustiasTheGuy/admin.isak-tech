@@ -4,42 +4,42 @@
   </a>
   
   {{ if .User }}
+  <div>
+    <h4>Account Settings</h4>
+      <a class="nav-link" href="/users/account">Account Information</a>
+      <a class="nav-link" href="/users/management">Server Management</a>
+      <a class="nav-link" href="/users/analytics">Requests Analytics</a>
+      <a class="nav-link" href="/users/sign-out">Sign Out</a>
+  </div>
+  {{ else }}
+    <div>
+      <h4>Account Access</h4>
+      <a class="nav-link" href="/sign-up">Sign Up</a>
+      <a class="nav-link" href="/sign-in">Sign In</a>
+    </div>
+  {{ end }}
+
+  {{ if .User }}
     <div>
       <h4>Isak Tech</h4>
-      <a class="nav-link" href="/site/main"><button>Posts</button></a>
-      <a class="nav-link" href="/site/main/post/add-new"><button>New Post</button></a>
-      <!-- <a class="nav-link" href="/site/main/site-information"><button>Site Information</button></a> -->
+      <a class="nav-link" href="/site/main">Browse Posts</a>
+      <a class="nav-link" href="/site/main/post/add-new">Publish New Post</a>
+      <!-- <a class="nav-link" href="/site/main/site-information">Site Information</a> -->
     </div>
 
     <div>
       <h4>Portal</h4>
-      <a class="nav-link" href="/site/portal"><button>Pages</button></a>
-      <a class="nav-link" href="/site/portal/page/add-page"><button>New Page</button></a>
-      <!-- <a class="nav-link" href="/site/portal/site-information"><button>Site Information</button></a> -->
+      <a class="nav-link" href="/site/portal">Edit Pages</a>
+      <a class="nav-link" href="/site/portal/page/add-page">Add New Page</a>
+      <!-- <a class="nav-link" href="/site/portal/site-information">Site Information</a> -->
     </div>
 
     <div>
       <h4>Paste</h4>
-      <a class="nav-link" href="/site/paste"><button>Pastes</button></a>
-      <!-- <a class="nav-link" href="/site/paste/site-information"><button>Site Information</button></a> -->
-      <a class="nav-link" href="/site/paste/api"><button>API</button></a>
+      <a class="nav-link" href="/site/paste">Pastes</a>
+      <!-- <a class="nav-link" href="/site/paste/site-information">Site Information</a> -->
+      <a class="nav-link" href="/site/paste/api">API Instructions</a>
     </div>
-    {{ end }}
-
-    {{ if .User }}
-      <div>
-        <h4>{{ .User.Username }}</h4>
-          <a class="nav-link" href="/users/account"><button>Account</button></a>
-          <a class="nav-link" href="/users/management"><button>Management</button></a>
-          <a class="nav-link" href="/users/analytics"><button>Analytics</button></a>
-          <a class="nav-link" href="/users/sign-out"><button>Sign Out</button></a>
-      </div>
-    {{ else }}
-      <div>
-        <h4>Account</h4>
-        <a class="nav-link" href="/sign-up"><button>Sign Up</button></a>
-        <a class="nav-link" href="/sign-in"><button>Sign In</button></a>
-      </div>
     {{ end }}
 </nav>
 

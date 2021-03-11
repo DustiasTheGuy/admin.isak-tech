@@ -45,7 +45,8 @@ func main() {
 
 	app.Static("/public", "./public") // serve static files from /public folder
 
-	indexRouter := app.Group("/")                                        // group every route that ONLY can be accessed without a session or can always be accessed
+	// group every route that ONLY can be accessed without a session or can always be accessed
+	indexRouter := app.Group("/")
 	indexRouter.Get("/", index.HomeGetController)                        // RENDER | display home page template
 	indexRouter.Get("/sign-in", index.SignInGetController)               // RENDER | display the user sign in template
 	indexRouter.Post("/sign-in", index.SignInPostController)             // POST   | request a new session with username and password
@@ -53,7 +54,11 @@ func main() {
 	indexRouter.Post("/sign-up", index.SignUpPostController)             // POST   | create a new user account
 	indexRouter.Post("/validate-form/:form", index.FormValidationRouter) // gets called through javascript to ensure form is valid before making a submit request
 
-	usersRouter := app.Group("/users")                            // Group all routes related to a users account
+	// Group all routes related to a users account
+	usersRouter := app.Group("/users", func(c *fiber.Ctx) error {
+		return c.Next()
+	})
+
 	usersRouter.Get("/account", users.AccountGetController)       // RENDER | display users account information
 	usersRouter.Get("/sign-out", users.SignOutController)         // UPDATE | request to clear session
 	usersRouter.Get("/start/:service", users.StartService)        // START  | start a new service
@@ -62,7 +67,11 @@ func main() {
 	usersRouter.Get("/management", users.ManagementGetController) // RENDER | Render the management template
 	usersRouter.Get("/analytics", users.AnalyticsGetController)   // RENDER | show some analytics about the site
 
-	mainRouter := app.Group("/site/main")                                              // Group all routes that are related to just isak-tech.tk the main site
+	// Group all routes that are related to just isak-tech.tk the main site
+	mainRouter := app.Group("/site/main", func(c *fiber.Ctx) error {
+		return c.Next()
+	})
+
 	mainRouter.Get("/", users.MainGetController)                                       // RENDER | display all posts template
 	mainRouter.Post("/post/add-new", users.AddNewPostController)                       // POST   | create a new post, form submit
 	mainRouter.Get("/post/add-new", users.AddNewGetController)                         // RENDER | display the form where you can add a new post
@@ -75,7 +84,11 @@ func main() {
 	mainRouter.Get("/site-information", users.MainSiteInfoController)                  // RENDER | display information about the site
 
 	// A page is a row in mysql that contains all data associated with a page that I find interesting
-	portalRouter := app.Group("/site/portal")                                 // Group all routes that are related to portal.isak-tech.tk
+	// Group all routes that are related to portal.isak-tech.tk
+	portalRouter := app.Group("/site/portal", func(c *fiber.Ctx) error {
+		return c.Next()
+	})
+
 	portalRouter.Get("/", users.PortalGetController)                          // RENDER | display all available pages template
 	portalRouter.Get("/page/add-page", users.PortalAddNewGetController)       // RENDER | request create a new page template
 	portalRouter.Post("/page/add-page", users.PortalAddNewPostController)     // CREATE | create a new page in mysql
@@ -84,7 +97,11 @@ func main() {
 	portalRouter.Get("/page/:pageID/delete", users.PortalDeleteOneController) // DELETE | request delete an existing page permanently
 	portalRouter.Get("/site-information", users.PortalSiteInfoController)     // RENDER | display information about the site
 
-	pasteRouter := app.Group("/site/paste")                             // Group all routes that are related to paste.isak-tech.tk
+	// Group all routes that are related to paste.isak-tech.tk
+	pasteRouter := app.Group("/site/paste", func(c *fiber.Ctx) error {
+		return c.Next()
+	})
+
 	pasteRouter.Get("/", users.PasteGetController)                      // RENDER | display all the pastes that have been submitted
 	pasteRouter.Get("/site-information", users.PasteSiteInfoController) // RENDER | display information about the site
 	pasteRouter.Get("/api", users.APIGetController)                     // REDNER | display template how the api works

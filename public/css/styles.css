@@ -124,6 +124,10 @@ section .list details summary::-webkit-details-marker {
 section .list details summary p {
   margin: 0;
   color: #4E937A;
+  transition: all 200ms linear;
+}
+section .list details summary p:hover {
+  color: #72aa95;
 }
 section .list details summary .far.fa-edit {
   color: #fff;

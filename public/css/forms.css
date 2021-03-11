@@ -37,7 +37,8 @@ form .form-group.focused label {
   bottom: 100%;
   transform: translateY(0);
   margin-bottom: 10px;
-  left: 0;
+  left: 4px;
+  color: #fff;
 }
 form .form-group {
   display: flex;
@@ -52,8 +53,7 @@ form .form-group p {
 }
 form .form-group label {
   display: block;
-  color: #4E937A;
-  font-weight: 600;
+  color: #205c46;
   position: absolute;
   bottom: 50%;
   transform: translateY(50%);
@@ -61,12 +61,15 @@ form .form-group label {
   transition: all 200ms linear;
 }
 form .form-group input, form .form-group select, form .form-group textarea {
-  padding: 0.8em;
+  padding: 0.68em;
   font-size: 17px;
   border: none;
   outline: none;
   background-color: #fff;
   border-radius: 10px;
+}
+form .form-group input::placeholder, form .form-group select::placeholder, form .form-group textarea::placeholder {
+  display: none;
 }
 form .form-group input:disabled, form .form-group select:disabled, form .form-group textarea:disabled {
   background-color: #bdbdbd;

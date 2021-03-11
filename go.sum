@@ -16,14 +16,6 @@ github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym
 github.com/CloudyKit/fastprinter v0.0.0-20200109182630-33d98a066a53/go.mod h1:+3IMCy2vIlbG1XG/0ggNQv0SvxCAIpPM5b1nCz56Xno=
 github.com/CloudyKit/jet/v3 v3.0.1/go.mod h1:HKQPgSJmdK8hdoAbKUUWajkHyHo4RaU5rMdUywE7VMo=
 github.com/Djarvur/go-err113 v0.0.0-20200511133814-5174e21577d5/go.mod h1:4UJr5HIiMZrwgkSPdsjy2uOQExX/WEILpIrO9UPGuXs=
-github.com/DustiasTheGuy/server_manager v0.0.0-20210301115328-7f3b5a2d42a7 h1:ZhyH1ueW59XSoKBlRW8KP2+4HvZDU4OZ+2h/J9sX5vs=
-github.com/DustiasTheGuy/server_manager v0.0.0-20210301115328-7f3b5a2d42a7/go.mod h1:u6zy94glug3EzG5ypnLuZ1w2MqoZEM6am38dps5jG14=
-github.com/DustiasTheGuy/server_manager v0.0.0-20210301115925-54201f2ac771 h1:ucAvT0u8SGkWSSk98OW9/IuypYh/xPK3fNRd1TAcn/Q=
-github.com/DustiasTheGuy/server_manager v0.0.0-20210301115925-54201f2ac771/go.mod h1:u6zy94glug3EzG5ypnLuZ1w2MqoZEM6am38dps5jG14=
-github.com/DustiasTheGuy/servman v0.0.0-20210303023521-e635666fde9d h1:MVq6jlDSR3CJmLnwL8xZAMY8+uzZHEpPwHDG/caPums=
-github.com/DustiasTheGuy/servman v0.0.0-20210303023521-e635666fde9d/go.mod h1:PGd/0PDBNIbev1E2C20eQcFnbF6KppXDz9z9EOhyzX0=
-github.com/DustiasTheGuy/servman v0.0.0-20210303045321-fb65be9b16fe h1:3fkdsCVUmEvD29cEhPUTUCtKZDX6P+uySo68TeWdGi0=
-github.com/DustiasTheGuy/servman v0.0.0-20210303045321-fb65be9b16fe/go.mod h1:PGd/0PDBNIbev1E2C20eQcFnbF6KppXDz9z9EOhyzX0=
 github.com/DustiasTheGuy/servman v0.0.0-20210306063202-30028b7d3dab h1:dOorCQXOhKzNYmukRMblmhKHJL+sA9bU2MZg4cuxSB8=
 github.com/DustiasTheGuy/servman v0.0.0-20210306063202-30028b7d3dab/go.mod h1:PGd/0PDBNIbev1E2C20eQcFnbF6KppXDz9z9EOhyzX0=
 github.com/Joker/hpp v0.0.0-20180418125244-6893e659854a/go.mod h1:MzD2WMdSxvbHw5fM/OXOFily/lipJWRc9C1px0Mt0ZE=

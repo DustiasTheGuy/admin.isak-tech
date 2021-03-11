@@ -31,16 +31,6 @@ const navigate = (element) => {
     }
 })();
 
-(function() {
-    let navLinks = document.getElementsByClassName('nav-link');
-    
-    for(let i = 0; i < navLinks.length; i++) {
-        if(navLinks[i].getAttribute('href') === window.location.pathname) {
-            return navLinks[i].classList.add('active-link');
-        } 
-    }
-})();
-
 const errorHandler = (error) => alert(error);
 
 (function() {

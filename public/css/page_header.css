@@ -30,7 +30,7 @@
   color: #c9c9c9;
 }
 .page-header nav a:not(:last-of-type)::after {
-  content: ">";
+  content: "/";
   margin: 0 10px;
   font-size: 14px;
   color: #ffffff;

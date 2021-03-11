@@ -15,16 +15,19 @@
 <section>
     <div class="list">
         <div class="details">
-            <p><i class="fas fa-id-card"></i> {{.User.ID}}</p>
+            <p>Unique Identifier: {{ .User.ID }}</p>
         </div>
 
+        <div class="details">
+            <p>Administration Level: {{ .User.Admin }}</p>
+        </div>
         <div class="details">
             <p><i class="fas fa-calendar"></i> {{ FormatDate .User.Created}}</p>
         </div>
         
         <details>
             <summary>
-                <p><i class="fas fa-envelope"></i> {{.User.Email}}</p>
+                <p><i class="fas fa-envelope"></i> {{ .User.Email }}</p>
                 <i class="far fa-edit"></i>
             </summary>
             <div class="body">
@@ -43,7 +46,7 @@
         
         <details>
             <summary>
-                <p><i class="fas fa-user"></i> {{.User.Username}}</p>
+                <p><i class="fas fa-user"></i> {{ .User.Username }}</p>
                 <i class="far fa-edit"></i>
             </summary>
             <div class="body">

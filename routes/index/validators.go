@@ -4,6 +4,7 @@ import (
 	models "admin/models/user"
 	"admin/routes"
 	"database/sql"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/session"
@@ -15,6 +16,7 @@ type SessionData struct {
 	ID       uint
 	Username string
 	Email    string
+	Admin    int8
 }
 
 // Store is a new mysql sessions storage
@@ -26,6 +28,18 @@ var Store = session.New(session.Config{
 		Table:    "fiber_storage",
 	}),
 })
+
+func ParsePrivileges(sessData interface{}) int8 {
+	value, ok := sessData.(SessionData)
+
+	if !ok {
+		return 0
+	}
+
+	fmt.Printf("User Admin Level: %d\n", value.Admin)
+
+	return value.Admin
+}
 
 // GetSession get the current session as a pointer
 func GetSession(c *fiber.Ctx) *session.Session {

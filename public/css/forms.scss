@@ -45,7 +45,8 @@ form {
             bottom: 100%;
             transform: translateY(0);
             margin-bottom: 10px;
-            left: 0;
+            left: 4px;
+            color: #fff;
         }
     }
 
@@ -63,8 +64,7 @@ form {
 
         label {
             display: block;
-            color: #4E937A;
-            font-weight: 600;
+            color: #205c46;
             position: absolute;
             bottom: 50%;
             transform: translateY(50%);
@@ -73,12 +73,16 @@ form {
         }
 
         input, select, textarea {
-            padding: .8em;
+            padding: .68em;
             font-size: 17px;
             border: none;
             outline: none;
             background-color: #fff;
             border-radius: 10px;
+
+            &::placeholder {
+                display: none;
+            }
 
             &:disabled {
                 background-color: rgb(189, 189, 189);

@@ -2,6 +2,7 @@ package user
 
 import (
 	"admin/database"
+
 	"database/sql"
 	"fmt"
 	"time"
@@ -16,7 +17,38 @@ type User struct {
 	Email    string    `json:"email"`
 	Password string    `json:"password"`
 	Created  time.Time `json:"created"`
-	Admin    bool      `json:"admin"`
+	Admin    int8      `json:"admin"`
+}
+
+/*
+	Admin Privileges Levels:
+
+		Level 0: Can view data but not create, update or delete data
+
+			GET /users/account
+			GET /users/management
+			GET /users/analytics
+			GET /users/sign-out
+			GET /site/main
+			GET /site/main/post/add-new
+			GET /site/portal
+			GET /site/portal/page/add-page
+			GET /site/paste
+			GET /site/paste/api
+			GET /sign-up
+			GET /sign-in
+			GET /site/main/post/:id/add-image
+			GET /site/main/post/:id
+			GET /site/portal/page/:id
+
+		Level 1: Can view, create data but not update or delete
+		Level 2: Can view, create, update data but not delete
+		Level 3: Can view, create, update, delete data plus modify user privileges, suspend users, remove users.
+*/
+
+// IsAllowedAccess checks if user admin level is greater or equal to the required level. First argument is the user admin level and the second argument is the required level to access an endpoint
+func IsAllowedAccess(a, b int8) bool {
+	return a >= b
 }
 
 // HashPassword generates a hash from a string

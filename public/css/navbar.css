@@ -1,3 +1,5 @@
+@charset "UTF-8";
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,400italic,700,800");
 #navbar-btn {
   position: fixed;
   bottom: 0;
@@ -36,6 +38,9 @@
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 #sidenav .logo {
   background-color: #333333;
@@ -53,46 +58,67 @@
   width: 280px;
 }
 #sidenav div {
-  border-bottom: 1px solid #424242;
   width: 300px;
-  padding: 0.63em 0;
+  height: 100%;
+  padding: 1.2rem;
+}
+#sidenav div:not(:last-of-type) {
+  border-bottom: 1px solid #414141;
 }
 #sidenav div h4 {
   text-transform: uppercase;
   color: #4E937A;
-  font-size: 20px;
-  padding: 0.5em;
-  margin: 0;
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
+  padding: 0 12px 0 12px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
 }
-#sidenav div a.active-link button {
-  background-color: #494949;
+#sidenav div a.active {
+  background-color: rgba(77, 77, 77, 0.589);
+}
+#sidenav div a.active::after {
+  opacity: 1;
+  color: #c9c9c9;
+  right: 10px;
 }
 #sidenav div a {
   color: #fff;
   text-decoration: none;
   display: block;
-  border: 1px solid transparent;
   cursor: pointer;
+  background-color: rgba(51, 51, 51, 0);
+  border: none;
+  padding: 6px 12px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  position: relative;
+  background-color: #333;
+  border-radius: 20px;
+  margin: 6px 0;
 }
 #sidenav div a:active {
   color: #4E937A;
 }
-#sidenav div a button {
-  width: 100%;
-  height: 100%;
-  padding: 0.5em 1em;
-  border: none;
-  background-color: rgba(51, 51, 51, 0);
-  text-align: left;
-  color: inherit;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
+#sidenav div a::after {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  /* Fix version 5.0.9 */
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 200ms linear;
+  color: #333;
 }
-#sidenav div a button:hover {
+#sidenav div a:hover {
   background-color: #494949;
+}
+#sidenav div a:hover::after {
+  opacity: 1;
+  color: silver;
+  right: 10px;
 }
 
 /*# sourceMappingURL=navbar.css.map */

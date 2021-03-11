@@ -1,5 +1,15 @@
+const activeLink = () => {
+    let navLinks = document.getElementsByClassName('nav-link');
+    
+    for(let i = 0; i < navLinks.length; i++) {
+        let isActive = navLinks[i].href === window.location.href;
+        if(isActive) return navLinks[i].classList.add('active');
+    }
+}
+
 const main = () => {
     console.log('Application Started..')
+    activeLink();
     switch(window.location.pathname) {
         case '/users/management': return getProcesses();
         case '/site/paste/api': return renderAPIRoutes();
@@ -11,12 +21,3 @@ const main = () => {
 }
 
 window.document.onload = main();
-
-// (function() {
-//     let elements = document.getElementsByClassName('created')
-    
-//     for(let i = 0; i < elements.length; i++) {
-//         elements[i].textContent = 
-//         formatDate(new Date(elements[i].textContent));
-//     }
-// })();

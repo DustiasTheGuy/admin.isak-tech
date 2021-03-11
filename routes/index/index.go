@@ -62,7 +62,6 @@ func SignUpGetController(c *fiber.Ctx) error {
 // SignUpPostController gets called when formdata has been validated in the SignUpFormValidation controller
 func SignUpPostController(c *fiber.Ctx) error {
 	var user models.User
-
 	if err := c.BodyParser(&user); err != nil {
 		return c.Redirect("/?err=unable to parse body")
 	}
@@ -99,6 +98,7 @@ func SignInPostController(c *fiber.Ctx) error {
 			ID:       user.ID,
 			Username: user.Username,
 			Email:    user.Email,
+			Admin:    user.Admin,
 		})
 
 		if err := sess.Save(); err != nil {

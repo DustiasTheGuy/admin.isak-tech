@@ -9,7 +9,10 @@ import (
 
 // AccountGetController renders the account template where a user can view their account information
 func AccountGetController(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 0) {
+
+	adminLevel := index.ParsePrivileges(index.GetSession(c))
+
+	if !userModels.IsAllowedAccess(adminLevel, 0) { // level >= required
 		return c.Redirect("/users/sign-out?s=You have been signed out")
 	}
 

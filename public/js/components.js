@@ -95,3 +95,14 @@ const fetchAnalytics = () => {
 
 }
 //#endregion
+
+
+//#region 
+const processFooter = (config) => {
+    console.log(config);
+    
+    return config.adminLevel >= 3 ? `    
+    <a class="terminate" href="javascript:void(0)" onclick="stopSite(this)" data-pid="${config.pid}">Terminate</a>
+    <a href="#">Restart</a>` : '';
+}
+//#endregion

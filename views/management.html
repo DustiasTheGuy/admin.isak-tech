@@ -15,12 +15,19 @@
 <section class="site-info-s1">
     <form>
         <div class="form-group">
+            <input type="hidden" value="{{ .User.Admin }}" id="admin_level" readonly>
+
             <select name="server" id="server">
                 <option value="isak_tech">Isak Tech</option>
                 <option value="portal">Portal</option>
                 <option value="paste">Paste</option>
             </select>
-            <button type="button" onclick="startSite()">Start Process</button>
+
+            {{ if (ge .User.Admin 3) }}
+                <button type="button" onclick="startSite()">Start Process</button>
+            {{ else }}
+                <button type="button" title="Requires level 3 admin privileges" disabled>Start Process</button>
+            {{ end }}
         </div>
     </form>
 </section>

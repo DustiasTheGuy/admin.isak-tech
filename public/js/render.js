@@ -2,7 +2,7 @@
 const renderProcess = (process) => {
     let processes = document.getElementById('processes');
     let placeholders = document.getElementsByClassName('placeholder');
-
+    let adminLevel = document.getElementById('admin_level').value;
     
     for(let i = 0; i < placeholders.length; i++) {
         placeholders[i].parentNode.removeChild(placeholders[i]);
@@ -19,9 +19,12 @@ const renderProcess = (process) => {
         <p><span>Domain:</span><span><a href="${process.Config.Domain}" target="_blank">${process.Config.Domain}</a></span></p>
         <p><span>Started:</span><span>${formatDate(new Date(process.Service.Started))}</span></p>
     </div>
+
     <div class="process-footer">
-        <a class="terminate" href="javascript:void(0)" onclick="stopSite(this)" data-pid="${process.Service.ProcessID}">Terminate</a>
-        <a href="#">Restart</a>
+        ${processFooter({ 
+            adminLevel: parseInt(adminLevel), 
+            pid: process.Service.ProcessID 
+        })}
     </div>`;
 
     processes.appendChild(div);
@@ -30,7 +33,15 @@ const renderProcess = (process) => {
 //#endregion
 
 //#region 
-const APIRoutes=[{path:"/api/posts",method:"GET",data:null},{path:"/api/post/:id",method:"GET",data:null},{path:"/api/paginate/:page/:limit",method:"GET",data:null},{path:"/api/delete",method:"DELETE",data:{id:"uint64"}},{path:"/api/new",method:"POST",data:{title:"string",body:"string",tags:"[]string"}},{path:"/api/update",method:"PUT",data:{id:"uint64",title:"string",body:"string",tags:"[]string"}}];
+const APIRoutes =
+[
+    { path: "/api/posts",                 method:"GET",    data: null },
+    { path: "/api/post/:id",              method:"GET",    data: null },
+    { path: "/api/paginate/:page/:limit", method: "GET",   data: null },
+    { path: "/api/delete",                method:"DELETE", data: { id: "uint64" }},
+    { path: "/api/new",                   method: "POST",  data: { title: "string", body: "string", tags: "[]string" }},
+    { path: "/api/update",                method: "PUT",   data: { id: "uint64", title: "string", body: "string", tags: "[]string" }}
+];
 
 const renderAPIRoutes = () => {
     let apiContainer = document.getElementById('api-container');
@@ -46,8 +57,7 @@ const renderAPIRoutes = () => {
             <pre>${el.data != undefined ? JSON.stringify(el.data, null, 2) : 'No data required'}</pre>
         `
 
-
         apiContainer.appendChild(div);
-    })
+    });
 }
 //#endregion

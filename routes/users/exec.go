@@ -1,10 +1,7 @@
 package users
 
 import (
-	"admin/models/user"
-	userModels "admin/models/user"
 	"admin/routes"
-	"admin/routes/index"
 	"fmt"
 	"os"
 	"strconv"
@@ -65,22 +62,6 @@ func GetProcesses(c *fiber.Ctx) error {
 
 // StartService starts a service with its service label
 func StartService(c *fiber.Ctx) error {
-	if !userModels.IsAllowedAccess(index.ParsePrivileges(index.GetSession(c)), 3) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
-	if !user.IsAllowedAccess(1, 2) {
-		return c.JSON(routes.HTTPResponse{
-			Message: "You lack the nessecary privileges to access this route",
-			Success: false,
-			Data:    nil,
-		})
-	}
-
 	serviceParam := c.Params("service")
 
 	for i := 0; i < len(processes); i++ {

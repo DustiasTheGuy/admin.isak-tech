@@ -190,6 +190,14 @@ section .grid .grid-item div a:hover {
   font-weight: bold;
   border: none;
 }
+.site-info-s1 form .form-group button:disabled {
+  background-color: #e7e7e7;
+  color: #b9b9b9;
+  cursor: not-allowed;
+}
+.site-info-s1 form .form-group button:disabled:hover {
+  background-color: #e7e7e7;
+}
 .site-info-s1 form .form-group button:hover {
   background-color: #56a085;
 }

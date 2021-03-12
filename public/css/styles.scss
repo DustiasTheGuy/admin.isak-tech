@@ -226,6 +226,16 @@ section {
                 font-weight: bold;
                 border: none;
 
+                &:disabled {
+                    background-color: #e7e7e7; 
+                    color: rgb(185, 185, 185);
+                    cursor: not-allowed;
+                    
+                    &:hover {
+                        background-color: #e7e7e7; 
+                    }
+                }
+
                 &:hover {
                     background-color: #56a085;
                 }

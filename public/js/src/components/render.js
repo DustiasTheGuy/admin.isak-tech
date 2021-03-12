@@ -1,5 +1,7 @@
-//#region 
-const renderProcess = (process) => {
+import { APIRoutes } from './utils';
+import { tableSetup } from './init';
+
+export const renderProcess = (process) => {
     let processes = document.getElementById('processes');
     let placeholders = document.getElementsByClassName('placeholder');
     let adminLevel = document.getElementById('admin_level').value;
@@ -30,20 +32,8 @@ const renderProcess = (process) => {
     processes.appendChild(div);
     return null
 }
-//#endregion
 
-//#region 
-const APIRoutes =
-[
-    { path: "/api/posts",                 method:"GET",    data: null },
-    { path: "/api/post/:id",              method:"GET",    data: null },
-    { path: "/api/paginate/:page/:limit", method: "GET",   data: null },
-    { path: "/api/delete",                method:"DELETE", data: { id: "uint64" }},
-    { path: "/api/new",                   method: "POST",  data: { title: "string", body: "string", tags: "[]string" }},
-    { path: "/api/update",                method: "PUT",   data: { id: "uint64", title: "string", body: "string", tags: "[]string" }}
-];
-
-const renderAPIRoutes = () => {
+export const renderAPIRoutes = () => {
     let apiContainer = document.getElementById('api-container');
 
     APIRoutes.forEach(el => {
@@ -60,4 +50,28 @@ const renderAPIRoutes = () => {
         apiContainer.appendChild(div);
     });
 }
-//#endregion
+
+
+export const processFooter = (config) => {    
+    return config.adminLevel >= 3 ? `    
+    <a class="terminate" href="javascript:void(0)" onclick="stopSite(this)" data-pid="${config.pid}">Terminate</a>
+    <a href="#">Restart</a>` : '';
+}
+
+export const renderAnalytics = (data) => {
+    let container = document.getElementsByClassName('table-body')[0];
+
+    data.forEach(row => {
+        let div = document.createElement('div');
+        div.className = 'table-row';
+        div.innerHTML = `
+            <span class="id">${row.id}</span>
+            <span class="href">${row.href}</span>
+            <span class="created">${row.created}</span>
+            <span class="ip">${row.ip}</span>
+        `
+        container.appendChild(div);
+    })
+
+    tableSetup();
+}

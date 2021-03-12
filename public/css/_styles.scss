@@ -134,7 +134,7 @@ section {
                 outline: none;
                 cursor: pointer;
 
-                &::-webkit-details-marker {
+                &::marker {
                     display: none;
                 }
 

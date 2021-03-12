@@ -1,4 +1,10 @@
-const signUpSubmit = () => {
+import { 
+    HTTPGetRequest,
+    HTTPPostRequest,
+    getServerAddr
+} from './http';
+
+export const signUpSubmit = () => {
     let form = document.getElementById('signUp-form');
     let formData = new FormData(form);
     let email = document.getElementById('email').value;
@@ -20,8 +26,7 @@ const signUpSubmit = () => {
     });
 }
 
-
-const signInSubmit = () => {
+export const signInSubmit = () => {
     let form = document.getElementById('signIn-form');
     let formData = new FormData(form);
     let username = document.getElementById('username').value;
@@ -39,7 +44,7 @@ const signInSubmit = () => {
     });
 }
 
-const updatePostSubmit = () => {
+export const updatePostSubmit = () => {
     let data = {
         ID: parseInt(document.getElementById('post-id').textContent),
         Title: document.getElementById('title').value,
@@ -61,7 +66,7 @@ const updatePostSubmit = () => {
     }
 }
 
-const deleteImageSubmit = (element) => {
+export const deleteImageSubmit = (element) => {
     let imageID = element.getAttribute('data-id');
     let postID = element.getAttribute('data-postid');
 
@@ -72,7 +77,7 @@ const deleteImageSubmit = (element) => {
     }
 }
 
-const deletePostSubmit = (element) => {
+export const deletePostSubmit = (element) => {
     let id = element.getAttribute('data-id');
     
     if(confirm('Confirm Delete Post ' + id)) {
@@ -81,7 +86,7 @@ const deletePostSubmit = (element) => {
     }
 }
 
-const startSite = () => {
+export const startSite = () => {
     let site = document.getElementById('server').value;
 
     return HTTPGetRequest(getServerAddr(false) + '/users/start/' + site)
@@ -93,14 +98,14 @@ const startSite = () => {
 }
 
 
-const deletePage = (element) => { // requires a valid session or it will be rejected
+export const deletePage = (element) => { // requires a valid session or it will be rejected
     if(confirm('Confirm Delete Page ' + element.getAttribute('data-id'))) {
         return window.location.pathname = '/site/portal/page/' + 
         element.getAttribute('data-id') + '/delete';
     }
 }
 
-const stopSite = (el) => {
+export const stopSite = (el) => {
     let pid = el.getAttribute('data-pid');
 
     if(confirm('Are you sure you wish to terminate process: ' + pid)) {
@@ -113,10 +118,4 @@ const stopSite = (el) => {
             }
         });
     }
-}
-
-const getProcesses = () => {
-    return HTTPGetRequest(getServerAddr(false) + '/users/get-processes')
-    .then(response => response.success && response.data != null ?
-    response.data.map(p => renderProcess(p, p.Label)) : console.log('err'));
 }

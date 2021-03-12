@@ -1,9 +1,9 @@
-const getServerAddr = (production) => {
+export const getServerAddr = (production) => {
     return production ? 
     'https://admin.isak-tech.tk' : 'http://localhost:8084';
 }
 
-const HTTPPostRequest = (url, data) => {
+export const HTTPPostRequest = (url, data) => {
     return fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -11,7 +11,7 @@ const HTTPPostRequest = (url, data) => {
     }).then(response => response.json());
 }
 
-const HTTPGetRequest = (url) => {
+export const HTTPGetRequest = (url) => {
     return fetch(url, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }

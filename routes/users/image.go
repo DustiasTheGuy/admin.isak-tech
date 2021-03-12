@@ -3,6 +3,7 @@ package users
 import (
 	imageModel "admin/models/image"
 	postModel "admin/models/post"
+	userModels "admin/models/user"
 	"admin/routes"
 	"fmt"
 
@@ -12,7 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func RemoveImageController(c *fiber.Ctx) error {
+func RemoveImageController(c *fiber.Ctx) error { // level 3
 	ImageID, err := strconv.ParseUint(c.Params("imageID"), 10, 64)
 
 	if err != nil {
@@ -83,6 +84,12 @@ func AddImageGetController(c *fiber.Ctx) error {
 }
 
 func AddImagePostController(c *fiber.Ctx) error {
+	adminLevel := index.ParsePrivileges(index.GetSession(c))
+
+	if !userModels.IsAllowedAccess(adminLevel, 1) { // level >= required
+		return c.Redirect("/users/sign-out?s=You have been signed out")
+	}
+
 	var body imageModel.Image
 
 	postID, err := strconv.ParseUint(c.Params("postID"), 10, 64)

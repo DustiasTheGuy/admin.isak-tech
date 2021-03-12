@@ -24,23 +24,6 @@ type User struct {
 	Admin Privileges Levels:
 
 		Level 0: Can view data but not create, update or delete data
-
-			GET /users/account
-			GET /users/management
-			GET /users/analytics
-			GET /users/sign-out
-			GET /site/main
-			GET /site/main/post/add-new
-			GET /site/portal
-			GET /site/portal/page/add-page
-			GET /site/paste
-			GET /site/paste/api
-			GET /sign-up
-			GET /sign-in
-			GET /site/main/post/:id/add-image
-			GET /site/main/post/:id
-			GET /site/portal/page/:id
-
 		Level 1: Can view, create data but not update or delete
 		Level 2: Can view, create, update data but not delete
 		Level 3: Can view, create, update, delete data plus modify user privileges, suspend users, remove users.
@@ -125,4 +108,36 @@ func (u *User) CreateNewUser() error {
 	}
 
 	return nil
+}
+
+func FindAllUsers() []User {
+	var users []User
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "isak_tech_admin",
+	})
+	defer db.Close()
+
+	rows, err := db.Query("SELECT * FROM users")
+
+	if err != nil {
+		return nil
+	}
+
+	for rows.Next() {
+		var user User
+		if err := rows.Scan(
+			&user.ID,
+			&user.Username,
+			&user.Email,
+			&user.Password,
+			&user.Created,
+			&user.Admin); err != nil {
+			return nil
+		}
+		users = append(users, user)
+	}
+
+	return users
 }

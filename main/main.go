@@ -33,7 +33,6 @@ func FormatDate(date time.Time) string {
 
 func main() {
 	index.Store.RegisterType(index.SessionData{}) // register the struct that will be held in each session
-	//engine := html.New("./views", ".html")
 	engine := html.New("./views", ".html")
 	engine = engine.AddFunc("IsLast", IsLast)         // add custom template func to check if element is last in an array, primarily used to apply CSS to last element in a range
 	engine = engine.AddFunc("FormatDate", FormatDate) // format date for nicer display
@@ -59,14 +58,14 @@ func main() {
 		return c.Next()
 	})
 
-	usersRouter.Get("/account", users.AccountGetController)       // RENDER | display users account information
-	usersRouter.Get("/sign-out", users.SignOutController)         // UPDATE | request to clear session
-	usersRouter.Get("/start/:service", users.StartService)        // START  | start a new service
-	usersRouter.Get("/stop/:pid", users.StopService)              // STOP   | stop a running service
-	usersRouter.Get("/get-processes", users.GetProcesses)         // GET    | grab all running processes
-	usersRouter.Get("/management", users.ManagementGetController) // RENDER | Render the management template
-	usersRouter.Get("/analytics", users.AnalyticsGetController)   // RENDER | show some analytics about the site
-
+	usersRouter.Get("/account", users.AccountGetController)            // RENDER | display users account information
+	usersRouter.Get("/sign-out", users.SignOutController)              // UPDATE | request to clear session
+	usersRouter.Get("/start/:service", users.StartService)             // START  | start a new service
+	usersRouter.Get("/stop/:pid", users.StopService)                   // STOP   | stop a running service
+	usersRouter.Get("/get-processes", users.GetProcesses)              // GET    | grab all running processes
+	usersRouter.Get("/management", users.ManagementGetController)      // RENDER | Render the management template
+	usersRouter.Get("/analytics", users.AnalyticsGetController)        // RENDER | show some analytics about the site
+	usersRouter.Get("/user_accounts", users.UsersAccountGetController) // RENDER | show all user accounts
 	// Group all routes that are related to just isak-tech.tk the main site
 	mainRouter := app.Group("/site/main", func(c *fiber.Ctx) error {
 		return c.Next()

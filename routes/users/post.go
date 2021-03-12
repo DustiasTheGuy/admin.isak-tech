@@ -2,6 +2,7 @@ package users
 
 import (
 	postModel "admin/models/post"
+	userModels "admin/models/user"
 	"admin/routes"
 	"admin/routes/index"
 	"fmt"
@@ -65,6 +66,12 @@ func AddNewGetController(c *fiber.Ctx) error {
 }
 
 func AddNewPostController(c *fiber.Ctx) error {
+	adminLevel := index.ParsePrivileges(index.GetSession(c))
+
+	if !userModels.IsAllowedAccess(adminLevel, 1) { // level >= required
+		return c.Redirect("/users/account?err=You lack the nessecary privileges to perform that action")
+	}
+
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
@@ -85,6 +92,12 @@ func AddNewPostController(c *fiber.Ctx) error {
 }
 
 func RemovePostController(c *fiber.Ctx) error {
+	adminLevel := index.ParsePrivileges(index.GetSession(c))
+
+	if !userModels.IsAllowedAccess(adminLevel, 3) { // level >= required
+		return c.Redirect("/users/account?err=You lack the nessecary privileges to perform that action")
+	}
+
 	postID, err := strconv.ParseUint(c.Params("postID"), 10, 64)
 
 	if err != nil {
@@ -98,7 +111,7 @@ func RemovePostController(c *fiber.Ctx) error {
 	return c.Redirect("/site/main?s=post has been deleted")
 }
 
-func UpdatePostController(c *fiber.Ctx) error {
+func UpdatePostController(c *fiber.Ctx) error { // level 2
 	var post postModel.Post
 
 	if err := c.BodyParser(&post); err != nil {

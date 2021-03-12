@@ -9,11 +9,10 @@ import (
 
 // AccountGetController renders the account template where a user can view their account information
 func AccountGetController(c *fiber.Ctx) error {
-
-	adminLevel := index.ParsePrivileges(index.GetSession(c))
+	adminLevel := index.ParsePrivileges(index.GetSession(c).Get("User"))
 
 	if !userModels.IsAllowedAccess(adminLevel, 0) { // level >= required
-		return c.Redirect("/users/sign-out?s=You have been signed out")
+		return c.Redirect("/users/sign-out?err=You have been signed out")
 	}
 
 	var err error
@@ -33,7 +32,7 @@ func AccountGetController(c *fiber.Ctx) error {
 	}
 
 	if user != nil {
-		return c.Render("account", fiber.Map{
+		return c.Render("account/account", fiber.Map{
 			"Title":    "Account",
 			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
 			"User":     user,
@@ -47,4 +46,27 @@ func AccountGetController(c *fiber.Ctx) error {
 	}
 
 	return c.Redirect("/?err=please sign in")
+}
+
+func UsersAccountGetController(c *fiber.Ctx) error {
+	adminLevel := index.ParsePrivileges(index.GetSession(c).Get("User"))
+	if !userModels.IsAllowedAccess(adminLevel, 3) { // level >= required
+		return c.Redirect("/users/account?err=You lack the nessecary privileges to view that page")
+	}
+
+	users := userModels.FindAllUsers()
+
+	return c.Render("account/user_accounts", fiber.Map{
+		"Title":    "User Accounts",
+		"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
+		"User":     index.GetSession(c).Get("User"),
+		"Users":    users,
+		"Breadcrumbs": []map[string]string{
+			{"text": "Home", "linkTo": "/"},
+			{"text": "Account", "linkTo": "/users/account"},
+			{"text": "User Accounts", "linkTo": "/users/user_accounts"},
+		},
+		"Error":   c.Query("err"),
+		"Success": c.Query("s"),
+	}, "layouts/main")
 }

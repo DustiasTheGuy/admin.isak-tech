@@ -38,8 +38,13 @@
             <input name="ID" value="{{ .Page.ID }}">
         </div>
         <div class="button-group">
-            <button type="button" class="btn btn-danger" onclick="deletePage(this)" data-id="{{ .Page.ID }}">Delete Page</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            {{ if (ge .User.Admin 3)}}
+                <button type="button" class="btn btn-danger" onclick="deletePage(this)" data-id="{{ .Page.ID }}">Delete Page</button>
+            {{ end }}
+
+            {{ if (ge .User.Admin 2)}}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            {{ end }}
         </div>
     </form>
 </section>

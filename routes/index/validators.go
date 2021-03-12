@@ -30,9 +30,12 @@ var Store = session.New(session.Config{
 })
 
 func ParsePrivileges(sessData interface{}) int8 {
+	fmt.Printf("Parsing: %v\n", &sessData)
+
 	value, ok := sessData.(SessionData)
 
 	if !ok {
+		fmt.Println("Parsing Error")
 		return 0
 	}
 

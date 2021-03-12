@@ -16,6 +16,7 @@ const main = () => {
         case '/site/main': return tableSetup();
         case '/site/portal': return tableSetup();
         case '/users/analytics': return fetchAnalytics();
+        case '/users/user_accounts': return tableSetup();
         default: return console.log('No match');
     }
 }

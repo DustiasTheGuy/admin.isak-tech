@@ -24,7 +24,7 @@ func ManagementGetController(c *fiber.Ctx) error {
 	}
 
 	if user != nil {
-		return c.Render("management", fiber.Map{
+		return c.Render("account/management", fiber.Map{
 			"Title":    "Management",
 			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
 			"User":     user,

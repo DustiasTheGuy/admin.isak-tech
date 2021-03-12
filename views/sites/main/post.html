@@ -47,9 +47,14 @@
             <span id="post-category">{{ .Post.Category }}</span>
         </div>
     
-        <div class="button-group">
-            <button onclick="deletePostSubmit(this)" data-id="{{ .Post.ID }}" type="button" class="btn btn-danger">Delete</button>
-            <button onclick="updatePostSubmit()" type="button" class="btn btn-primary">Save</button>
-        </div>
+            <div class="button-group">
+                {{ if (ge .User.Admin 3) }}
+                    <button onclick="deletePostSubmit(this)" data-id="{{ .Post.ID }}" type="button" class="btn btn-danger">Delete</button>
+                {{ end }}
+                
+                {{ if (ge .User.Admin 2) }}
+                <button onclick="updatePostSubmit()" type="button" class="btn btn-primary">Save</button>
+                {{ end }}
+            </div>
     </form>
 </section>

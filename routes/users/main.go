@@ -59,7 +59,7 @@ func AnalyticsGetController(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
-		return c.Render("analytics", fiber.Map{
+		return c.Render("account/analytics", fiber.Map{
 			"Title":    "Analytics",
 			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
 			"User":     user,

@@ -20,10 +20,12 @@
             <label for="image">Image URL</label>
             <input type="text" id="image" name="URL" required>
         </div>
-        
-        <div class="button-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+
+        {{ if (ge .User.Admin 1) }}
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        {{ end }}
     </form>
 </section>
 

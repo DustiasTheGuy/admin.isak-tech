@@ -1,0 +1,30 @@
+<section class="table-container">
+
+    <div class="table">
+      <div class="table-head">
+        <div class="table-row" id="t-head">        
+            <span>ID</span>
+            <span>Username</span>
+            <span>Email</span>
+            <span>Password</span>
+            <span>Created</span>
+            <span>Admin</span>
+        </div>
+      </div>
+      <div class="table-body">
+          {{ range $index, $user := .Users }}
+              <div class="table-row">
+                  <div class="actions">
+                    <a href="#"><i class="fas fa-cog"></i></a>
+                  </div>
+                  <span class="id">{{ $user.ID }}</span>
+                  <span class="username">{{ $user.Username }}</span>
+                  <span class="email">{{ $user.Email }}</span>
+                  <span class="password">{{ $user.Password }}</span>
+                  <span class="created">{{ $user.Created }}</span>
+                  <span class="admin">{{ $user.Admin }}</span>
+              </div>
+          {{ end }}
+      </div>
+    </div>
+</section>

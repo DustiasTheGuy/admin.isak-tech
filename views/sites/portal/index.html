@@ -28,7 +28,9 @@
 
                     <div class="actions">
                         <a href="/site/portal/page/{{ $page.ID }}"><i class="fas fa-cog"></i></a>
-                        <a href="javascript:void()" onclick="deletePage(this)" data-id="{{ $page.ID }}"><i class="fas fa-trash"></i></a>
+                        {{ if (ge $.User.Admin 3) }}
+                            <a href="javascript:void()" onclick="deletePage(this)" data-id="{{ $page.ID }}"><i class="fas fa-trash"></i></a>
+                        {{ end }}
                     </div>
 
                     <span style="width:20%;" class="thumbnail span-image"><img src="{{ $page.Thumbnail }}" data-id="{{ $page.ID }}"></span>

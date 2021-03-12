@@ -2,6 +2,7 @@ package users
 
 import (
 	pageModel "admin/models/page"
+	userModels "admin/models/user"
 	"admin/routes/index"
 	"fmt"
 	"strconv"
@@ -72,6 +73,12 @@ func PortalGetPageController(c *fiber.Ctx) error {
 }
 
 func PortalUpdateController(c *fiber.Ctx) error {
+	adminLevel := index.ParsePrivileges(index.GetSession(c))
+
+	if !userModels.IsAllowedAccess(adminLevel, 2) { // level >= required
+		return c.Redirect("/users/account?err=You lack the nessecary privileges to perform that action")
+	}
+
 	fmt.Println("Request From: ", c.OriginalURL())
 	var p pageModel.Page
 	user := index.GetSession(c).Get("User")
@@ -92,7 +99,12 @@ func PortalUpdateController(c *fiber.Ctx) error {
 }
 
 func PortalDeleteOneController(c *fiber.Ctx) error {
-	fmt.Println("Request From: ", c.OriginalURL())
+	adminLevel := index.ParsePrivileges(index.GetSession(c))
+
+	if !userModels.IsAllowedAccess(adminLevel, 2) { // level >= required
+		return c.Redirect("/users/account?err=You lack the nessecary privileges to perform that action")
+	}
+
 	user := index.GetSession(c).Get("User")
 
 	if user != nil {
@@ -134,6 +146,12 @@ func PortalAddNewGetController(c *fiber.Ctx) error {
 }
 
 func PortalAddNewPostController(c *fiber.Ctx) error {
+	adminLevel := index.ParsePrivileges(index.GetSession(c))
+
+	if !userModels.IsAllowedAccess(adminLevel, 1) { // level >= required
+		return c.Redirect("/users/account?err=You lack the nessecary privileges to perform that action")
+	}
+
 	var p pageModel.Page
 	user := index.GetSession(c).Get("User")
 

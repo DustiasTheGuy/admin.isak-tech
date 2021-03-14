@@ -1,0 +1,2 @@
+1. Sidenav scrollbar looks awful
+2. Sidenav scrollbar overflow should only be on the body of the nav, not the logo.

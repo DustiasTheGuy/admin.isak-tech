@@ -15,7 +15,7 @@
           {{ range $index, $user := .Users }}
               <div class="table-row">
                   <div class="actions">
-                    <a href="#"><i class="fas fa-cog"></i></a>
+                    <a href="/users/edit_account/{{ $user.Username }}"><i class="fas fa-cog"></i></a>
                   </div>
                   <span class="id">{{ $user.ID }}</span>
                   <span class="username">{{ $user.Username }}</span>

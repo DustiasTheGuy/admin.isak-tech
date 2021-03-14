@@ -88,7 +88,7 @@ func (p *Page) SaveNewPage() error {
 		return errors.New("Image URL too short, minimum 10 characters")
 	}
 
-	_, err := db.Exec("INSERT INTO pages (url, description, imageurl) VALUES (?, ?, ?)",
+	_, err := db.Exec("INSERT INTO pages (href, description, thumbnail) VALUES (?, ?, ?)",
 		p.Href, p.Description, p.Thumbnail)
 
 	return err
@@ -110,7 +110,7 @@ func (p *Page) UpdatePage() error {
 		return errors.New("Image URL too short, minimum 10 characters")
 	}
 
-	_, err := db.Exec("UPDATE pages SET url = ?, description = ?, imageurl = ? WHERE id = ?",
+	_, err := db.Exec("UPDATE pages SET href = ?, description = ?, thumbnail = ? WHERE id = ?",
 		p.Href, p.Description, p.Thumbnail, p.ID)
 
 	return err

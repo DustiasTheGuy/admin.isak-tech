@@ -146,14 +146,13 @@ func PortalAddNewGetController(c *fiber.Ctx) error {
 }
 
 func PortalAddNewPostController(c *fiber.Ctx) error {
-	adminLevel := index.ParsePrivileges(index.GetSession(c))
+	var p pageModel.Page
+	user := index.GetSession(c).Get("User")
+	adminLevel := index.ParsePrivileges(user)
 
 	if !userModels.IsAllowedAccess(adminLevel, 1) { // level >= required
 		return c.Redirect("/users/account?err=You lack the nessecary privileges to perform that action")
 	}
-
-	var p pageModel.Page
-	user := index.GetSession(c).Get("User")
 
 	if err := c.BodyParser(&p); err != nil {
 		return c.Redirect("/site/portal/page/add-page?err=unable to parse body")

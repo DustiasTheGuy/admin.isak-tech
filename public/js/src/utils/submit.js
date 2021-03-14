@@ -89,38 +89,9 @@ export const deletePostSubmit = (element) => {
     }
 }
 
-export const startProcess = () => {
-    let site = document.getElementById('server').value;
-
-    return HTTPGetRequest(getServerAddr(false) + '/users/start/' + site)
-    .then(response => {
-        return response.success ? 
-        new ProcessesComponent().render(response.data) : 
-        errorHandler(response.message);
-    });
-}
-
-
 export const deletePage = (element) => { // requires a valid session or it will be rejected
     if(confirm('Confirm Delete Page ' + element.getAttribute('data-id'))) {
         return window.location.pathname = '/site/portal/page/' + 
         element.getAttribute('data-id') + '/delete';
-    }
-}
-
-export const stopProcess = (el) => {
-    console.log(el);
-    
-    let pid = el.getAttribute('data-pid');
-
-    if(confirm('Are you sure you wish to terminate process: ' + pid)) {
-        return HTTPGetRequest(getServerAddr(false) + '/users/stop/' + pid)
-        .then(response => {
-            console.log(response);
-            if(response.success) {
-                let processes = document.getElementById('processes');
-                processes.removeChild(document.getElementById('p-' + pid));
-            }
-        });
     }
 }

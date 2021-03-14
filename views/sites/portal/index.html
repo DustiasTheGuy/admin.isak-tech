@@ -36,7 +36,7 @@
                     <span style="width:20%;" class="thumbnail span-image"><img src="{{ $page.Thumbnail }}" data-id="{{ $page.ID }}"></span>
                     <span style="width:10%;" class="id">{{ $page.ID }}</span>
                     <span class="description">{{ $page.Description }}</span>
-                    <span class="created">{{ $page.Created }}</span>
+                    <span class="created" data-original="{{ $page.Created }}">{{ $page.Created }}</span>
                 </div>
                 {{ end }}
             </div>

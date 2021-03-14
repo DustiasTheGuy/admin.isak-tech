@@ -1,16 +1,19 @@
 import { timeSince } from '../utils/utils';
-import { HTTPGetRequest, getServerAddr } from '../utils/http';
 
 export class TableComponent {
-
     constructor() {
         this.thead = document.getElementById('t-head');
     }
 
+    init() {
+        this.addEventListeners();
+        this.fixDates();
+    }
+    
     fixDates() {
         let dates = document.getElementsByClassName('created');
         for(let i = 0; i < dates.length; i++) {
-            dates[i].textContent = timeSince(new Date(dates[i].textContent)) + ' ago'
+            dates[i].textContent = timeSince(new Date(dates[i].textContent));
         }
     }
 
@@ -34,10 +37,5 @@ export class TableComponent {
                 }
             });
         });
-    }
-
-    init() {
-        this.addEventListeners();
-        this.fixDates();
     }
 }

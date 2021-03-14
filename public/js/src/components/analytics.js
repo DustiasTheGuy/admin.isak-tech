@@ -1,5 +1,5 @@
 import { TableComponent } from '../components/table';
-import { HTTPGetRequest, getServerAddr } from '../utils/http';
+import { HTTPGetRequest } from '../utils/http';
 
 export class AnalyticsComponent {
     constructor(data) {

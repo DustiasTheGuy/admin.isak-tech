@@ -1,6 +1,5 @@
-import { timeSince } from '../utils/utils';
+import { timeSince, errorHandler } from '../utils/utils';
 import { HTTPGetRequest, getServerAddr } from '../utils/http';
-import { startProcess, stopProcess } from '../utils/submit';
 
 export class ProcessesComponent  {
 
@@ -15,18 +14,9 @@ export class ProcessesComponent  {
 
         try {
             document.getElementsByClassName('btn-primary')[0]
-            .addEventListener('click', () => startProcess());
+            .addEventListener('click', () => this.startProcess());
         } catch(err) {
             console.log('Administration level too low');
-        }
-    }
-
-    hookTerminateBtn() {
-        let buttons = document.getElementsByClassName('terminate')
-            
-        for(let i = 0; i < buttons.length; i++) {
-            console.log(buttons[i])
-            buttons[i].addEventListener('click', () => stopProcess(buttons[i]));
         }
     }
 
@@ -36,9 +26,30 @@ export class ProcessesComponent  {
         response.data.map(p => this.render({ Service: p.Service, Config: p.Config })) : console.log('err'));
     }
     
-    render(process) {      
-        console.log(process);
+    stopProcess(pid) {              
+        if(confirm('Are you sure you wish to terminate process: ' + pid)) {
+            return HTTPGetRequest(getServerAddr(false) + '/users/stop/' + pid)
+            .then(response => {
+                if(response.success) {
+                    let processes = document.getElementById('processes');
+                    processes.removeChild(document.getElementById('p-' + pid));
+                }
+            });
+        }
+    }
 
+    startProcess() {
+        let site = document.getElementById('server').value;
+
+        return HTTPGetRequest(getServerAddr(false) + '/users/start/' + site)
+        .then(response => {
+            return response.success ? 
+            this.render(response.data) : 
+            errorHandler(response.message);
+        });
+    }
+
+    render(process) {      
         let div = document.createElement('div');
         div.classList.add('process');
         div.id = 'p-' + process.Service.ProcessID;
@@ -59,13 +70,17 @@ export class ProcessesComponent  {
         </div>`;
     
         this.processes.appendChild(div);
-        this.hookTerminateBtn();
+
+        document.getElementById('btn-' + process.Service.ProcessID)
+        .addEventListener('click', () => 
+        this.stopProcess(process.Service.ProcessID));
+
         return null
     }
 
     processFooter(config) {    
         return config.adminLevel >= 3 ? `    
-        <a class="terminate" href="javascript:void(0)" data-pid="${config.pid}">Terminate</a>
+        <a class="terminate" href="javascript:void(0)" id="btn-${config.pid}">Terminate</a>
         <a href="#">Restart</a>` : '';
     }
 }

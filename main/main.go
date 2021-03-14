@@ -58,14 +58,16 @@ func main() {
 		return c.Next()
 	})
 
-	usersRouter.Get("/account", users.AccountGetController)            // RENDER | display users account information
-	usersRouter.Get("/sign-out", users.SignOutController)              // UPDATE | request to clear session
-	usersRouter.Get("/start/:service", users.StartService)             // START  | start a new service
-	usersRouter.Get("/stop/:pid", users.StopService)                   // STOP   | stop a running service
-	usersRouter.Get("/get-processes", users.GetProcesses)              // GET    | grab all running processes
-	usersRouter.Get("/management", users.ManagementGetController)      // RENDER | Render the management template
-	usersRouter.Get("/analytics", users.AnalyticsGetController)        // RENDER | show some analytics about the site
-	usersRouter.Get("/user_accounts", users.UsersAccountGetController) // RENDER | show all user accounts
+	usersRouter.Get("/account", users.AccountGetController)                        // RENDER | display users account information
+	usersRouter.Get("/sign-out", users.SignOutController)                          // UPDATE | request to clear session
+	usersRouter.Get("/start/:service", users.StartService)                         // START  | start a new service
+	usersRouter.Get("/stop/:pid", users.StopService)                               // STOP   | stop a running service
+	usersRouter.Get("/get-processes", users.GetProcesses)                          // GET    | grab all running processes
+	usersRouter.Get("/management", users.ManagementGetController)                  // RENDER | Render the management template
+	usersRouter.Get("/analytics", users.AnalyticsGetController)                    // RENDER | show some analytics about the site
+	usersRouter.Get("/user_accounts", users.UsersAccountGetController)             // RENDER | show all user accounts
+	usersRouter.Get("/edit_account/:username", users.EditUserAccountGetController) // RENDER | render form where you can edit a user account
+	usersRouter.Post("/edit_account/", users.EditUserAccountPostController)        // POST   | final step when modifying a user account
 	// Group all routes that are related to just isak-tech.tk the main site
 	mainRouter := app.Group("/site/main", func(c *fiber.Ctx) error {
 		return c.Next()

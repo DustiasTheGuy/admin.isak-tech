@@ -1,0 +1,34 @@
+<section>
+    <form action="/users/edit_account" method="POST">
+        <input type="hidden" id="adminLevel" value="{{ .UserTarget.Admin }}" readonly>
+        <input type="hidden" id="created" value="{{ .UserTarget.Created }}" name="Created" disabled readonly>
+        <input type="hidden" id="id" value="{{ .UserTarget.ID }}" name="ID" disabled readonly>
+
+        <div class="form-group">
+            <label for="username"><span>Username</span> <span>[Required]</span></label>
+            <input type="text" id="username" value="{{ .UserTarget.Username }}" name="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="email"><span>Email</span> <span>[Required]</span></label>
+            <input type="email" id="email" value="{{ .UserTarget.Email }}" name="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="Password">
+        </div>
+        <div class="form-group">
+            <label for="admin"><span>Admin Level</span> <span>[Required]</span></label>
+            <select id="admin" name="Admin" required>
+                <option value="0">View</option>
+                <option value="1">View, Add</option>
+                <option value="2">View, Add, Edit</option>
+                <option value="3">View, Add, Edit, Accounts, Servers</option>
+            </select>
+        </div>
+
+        <div class="button-group">
+            <span></span>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+</section>

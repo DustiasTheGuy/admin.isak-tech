@@ -1,5 +1,3 @@
-import { HTTPGetRequest, getServerAddr } from '../utils/http';
-
 export class APIComponent {
     constructor() {
         this.apiContainer = document.getElementById('api-container');

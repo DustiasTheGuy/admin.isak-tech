@@ -4,6 +4,9 @@ import {
     getServerAddr
 } from './http';
 
+import { ProcessesComponent } from '../components/processes';
+import { errorHandler } from '../utils/utils';
+
 export const signUpSubmit = () => {
     let form = document.getElementById('signUp-form');
     let formData = new FormData(form);
@@ -86,13 +89,13 @@ export const deletePostSubmit = (element) => {
     }
 }
 
-export const startSite = () => {
+export const startProcess = () => {
     let site = document.getElementById('server').value;
 
     return HTTPGetRequest(getServerAddr(false) + '/users/start/' + site)
     .then(response => {
         return response.success ? 
-        renderProcess(response.data, site) : 
+        new ProcessesComponent().render(response.data) : 
         errorHandler(response.message);
     });
 }
@@ -105,7 +108,9 @@ export const deletePage = (element) => { // requires a valid session or it will 
     }
 }
 
-export const stopSite = (el) => {
+export const stopProcess = (el) => {
+    console.log(el);
+    
     let pid = el.getAttribute('data-pid');
 
     if(confirm('Are you sure you wish to terminate process: ' + pid)) {

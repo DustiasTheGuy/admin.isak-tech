@@ -24,9 +24,9 @@
             </select>
 
             {{ if (ge .User.Admin 3) }}
-                <button type="button" onclick="startSite()">Start Process</button>
+                <button class="btn btn-primary" type="button">Start Process</button>
             {{ else }}
-                <button type="button" title="Requires level 3 admin privileges" disabled>Start Process</button>
+                <button class="btn btn-danger" type="button" title="Requires level 3 admin privileges" disabled>Start Process</button>
             {{ end }}
         </div>
     </form>

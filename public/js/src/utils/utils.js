@@ -1,13 +1,3 @@
-export const APIRoutes =
-[
-    { path: "/api/posts",                 method:"GET",    data: null },
-    { path: "/api/post/:id",              method:"GET",    data: null },
-    { path: "/api/paginate/:page/:limit", method: "GET",   data: null },
-    { path: "/api/delete",                method:"DELETE", data: { id: "uint64" }},
-    { path: "/api/new",                   method: "POST",  data: { title: "string", body: "string", tags: "[]string" }},
-    { path: "/api/update",                method: "PUT",   data: { id: "uint64", title: "string", body: "string", tags: "[]string" }}
-];
-
 export const navigate = (element) => 
     window.location.pathname = '/site/portal/page/' + 
     parseInt(element.getAttribute('data-id'));
@@ -21,15 +11,6 @@ export const formGroupFocusIn = (e) =>
 
 export const formGroupFocusOut = (e) => 
     e.path[0].value.length <= 0 ? true : false;
-
-
-export const fixTableDates = () => {
-    let dates = document.getElementsByClassName('created');
-    for(let i = 0; i < dates.length; i++) {
-        dates[i].textContent = timeSince(new Date(dates[i].textContent)) + ' ago'
-        //console.log(formatted);
-    }
-}
 
 export const toggleSidenav = () => {
     toggleElement('sidenav');
@@ -46,7 +27,7 @@ export const toggleElement = (id) => {
     element.classList.add('open');
 }
 
-function timeSince(date) {
+export const timeSince = (date) => {
 
     var seconds = Math.floor((new Date() - date) / 1000);
   
@@ -74,6 +55,14 @@ function timeSince(date) {
     return Math.floor(seconds) + " seconds";
 }
 
+export const activeLink = () => {
+    let navLinks = document.getElementsByClassName('nav-link');
+    
+    for(let i = 0; i < navLinks.length; i++) {
+        let isActive = navLinks[i].href === window.location.href;
+        if(isActive) return navLinks[i].classList.add('active');
+    }
+}
 
 (function() {
     try {

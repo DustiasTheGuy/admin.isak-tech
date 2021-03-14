@@ -1,44 +1,40 @@
-import { 
-    tableSetup, 
-    fetchAnalytics, 
-    getProcesses 
-} from './components/init';
+import { signInSubmit, signUpSubmit } from './utils/submit';
+import { activeLink } from './utils/utils';
 
-import { 
-    renderAPIRoutes,
-} from './components/render';
-
-const activeLink = () => {
-    let navLinks = document.getElementsByClassName('nav-link');
-    
-    for(let i = 0; i < navLinks.length; i++) {
-        let isActive = navLinks[i].href === window.location.href;
-        if(isActive) return navLinks[i].classList.add('active');
-    }
-}
+import { TableComponent } from './components/table';
+import { APIComponent } from './components/api';
+import { AnalyticsComponent } from './components/analytics';
+import { ProcessesComponent } from './components/processes'; 
 
 const main = () => {
     console.log('Application Started..')
     activeLink();
     switch(window.location.pathname) {
         case '/users/management': 
-            return getProcesses()
+            return new ProcessesComponent().init();
         
         case '/site/paste/api': 
-            return renderAPIRoutes();
+            return new APIComponent().init();
         
         case '/site/main': 
-            return tableSetup();
+            return new TableComponent().init();
         
         case '/site/portal': 
-            return tableSetup();
+            return new TableComponent().init();
         
         case '/users/analytics': 
-            return fetchAnalytics();
+            return new AnalyticsComponent().init();
         
         case '/users/user_accounts': 
-            return tableSetup();
+            return new TableComponent().init();
         
+        case '/sign-in':
+            return document.getElementsByClassName('btn-primary')[0]
+            .addEventListener('click', (e) => signInSubmit());
+
+        case '/sign-up':
+            return document.getElementsByClassName('btn-primary')[0]
+            .addEventListener('click', (e) => signUpSubmit());
 
         default: return console.log('No match');
     }

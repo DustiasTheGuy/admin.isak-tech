@@ -562,27 +562,6 @@ section .grid .grid-item div a:hover {
 .site-info-s1 form .form-group select {
   flex-grow: 1;
 }
-.site-info-s1 form .form-group button {
-  min-width: 140px;
-  background-color: #4E937A;
-  color: #fff;
-  border-radius: 10px;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: bold;
-  border: none;
-}
-.site-info-s1 form .form-group button:disabled {
-  background-color: #e7e7e7;
-  color: #b9b9b9;
-  cursor: not-allowed;
-}
-.site-info-s1 form .form-group button:disabled:hover {
-  background-color: #e7e7e7;
-}
-.site-info-s1 form .form-group button:hover {
-  background-color: #56a085;
-}
 
 #processes, .pastes, .analytics {
   padding: 1em 0;

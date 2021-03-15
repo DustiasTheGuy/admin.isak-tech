@@ -22,8 +22,8 @@
           <textarea type="text" id="body" name="post">{{ .Post.Post }}</textarea>
         </div>
         <div class="form-group">
-          <label for="imageurl">Image URL</label>
-          <input type="text" id="imageurl" name="imageurl" value="{{ .Post.ImageURL }}">
+          <label for="thumbnail">Image URL</label>
+          <input type="text" id="thumbnail" name="thumbnail" value="{{ .Post.Thumbnail }}">
         </div>
         <div class="form-group">
             <label for="category">Category</label>
@@ -49,11 +49,11 @@
     
             <div class="button-group">
                 {{ if (ge .User.Admin 3) }}
-                    <button onclick="deletePostSubmit(this)" data-id="{{ .Post.ID }}" type="button" class="btn btn-danger">Delete</button>
+                    <button id="delete" data-id="{{ .Post.ID }}" type="button" class="btn btn-danger">Delete</button>
                 {{ end }}
                 
                 {{ if (ge .User.Admin 2) }}
-                <button onclick="updatePostSubmit()" type="button" class="btn btn-primary">Save</button>
+                    <button id="save" type="button" class="btn btn-primary">Save</button>
                 {{ end }}
             </div>
     </form>

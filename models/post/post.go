@@ -5,19 +5,20 @@ import (
 	"admin/models"
 	imageModel "admin/models/image"
 	"errors"
+	"fmt"
 	"time"
 )
 
 type Post struct {
-	ID          uint
+	ID          int64
 	Post        string
 	Title       string
 	Category    string
 	Date        time.Time
-	UserID      uint
+	UserID      int64
 	Archived    int8
-	ImageURL    string
-	TotalImages uint
+	Thumbnail   string
+	TotalImages int64
 	Images      []imageModel.Image
 }
 
@@ -46,16 +47,30 @@ func (p *Post) SaveNewPost() error {
 		return errors.New("You forgot to enter a post")
 	} else if !models.CheckLength(p.Title, 10) {
 		return errors.New("You forgot to enter a title")
-	} else if !models.CheckLength(p.Category, 10) {
+	} else if !models.CheckLength(p.Category, 6) {
 		return errors.New("You forgot to enter a category")
-	} else if !models.CheckLength(p.ImageURL, 10) {
+	} else if !models.CheckLength(p.Thumbnail, 10) {
 		return errors.New("You forgot to enter an image url")
 	}
 
-	_, err := db.Exec("INSERT INTO posts (post, title, category, userid, imageurl) VALUES (?, ?, ?, ?, ?)",
-		p.Post, p.Title, p.Category, p.UserID, p.ImageURL)
+	result, err := db.Exec("INSERT INTO posts (post, title, category, user_id, thumbnail) VALUES (?, ?, ?, ?, ?)",
+		p.Post, p.Title, p.Category, p.UserID, 0)
 
-	return err
+	id, err := result.LastInsertId()
+
+	if err != nil {
+		fmt.Println("err saving post")
+		return err
+	}
+
+	err = imageModel.SaveNewImage(id, p.Thumbnail)
+
+	if err != nil {
+		fmt.Println("err saving image")
+		return err
+	}
+
+	return nil
 }
 
 // GetAllPosts is used for getting all posts from the database
@@ -87,12 +102,12 @@ func GetAllPosts() ([]Post, error) {
 			&post.Date,
 			&post.UserID,
 			&post.Archived,
-			&post.ImageURL,
+			&post.Thumbnail,
 			&post.TotalImages); err != nil {
 			return nil, err
 		}
 		images, err := imageModel.GetImagesWithPostID(post.ID, db)
-
+		post.Thumbnail = images[0].URL
 		if err != nil {
 			return nil, err
 		}
@@ -127,7 +142,7 @@ func GetPostById(ID uint64) (*Post, error) {
 		&post.Date,
 		&post.UserID,
 		&post.Archived,
-		&post.ImageURL,
+		&post.Thumbnail,
 		&post.TotalImages); err != nil {
 		return nil, err
 	}
@@ -151,8 +166,8 @@ func (p *Post) UpdatePostWithID() error {
 	})
 	defer db.Close()
 
-	_, err := db.Exec("UPDATE posts SET title=?, post=?, category=?, archived=?, imageurl=? WHERE id=?",
-		p.Title, p.Post, p.Category, p.Archived, p.ImageURL, p.ID)
+	_, err := db.Exec("UPDATE posts SET title=?, post=?, category=?, archived=?, thumbnail=? WHERE id=?",
+		p.Title, p.Post, p.Category, p.Archived, p.Thumbnail, p.ID)
 
 	if err != nil {
 		return err

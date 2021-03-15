@@ -39,7 +39,7 @@
         </div>
         <div class="button-group">
             {{ if (ge .User.Admin 3)}}
-                <button type="button" class="btn btn-danger" onclick="deletePage(this)" data-id="{{ .Page.ID }}">Delete Page</button>
+                <button type="button" class="btn btn-danger delete_page" data-id="{{ .Page.ID }}">Delete Page</button>
             {{ end }}
 
             {{ if (ge .User.Admin 2)}}

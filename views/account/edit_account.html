@@ -1,8 +1,7 @@
 <section>
     <form action="/users/edit_account" method="POST">
-        <input type="hidden" id="adminLevel" value="{{ .UserTarget.Admin }}" readonly>
-        <input type="hidden" id="created" value="{{ .UserTarget.Created }}" name="Created" disabled readonly>
-        <input type="hidden" id="id" value="{{ .UserTarget.ID }}" name="ID" disabled readonly>
+        <input type="hidden" id="adminLevel" value="{{ .UserTarget.Admin }}">
+        <input type="hidden" id="id" value="{{ .UserTarget.ID }}" name="ID">
 
         <div class="form-group">
             <label for="username"><span>Username</span> <span>[Required]</span></label>

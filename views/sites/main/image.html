@@ -31,6 +31,6 @@
 
 <section class="gallery">
     {{ range $index, $image := .Post.Images }}
-        <img src="{{ $image.URL }}" onclick="deleteImageSubmit(this)" data-id="{{ $image.ID }}" data-postid="{{ $image.PostID }}">
+        <img src="{{ $image.URL }}" class="gallery-item" data-id="{{ $image.ID }}" data-postid="{{ $image.PostID }}">
     {{ end }}
 </section>

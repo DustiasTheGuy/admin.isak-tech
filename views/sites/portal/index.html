@@ -29,7 +29,7 @@
                     <div class="actions">
                         <a href="/site/portal/page/{{ $page.ID }}"><i class="fas fa-cog"></i></a>
                         {{ if (ge $.User.Admin 3) }}
-                            <a href="javascript:void()" onclick="deletePage(this)" data-id="{{ $page.ID }}"><i class="fas fa-trash"></i></a>
+                            <a href="javascript:void()" class="delete_page" data-id="{{ $page.ID }}"><i class="fas fa-trash"></i></a>
                         {{ end }}
                     </div>
 

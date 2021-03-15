@@ -1,5 +1,7 @@
 import { TableComponent } from '../components/table';
-import { HTTPGetRequest } from '../utils/http';
+import { HTTP } from '../utils/http';
+
+let http = new HTTP(false);
 
 export class AnalyticsComponent {
     constructor(data) {
@@ -12,7 +14,7 @@ export class AnalyticsComponent {
     }
 
     loadData() {
-        HTTPGetRequest('https://paste.isak-tech.tk/analytics/load/load_all')
+        http.GET('https://paste.isak-tech.tk/analytics/load/load_all', true)
         .then(res => res.success ? this.render(res.data) : 
         console.log(res.message));
     }

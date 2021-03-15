@@ -1,3 +1,10 @@
+import { 
+    deleteImageSubmit,
+    deletePostSubmit,
+    updatePostSubmit,
+    deletePageSubmit
+} from './submit';
+
 export const navigate = (element) => 
     window.location.pathname = '/site/portal/page/' + 
     parseInt(element.getAttribute('data-id'));
@@ -16,7 +23,7 @@ export const toggleSidenav = () => {
     toggleElement('sidenav');
     toggleElement('navbar-btn');
     toggleElement('content-main');
-    return null;
+    return;
 }
 
 export const initSidenav = () => {
@@ -110,10 +117,9 @@ export const closeAlertEvent = () => {
             });
         }
 
-        return null
-
+        return;
     } catch(err) {
-        return null
+        return;
     }
 }
 
@@ -129,13 +135,17 @@ export const archivedInitial = () => {
 }
 
 export const adminLevelInitial = () => {
-    let adminLevel = document.getElementById('adminLevel').value;
-    let select = document.getElementById('admin');
-
-    for(let i = 0; i < select.length; i++) {
-        if(select[i].value === adminLevel) {
-            select[i].selected = true;
+    try {
+        let adminLevel = document.getElementById('adminLevel').value;
+        let select = document.getElementById('admin');
+    
+        for(let i = 0; i < select.length; i++) {
+            if(select[i].value === adminLevel) {
+                select[i].selected = true;
+            }
         }
+    } catch(err) {
+        return;
     }
 }
 
@@ -171,5 +181,52 @@ export const formGroupInitial = () => {
 
         formGroups[i].addEventListener('focusin', (e) =>  e.path[1].classList.add('focused'));
         formGroups[i].addEventListener('focusout', (e) => formGroupFocusOut(e) ? e.path[1].classList.remove('focused') : '');
+    }
+}
+
+export const galleryItemInital = () => {
+    try {
+        let galleryItems = document.getElementsByClassName('gallery-item');
+        
+        for(let i = 0; i < galleryItems.length; i++) {
+            galleryItems[i].addEventListener('click', () => 
+            deleteImageSubmit({
+                id: galleryItems[i].getAttribute('data-id'),
+                postid: galleryItems[i].getAttribute('data-postid')
+            }))
+        }
+
+    } catch(err) {
+        return;
+    }
+}
+
+export const editPostInitial = () => {
+    try {
+        let deleteBtn = document.getElementById('delete');
+        let saveBtn = document.getElementById('save');
+    
+        deleteBtn.addEventListener('click', () => 
+        deletePostSubmit(deleteBtn.getAttribute('data-id')));
+    
+        saveBtn.addEventListener('click', () => 
+        updatePostSubmit())
+
+    } catch(err) {
+        return;
+    }
+}
+
+export const deletePageInitial = () => {
+    try {
+        let deleteBtns = document.getElementsByClassName('delete_page');
+        
+        for(let i = 0; i < deleteBtns.length; i++) {
+            deleteBtns[i].addEventListener('click', () => 
+            deletePageSubmit(deleteBtns[i].getAttribute('data-id')));
+        }
+
+    } catch(err) {
+        return;
     }
 }

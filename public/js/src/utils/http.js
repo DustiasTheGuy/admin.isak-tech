@@ -1,19 +1,36 @@
-export const getServerAddr = (production) => {
-    return production ? 
-    'https://admin.isak-tech.tk' : 'http://localhost:8084';
-}
+export class HTTP {
+    
+    constructor(production) {
+        this.serverAddr = this.getServerAddr(production);
+        this.headers = { 'Content-Type': 'application/json' };
+    }
 
-export const HTTPPostRequest = (url, data) => {
-    return fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    }).then(response => response.json());
-}
+    getServerAddr() {
+        return this.production ? 
+        'https://admin.isak-tech.tk' : 'http://localhost:8084';
+    }
 
-export const HTTPGetRequest = (url) => {
-    return fetch(url, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-    }).then(response => response.json());
+    // string, boolean
+    GET(url, customUrl) {
+        if(customUrl) {
+            return fetch(url, {
+                method: 'GET',
+                headers: this.headers
+            }).then(response => response.json());
+
+        } else {
+            return fetch(this.serverAddr + url, {
+                method: 'GET',
+                headers: this.headers
+            }).then(response => response.json());
+        }
+    }
+
+    POST(url, data) {
+        return fetch(this.serverAddr + url, {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify(data)
+        }).then(response => response.json());
+    }
 }

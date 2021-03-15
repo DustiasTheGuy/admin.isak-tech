@@ -104,7 +104,7 @@ form .form-group.row label {
 form .form-group {
   display: flex;
   flex-direction: column;
-  margin: 3em 0;
+  margin: 1.6em 0;
   position: relative;
   border-radius: 10px;
   background-color: #333;
@@ -125,8 +125,8 @@ form .form-group #archived {
   margin-left: 12px;
 }
 form .form-group input, form .form-group select, form .form-group textarea {
-  padding: 0.68em;
-  font-size: 17px;
+  padding: 0.58em;
+  font-size: 15px;
   border: none;
   outline: none;
   border-radius: 10px;
@@ -651,6 +651,7 @@ section .grid .grid-item div a:hover {
 .gallery {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 2em;
 }
 .gallery img {
   max-height: 400px;
@@ -730,7 +731,9 @@ section .grid .grid-item div a:hover {
 .table {
   width: 100%;
   background-color: #333;
-  border-radius: 25px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 .table .table-head,
 .table .table-body {

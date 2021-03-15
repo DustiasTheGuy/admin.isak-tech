@@ -99,9 +99,9 @@ func PortalUpdateController(c *fiber.Ctx) error {
 }
 
 func PortalDeleteOneController(c *fiber.Ctx) error {
-	adminLevel := index.ParsePrivileges(index.GetSession(c))
+	adminLevel := index.ParsePrivileges(index.GetSession(c).Get("User"))
 
-	if !userModels.IsAllowedAccess(adminLevel, 2) { // level >= required
+	if !userModels.IsAllowedAccess(adminLevel, 3) { // level >= required
 		return c.Redirect("/users/account?err=You lack the nessecary privileges to perform that action")
 	}
 

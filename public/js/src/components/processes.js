@@ -1,5 +1,7 @@
 import { timeSince, errorHandler } from '../utils/utils';
-import { HTTPGetRequest, getServerAddr } from '../utils/http';
+import { HTTP } from '../utils/http';
+
+let http = new HTTP(false);
 
 export class ProcessesComponent  {
 
@@ -21,14 +23,14 @@ export class ProcessesComponent  {
     }
 
     loadData() {
-        return HTTPGetRequest(getServerAddr(false) + '/users/get-processes')
+        return http.GET('/users/get-processes')
         .then(response => response.success && response.data != null ?
         response.data.map(p => this.render({ Service: p.Service, Config: p.Config })) : console.log('err'));
     }
     
     stopProcess(pid) {              
         if(confirm('Are you sure you wish to terminate process: ' + pid)) {
-            return HTTPGetRequest(getServerAddr(false) + '/users/stop/' + pid)
+            return http.GET('/users/stop/' + pid)
             .then(response => {
                 if(response.success) {
                     let processes = document.getElementById('processes');
@@ -41,7 +43,7 @@ export class ProcessesComponent  {
     startProcess() {
         let site = document.getElementById('server').value;
 
-        return HTTPGetRequest(getServerAddr(false) + '/users/start/' + site)
+        return http.GET('/users/start/' + site)
         .then(response => {
             return response.success ? 
             this.render(response.data) : 

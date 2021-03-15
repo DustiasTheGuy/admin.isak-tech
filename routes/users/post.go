@@ -66,7 +66,7 @@ func AddNewGetController(c *fiber.Ctx) error {
 }
 
 func AddNewPostController(c *fiber.Ctx) error {
-	adminLevel := index.ParsePrivileges(index.GetSession(c))
+	adminLevel := index.ParsePrivileges(index.GetSession(c).Get("User"))
 
 	if !userModels.IsAllowedAccess(adminLevel, 1) { // level >= required
 		return c.Redirect("/users/account?err=You lack the nessecary privileges to perform that action")
@@ -92,7 +92,7 @@ func AddNewPostController(c *fiber.Ctx) error {
 }
 
 func RemovePostController(c *fiber.Ctx) error {
-	adminLevel := index.ParsePrivileges(index.GetSession(c))
+	adminLevel := index.ParsePrivileges(index.GetSession(c).Get("User"))
 
 	if !userModels.IsAllowedAccess(adminLevel, 3) { // level >= required
 		return c.Redirect("/users/account?err=You lack the nessecary privileges to perform that action")

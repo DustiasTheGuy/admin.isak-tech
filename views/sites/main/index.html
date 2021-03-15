@@ -22,7 +22,6 @@
           <span>Title</span>
           <span>Category</span>
           <span>Created</span>
-          <span>Image URL</span>
           <span class="text-center">Total Images</span>
           <span class="text-center">Archived</span>
       </div>
@@ -35,15 +34,13 @@
             <a href="/site/main/post/{{ $post.ID }}"><i class="fas fa-cog"></i></a>
           </div>
 
-          <span class="thumbnail span-image"><img src="{{ $post.ImageURL }}"></span>
+          <span class="thumbnail span-image"><img src="{{ $post.Thumbnail }}"></span>
           <span class="id">{{ $post.ID }}</span>
           <span class="title">{{ $post.Title}}</span>
           <span class="category">{{ $post.Category }}</span>
           <span class="created">{{ $post.Date }}</span>
-          <span class="imageurl">{{ $post.ImageURL }}</span>
           <span class="totalimages text-center">{{ $post.TotalImages }}</span>
           <span class="archived text-center">{{ $post.Archived }}</span> 
-
       </div>
       {{ end }}
     </div>

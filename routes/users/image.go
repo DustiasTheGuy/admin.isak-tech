@@ -14,7 +14,7 @@ import (
 )
 
 func RemoveImageController(c *fiber.Ctx) error { // level 3
-	ImageID, err := strconv.ParseUint(c.Params("imageID"), 10, 64)
+	ImageID, err := strconv.ParseInt(c.Params("imageID"), 10, 64)
 
 	if err != nil {
 		return c.JSON(routes.HTTPResponse{
@@ -24,7 +24,7 @@ func RemoveImageController(c *fiber.Ctx) error { // level 3
 		})
 	}
 
-	PostID, err := strconv.ParseUint(c.Params("postID"), 10, 64)
+	PostID, err := strconv.ParseInt(c.Params("postID"), 10, 64)
 
 	if err != nil {
 		return c.JSON(routes.HTTPResponse{
@@ -92,7 +92,7 @@ func AddImagePostController(c *fiber.Ctx) error {
 
 	var body imageModel.Image
 
-	postID, err := strconv.ParseUint(c.Params("postID"), 10, 64)
+	postID, err := strconv.ParseInt(c.Params("postID"), 10, 64)
 
 	if err != nil {
 		return c.Redirect("/site/main?err=invalid parameter recieved")

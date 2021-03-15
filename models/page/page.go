@@ -9,10 +9,10 @@ import (
 
 // Page contains all data accociated with a page
 type Page struct {
-	ID          uint      `json:"id"`          // unique identifier
+	ID          int64     `json:"id"`          // unique identifier
 	Href        string    `json:"href"`        // where should the user be taken when clicking
 	Description string    `json:"description"` // describe it, should be short and concise
-	Thumbnail   string    `json:"thumbnail"`   // imageurl, self explainatory
+	Thumbnail   string    `json:"thumbnail"`   // thumbnail, self explainatory
 	Created     time.Time `json:"created"`     // auto populated in mysql
 }
 

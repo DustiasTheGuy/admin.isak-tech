@@ -55,6 +55,52 @@ func ComparePassword(savedPassword string, password string) bool {
 	return true
 }
 
+func (u *User) UpdateUserPassword() error {
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "isak_tech_admin",
+	})
+	defer db.Close()
+
+	pw, err := HashPassword(u.Password)
+
+	if err != nil {
+		return err
+	}
+
+	result, err := db.Exec("UPDATE users SET password=? WHERE id=?",
+		pw, u.ID)
+
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(result.LastInsertId())
+
+	return nil
+}
+
+func (u *User) UpdateUserData() error {
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "isak_tech_admin",
+	})
+	defer db.Close()
+
+	result, err := db.Exec("UPDATE users SET username=?, email=?, admin=? WHERE id=?",
+		u.Username, u.Email, u.Admin, u.ID)
+
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(result.LastInsertId())
+
+	return nil
+}
+
 // GetUserByUsername select a user from database by its username
 func (u *User) GetUserByUsername() (User, error) {
 	var user User

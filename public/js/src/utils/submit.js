@@ -1,11 +1,10 @@
 import { 
-    HTTPGetRequest,
-    HTTPPostRequest,
-    getServerAddr
+    HTTP,
 } from './http';
 
-import { ProcessesComponent } from '../components/processes';
 import { errorHandler } from '../utils/utils';
+
+let http = new HTTP(false);
 
 export const signUpSubmit = () => {
     let form = document.getElementById('signUp-form');
@@ -14,7 +13,7 @@ export const signUpSubmit = () => {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    HTTPPostRequest(getServerAddr(false) + '/validate-form/sign-up', { email, username, password })
+    http.POST('/validate-form/sign-up', { email, username, password })
     .then(response => {
         console.log(response);
 
@@ -35,7 +34,7 @@ export const signInSubmit = () => {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    HTTPPostRequest(getServerAddr(false) + '/validate-form/sign-in', { username, password })
+    http.POST('/validate-form/sign-in', { username, password })
     .then(response => {
         if(response.success) {
             formData.append('username', username);
@@ -52,13 +51,13 @@ export const updatePostSubmit = () => {
         ID: parseInt(document.getElementById('post-id').textContent),
         Title: document.getElementById('title').value,
         Post: document.getElementById('body').value,
-        Category: document.getElementById('category').value,
-        ImageURL: document.getElementById('imageurl').value,
+        Category: document.getElementById('category').value || 'Articles',
+        Thumbnail: document.getElementById('thumbnail').value,
         Archived: document.getElementById('archived').checked ? 1 : 0
     }
 
     if(confirm('Confirm Update')) {
-        HTTPPostRequest(getServerAddr(false) + '/site/main/post/' + data.ID, data)
+        http.POST('/site/main/post/' + data.ID, data)
         .then(response => {
             if(response.success) {
                 return window.location.href = '/site/main' 
@@ -69,29 +68,28 @@ export const updatePostSubmit = () => {
     }
 }
 
-export const deleteImageSubmit = (element) => {
-    let imageID = element.getAttribute('data-id');
-    let postID = element.getAttribute('data-postid');
+export const deleteImageSubmit = (config) => {
+    try {
+        if(confirm('Confirm Delete Image: ' + config.id)) {
+            return http.GET('/site/main/post/' + config.postid + '/' + config.id + '/remove-image')
+            .then(response => response.success ? 
+            window.location.reload() : errorHandler(response.message));
+        }
 
-    if(confirm('Confirm Delete Image: ' + imageID)) {
-        return HTTPGetRequest(getServerAddr(false) + '/site/main/post/' + postID + '/' + imageID + '/remove-image')
-        .then(response => response.success ? 
-        window.location.reload() : errorHandler(response.message));
+    } catch(err) {
+        return;
     }
-}
+} 
 
-export const deletePostSubmit = (element) => {
-    let id = element.getAttribute('data-id');
-    
+export const deletePostSubmit = (id) => {
     if(confirm('Confirm Delete Post ' + id)) {
-        console.log('Delete Post..')
         return window.location.pathname = '/site/main/post/' + id + '/remove-post'
     }
 }
 
-export const deletePage = (element) => { // requires a valid session or it will be rejected
-    if(confirm('Confirm Delete Page ' + element.getAttribute('data-id'))) {
+export const deletePageSubmit = (id) => { // requires a valid session or it will be rejected
+    if(confirm('Confirm Delete Page ' + id)) {
         return window.location.pathname = '/site/portal/page/' + 
-        element.getAttribute('data-id') + '/delete';
+        id + '/delete';
     }
 }

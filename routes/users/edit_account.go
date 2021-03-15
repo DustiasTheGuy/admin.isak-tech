@@ -42,6 +42,7 @@ func EditUserAccountPostController(c *fiber.Ctx) error {
 	var user userModels.User
 
 	if err := c.BodyParser(&user); err != nil {
+		fmt.Println(err)
 		return c.Redirect("/users/account?err=Unable to parse body")
 	}
 
@@ -49,8 +50,15 @@ func EditUserAccountPostController(c *fiber.Ctx) error {
 
 	if len(user.Password) > 5 {
 		// update user password
+		fmt.Println("Update User Password...")
+		if err := user.UpdateUserPassword(); err != nil {
+			return c.Redirect(fmt.Sprintf("/users/edit_account/%s?err=Unable to update password", user.Username))
+		}
 	}
 
-	// update user, not password
-	return c.Redirect("/users/account?err=one two three")
+	if err := user.UpdateUserData(); err != nil {
+		return c.Redirect(fmt.Sprintf("/users/edit_account/%s?err=Unable to update user", user.Username))
+	}
+
+	return c.Redirect(fmt.Sprintf("/users/user_accounts?s=%s has been updated", user.Username))
 }

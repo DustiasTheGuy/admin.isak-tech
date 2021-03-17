@@ -9,7 +9,26 @@ export const navigate = (element) =>
     window.location.pathname = '/site/portal/page/' + 
     parseInt(element.getAttribute('data-id'));
 
-export const errorHandler = (error) => alert(error);
+export const errorHandler = (message, isErr) => {
+    
+    try {
+        let alertsContainer = document.getElementsByClassName('alerts-container')[0];
+        alertsContainer.parentElement.removeChild(alertsContainer);
+    } catch(err) {
+        console.log('Zero errors found');
+    }
+
+    let div = document.createElement('div');
+    div.classList.add('alert-container');
+    div.innerHTML = `
+        <div class="${ isErr ? 'alert-error' : 'alert-success' }">
+            <p>${message}</p>
+        </div>
+    `
+    document.body.appendChild(div)
+    closeAlertEvent();
+    //setTimeout(() => document.body.removeChild(div), 5000);
+};
 
 export const formatDate = (date) => moment(date).fromNow();
 
@@ -109,7 +128,7 @@ export const activeLink = () => {
 
 export const closeAlertEvent = () => {
     try {
-        let alerts = document.getElementsByClassName('alert');
+        let alerts = document.getElementsByClassName('alert-container');
         
         for(let i = 0; i < alerts.length; i++) {
             alerts[i].addEventListener('click', () => {
@@ -117,6 +136,7 @@ export const closeAlertEvent = () => {
             });
         }
 
+        window.history.replaceState(null, null, window.location.pathname);
         return;
     } catch(err) {
         return;
@@ -161,26 +181,6 @@ export const optionInital = () => {
 
     } catch(err) {
         return;
-    }
-}
-
-export const formGroupInitial = () => {
-    let formGroups = document.getElementsByClassName('form-group');
-    for(let i = 0; i < formGroups.length; i++) {
-
-        formGroups[i].childNodes.forEach(el => {
-            let isFormElement = 
-            el.tagName === "INPUT" || 
-            el.tagName === "SELECT" || 
-            el.tagName === "TEXTAREA";
-
-            if(isFormElement && el.value.length > 0) {
-                formGroups[i].classList.add('focused');
-            }
-        });
-
-        formGroups[i].addEventListener('focusin', (e) =>  e.path[1].classList.add('focused'));
-        formGroups[i].addEventListener('focusout', (e) => formGroupFocusOut(e) ? e.path[1].classList.remove('focused') : '');
     }
 }
 

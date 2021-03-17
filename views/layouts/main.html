@@ -31,6 +31,20 @@
         </div>
     </main> 
 
+    <div class="alert-container">
+        {{ if .Error }}
+        <div class="alert-error">
+            <p>{{ .Error }}</p>
+        </div>
+        {{ end }}
+    
+        {{ if .Success }}
+            <div class="alert-success">
+                <p>{{ .Success }}</p>
+            </div>
+        {{ end }}
+    </div>
+
     <script src="/public/js/src/dist/bundle.js"></script>
 </body>
 </html>

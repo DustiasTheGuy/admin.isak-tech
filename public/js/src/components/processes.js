@@ -1,7 +1,6 @@
 import { timeSince, errorHandler } from '../utils/utils';
-import { HTTP } from '../utils/http';
 
-let http = new HTTP(true);
+import { http } from '../index';
 
 export class ProcessesComponent  {
 
@@ -35,7 +34,12 @@ export class ProcessesComponent  {
                 if(response.success) {
                     let processes = document.getElementById('processes');
                     processes.removeChild(document.getElementById('p-' + pid));
+                    errorHandler(response.message, false);
+                } else {
+                    errorHandler(response.message, true);
                 }
+
+                return;
             });
         }
     }
@@ -45,9 +49,14 @@ export class ProcessesComponent  {
 
         return http.GET('/users/start/' + site)
         .then(response => {
-            return response.success ? 
-            this.render(response.data) : 
-            errorHandler(response.message);
+            if(response.success) {
+                this.render(response.data);
+                errorHandler(response.message, false);
+            } else {
+                errorHandler(response.message, true);
+            }
+
+            return;
         });
     }
 

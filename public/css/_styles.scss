@@ -123,7 +123,6 @@ section {
         background-color: #333;
         margin-top: 1em;
         padding: 2em;
-        border-radius: 25px;
 
         .details {
             display: flex;
@@ -253,7 +252,6 @@ section {
         flex-direction: column;
         justify-content: space-between;
         min-width: 400px;
-        border-radius: 25px;
 
         .process-body {
             padding: 1em;
@@ -298,11 +296,6 @@ section {
 
                 &:first-of-type {
                     border-right: 1px solid #fff;
-                    border-bottom-left-radius: 25px;
-                }
-                
-                &:last-of-type {
-                    border-bottom-right-radius: 25px;
                 }
             }
         }
@@ -330,7 +323,6 @@ section {
 #api-container {
     background-color: #333;
     margin-top: 2em;
-    border-radius: 25px;
 
     .api-route {
         display: flex;
@@ -362,7 +354,6 @@ section {
     flex-direction: column;
     justify-content: space-between; 
     min-width: 400px;
-    border-radius: 25px;
     min-height: 300px;
     padding: 3em;
     gap: 20px;

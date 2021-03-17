@@ -1,10 +1,5 @@
-import { 
-    HTTP,
-} from './http';
-
 import { errorHandler } from '../utils/utils';
-
-let http = new HTTP(true);
+import { http } from '../index';
 
 export const signUpSubmit = () => {
     let form = document.getElementById('signUp-form');
@@ -23,7 +18,7 @@ export const signUpSubmit = () => {
             formData.append('password', password);
             return form.submit();
         } else {
-            return errorHandler(response.message)
+            return errorHandler(response.message, true)
         }
     });
 }
@@ -41,7 +36,7 @@ export const signInSubmit = () => {
             formData.append('password', password);
             return form.submit();
         } else {
-            return errorHandler(response.message)
+            return errorHandler(response.message, true)
         }
     });
 }
@@ -60,9 +55,9 @@ export const updatePostSubmit = () => {
         http.POST('/site/main/post/' + data.ID, data)
         .then(response => {
             if(response.success) {
-                return window.location.href = '/site/main' 
+                return window.location.href = '/site/main?s=post has been updated'; 
             } else {
-                return errorHandler(response.message)
+                return errorHandler(response.message, true);
             }
         });
     }
@@ -72,8 +67,17 @@ export const deleteImageSubmit = (config) => {
     try {
         if(confirm('Confirm Delete Image: ' + config.id)) {
             return http.GET('/site/main/post/' + config.postid + '/' + config.id + '/remove-image')
-            .then(response => response.success ? 
-            window.location.reload() : errorHandler(response.message));
+            .then(response => {
+                if(response.success) {
+                    errorHandler(response.message, false);
+                    let img = document.querySelector(`[data-id='${config.id}']`)
+                    img.parentElement.removeChild(img);
+                    return;
+                }
+
+                errorHandler(response.message, true);
+                return;
+            });
         }
 
     } catch(err) {

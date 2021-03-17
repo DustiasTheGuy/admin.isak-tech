@@ -169,24 +169,3 @@ func PortalAddNewPostController(c *fiber.Ctx) error {
 
 	return c.Redirect("/?err=an error has occured")
 }
-
-func PortalSiteInfoController(c *fiber.Ctx) error {
-	user := index.GetSession(c).Get("User")
-
-	if user != nil {
-		return c.Render("sites/portal/site_info", fiber.Map{
-			"Title":    "Portal Site Info",
-			"Subtitle": "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may",
-			"User":     user,
-			"Error":    c.Query("err"),
-			"Breadcrumbs": []map[string]string{
-				{"text": "Home", "linkTo": "/"},
-				{"text": "Portal", "linkTo": "/site/portal"},
-				{"text": "Site Info", "linkTo": "/site/portal/site-information"},
-			},
-			"Success": c.Query("s"),
-		}, "layouts/main")
-	}
-
-	return c.Redirect("/site/portal?err=an error has occured")
-}

@@ -1,19 +1,4 @@
 <section>
-    {{ if .Error }}
-    <div class="alert alert-danger" role="alert">
-        <p>{{ .Error }}</p>
-    </div>
-    {{ end }}
-
-    {{ if .Success }}
-        <div class="alert alert-success" role="alert">
-            <p>{{ .Success }}</p>
-        </div>
-    {{ end }}
-</section>
-
-<section>
-
     <form action="/site/main/post/{{ .Post.ID }}/add-image" method="POST">
         <h3>{{ .Post.Title }}</h3>
         <div class="form-group">

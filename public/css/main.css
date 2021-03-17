@@ -1,69 +1,34 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,400italic,700,800");
-.alert.alert-success,
-.alert.alert-danger {
-  padding: 0.53em;
-  color: #fff;
-  font-size: 22px;
-  position: relative;
-  margin: 25px 0;
-  border-radius: 17px;
+.alert-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 0 3em 3em 0;
+  min-width: 300px;
+  text-align: center;
 }
-.alert.alert-success p,
-.alert.alert-danger p {
-  margin: 0;
-  text-transform: capitalize;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.alert.alert-success p::after,
-.alert.alert-danger p::after {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  margin-left: 10px;
-}
-.alert.alert-success::before,
-.alert.alert-danger::before {
-  transition: all 200ms linear;
-  background-color: rgba(177, 55, 55, 0);
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: "Font Awesome 5 Free";
-  content: "";
-  color: rgba(255, 255, 255, 0);
-  font-weight: 900;
-  width: 100%;
+.alert-container .alert-error,
+.alert-container .alert-success {
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 25px;
+  width: 100%;
+  padding: 1em;
+  font-weight: 400;
+  text-transform: capitalize;
+  transition: all 200ms linear;
 }
-
-.alert.alert-danger {
-  background-color: #8b1a2d;
+.alert-container .alert-error:hover,
+.alert-container .alert-success:hover {
+  opacity: 50%;
+  cursor: pointer;
 }
-.alert.alert-danger:hover::before {
-  background-color: #8b1a2da8;
+.alert-container .alert-error {
+  background-color: #b64141;
   color: #fff;
 }
-.alert.alert-danger p::after {
-  content: "";
-}
-
-.alert.alert-success {
+.alert-container .alert-success {
   background-color: #4E937A;
-}
-.alert.alert-success:hover::before {
-  background-color: #466e668a;
   color: #fff;
-}
-.alert.alert-success p::after {
-  content: "";
 }
 
 form {
@@ -71,7 +36,6 @@ form {
   margin-top: 2em;
   background-color: #333;
   padding: 2em;
-  border-radius: 25px;
 }
 form h1 {
   color: #fff;
@@ -106,7 +70,6 @@ form .form-group {
   flex-direction: column;
   margin: 1.6em 0;
   position: relative;
-  border-radius: 10px;
   background-color: #333;
 }
 form .form-group p {
@@ -129,7 +92,6 @@ form .form-group input, form .form-group select, form .form-group textarea {
   font-size: 15px;
   border: none;
   outline: none;
-  border-radius: 10px;
   border: 4px solid transparent;
   color: #333;
   transition: all 200ms linear;
@@ -156,7 +118,6 @@ form .button-group {
   justify-content: space-between;
 }
 form .button-group button {
-  border-radius: 10px;
   padding: 0.8em;
 }
 
@@ -268,7 +229,6 @@ form .button-group button {
   font-weight: 300;
   position: relative;
   background-color: #333;
-  border-radius: 20px;
   margin: 6px 0;
 }
 #sidenav div a:active {
@@ -302,7 +262,6 @@ form .button-group button {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  border-radius: 25px;
 }
 .page-header h1 {
   font-size: 4rem;
@@ -343,14 +302,12 @@ form .button-group button {
   padding: 2em;
   overflow: hidden;
   background-color: #333;
-  border-radius: 25px;
   min-height: 300px;
 }
 .ph-item .line {
   height: 20px;
   width: 85%;
   background-color: #4b4b4b;
-  border-radius: 5px;
 }
 .ph-item:before {
   content: " ";
@@ -490,7 +447,6 @@ section .list {
   background-color: #333;
   margin-top: 1em;
   padding: 2em;
-  border-radius: 25px;
 }
 section .list .details {
   display: flex;
@@ -593,7 +549,6 @@ section .grid .grid-item div a:hover {
   flex-direction: column;
   justify-content: space-between;
   min-width: 400px;
-  border-radius: 25px;
 }
 #processes .process .process-body, .pastes .process .process-body, .analytics .process .process-body {
   padding: 1em;
@@ -633,10 +588,6 @@ section .grid .grid-item div a:hover {
 }
 #processes .process .process-footer a:first-of-type, .pastes .process .process-footer a:first-of-type, .analytics .process .process-footer a:first-of-type {
   border-right: 1px solid #fff;
-  border-bottom-left-radius: 25px;
-}
-#processes .process .process-footer a:last-of-type, .pastes .process .process-footer a:last-of-type, .analytics .process .process-footer a:last-of-type {
-  border-bottom-right-radius: 25px;
 }
 
 .gallery {
@@ -658,7 +609,6 @@ section .grid .grid-item div a:hover {
 #api-container {
   background-color: #333;
   margin-top: 2em;
-  border-radius: 25px;
 }
 #api-container .api-route {
   display: flex;
@@ -686,7 +636,6 @@ section .grid .grid-item div a:hover {
   flex-direction: column;
   justify-content: space-between;
   min-width: 400px;
-  border-radius: 25px;
   min-height: 300px;
   padding: 3em;
   gap: 20px;
@@ -722,9 +671,6 @@ section .grid .grid-item div a:hover {
 .table {
   width: 100%;
   background-color: #333;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-left-radius: 25px;
 }
 .table .table-head,
 .table .table-body {
@@ -770,14 +716,11 @@ section .grid .grid-item div a:hover {
 .table .table-body {
   max-height: 50vh;
   overflow: auto;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
 }
 .table .table-body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #333333;
-  border-bottom-right-radius: 25px;
 }
 .table .table-body::-webkit-scrollbar {
   width: 12px;
@@ -787,15 +730,10 @@ section .grid .grid-item div a:hover {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #4E937A;
-  border-bottom-right-radius: 25px;
 }
 .table .table-body .table-row {
   width: 100%;
   position: relative;
-}
-.table .table-body .table-row:last-of-type {
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
 }
 .table .table-body .table-row:hover .actions {
   opacity: 1;
@@ -852,9 +790,6 @@ section .grid .grid-item div a:hover {
   }
 }
 @media only screen and (max-width: 768px) {
-  .table {
-    border-top-right-radius: 0;
-  }
   .table .table-head {
     display: none;
   }
@@ -868,19 +803,9 @@ section .grid .grid-item div a:hover {
   }
   .table .table-body {
     overflow-x: hidden;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
   }
   .table .table-body .actions {
     left: 0;
-  }
-  .table .table-body::-webkit-scrollbar-track {
-    border-bottom-right-radius: 25px;
-    border-top-right-radius: 25px;
-  }
-  .table .table-body::-webkit-scrollbar-thumb {
-    border-bottom-right-radius: 25px;
-    border-top-right-radius: 25px;
   }
   .table .table-body span {
     max-width: 100%;

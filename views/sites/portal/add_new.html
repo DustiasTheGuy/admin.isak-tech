@@ -1,12 +1,4 @@
 <section>
-    {{ if .Error }}
-    <div class="alert alert-danger" role="alert">
-        <p>{{ .Error }}</p>
-    </div>
-    {{ end }}
-</section>
-
-<section>
     <form action="/site/portal/page/add-page" method="POST">
         <div class="form-group">
             <label for="Href">Href</label>

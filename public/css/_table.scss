@@ -5,9 +5,6 @@
 .table {
     width: 100%;
     background-color: #333;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    border-bottom-left-radius: 25px;
     .table-head,
     .table-body {
         display: block;
@@ -57,14 +54,11 @@
     .table-body {
         max-height: 50vh;
         overflow: auto;
-        border-bottom-left-radius: 25px;
-        border-bottom-right-radius: 25px;
 
         &::-webkit-scrollbar-track {
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
             box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
             background-color: #333333;
-            border-bottom-right-radius: 25px;
         }
         
         &::-webkit-scrollbar {
@@ -76,18 +70,12 @@
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
             box-shadow: inset 0 0 6px rgba(0,0,0,.3);
             background-color: #4E937A;
-            border-bottom-right-radius: 25px;
         }
 
         .table-row {
             width: 100%;
             position: relative;
-
-            &:last-of-type {
-                border-bottom-left-radius: 25px;
-                border-bottom-right-radius: 25px;
-            }
-
+            
             &:hover {
                 .actions {
                     opacity: 1;

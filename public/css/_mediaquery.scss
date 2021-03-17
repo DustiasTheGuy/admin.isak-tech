@@ -26,7 +26,6 @@
 
 @media only screen and(max-width: 768px) {
     .table {    
-        border-top-right-radius: 0;
         .table-head {
             display: none;
         }
@@ -43,22 +42,9 @@
 
         .table-body {
             overflow-x: hidden;
-            border-top-left-radius: 25px;
-            border-bottom-left-radius: 25px;
 
             .actions {
                 left: 0;
-            }
-
-            &::-webkit-scrollbar-track {
-                border-bottom-right-radius: 25px;
-                border-top-right-radius: 25px;
-            }
-            
-            
-            &::-webkit-scrollbar-thumb {
-                border-bottom-right-radius: 25px;
-                border-top-right-radius: 25px;
             }
 
             span {

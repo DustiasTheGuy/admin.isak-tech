@@ -1,74 +1,33 @@
-.alert.alert-success,
-.alert.alert-danger {
-    padding: .53em;
-    color: #fff;
-    font-size: 22px;
-    position: relative;
-    margin: 25px 0;
-    border-radius: 17px;
-    p {
-        margin: 0;
-        text-transform: capitalize;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        &::after {
-            font-family: "Font Awesome 5 Free"; 
-            font-weight: 900; 
-            margin-left: 10px;
-        }
-    }
+.alert-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 0 3em 3em 0;
+    min-width: 300px;
+    text-align: center;
 
-    &::before {
-        transition: all 200ms linear;
-        background-color: rgba(177, 55, 55, 0);
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: "Font Awesome 5 Free"; 
-        content: '\f00d';
-        color: rgba(255, 255, 255, 0);
-        font-weight: 900;
-        width: 100%;
+    .alert-error,
+    .alert-success {
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 25px;
-    }
-}
-
-
-.alert.alert-danger {
-    background-color: #8b1a2d;
-
-    &:hover {
-        &::before {
-            background-color: #8b1a2da8;
-            color: #fff;
+        width: 100%;
+        padding: 1em;
+        font-weight: 400;
+        text-transform: capitalize;
+        transition: all 200ms linear;
+        
+        &:hover {
+            opacity: 50%;
+            cursor: pointer;
         }
     }
 
-    p::after {
-        content: "\f05a"; 
+    .alert-error {
+        background-color: rgb(182, 65, 65);
+        color: #fff;
+    }
+
+    .alert-success {
+        background-color: #4E937A;
+        color: #fff;
     }
 }
-
-.alert.alert-success {
-    background-color: #4E937A;
-
-    &:hover {
-        &::before {
-            background-color: #466e668a;
-            color: #fff;
-        }
-    }
-    
-    p::after {
-        content: "\f058"; 
-    }
-}
-

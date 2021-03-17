@@ -27,7 +27,17 @@ func RemoveImage(ImageID, postID int64) error {
 	})
 	defer db.Close() // close the mysql connection right before returning this func
 
-	_, err := db.Exec("DELETE FROM images WHERE id=?", ImageID) // Delete the image with it's ID
+	images, err := GetImagesWithPostID(postID, db)
+
+	if err != nil {
+		return err
+	}
+
+	if len(images) <= 1 {
+		return errors.New("You cannot remove the last image of a post")
+	}
+
+	_, err = db.Exec("DELETE FROM images WHERE id = ?", ImageID) // Delete the image with it's ID
 
 	if err != nil {
 		return err
@@ -71,12 +81,18 @@ func SaveNewImage(PostID int64, URL string, updateThumbnail bool) error {
 
 	if updateThumbnail {
 		_, err = db.Exec(
-			"UPDATE posts SET thumbnail = ?, total_images = total_images + 1 WHERE id = ?",
+			"UPDATE posts SET thumbnail = ? WHERE id = ?",
 			ImageID, PostID)
 
 		if err != nil {
 			return err
 		}
+	}
+
+	_, err = db.Exec("UPDATE posts SET total_images = total_images + 1 WHERE id = ?", PostID)
+
+	if err != nil {
+		return err
 	}
 
 	return nil
@@ -107,4 +123,21 @@ func GetImagesWithPostID(postID int64, db *sql.DB) ([]Image, error) {
 	}
 
 	return images, nil
+}
+
+func GetImageWithID(imageID int64, db *sql.DB) *Image {
+	var image Image
+
+	row := db.QueryRow("SELECT * FROM images WHERE id=?", imageID)
+
+	if err := row.Scan(
+		&image.ID,
+		&image.URL,
+		&image.Date,
+		&image.PostID,
+		&image.Thumbnail); err != nil {
+		return nil
+	}
+
+	return &image
 }

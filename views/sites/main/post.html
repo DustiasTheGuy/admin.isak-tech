@@ -1,16 +1,3 @@
-<section>
-    {{ if .Error }}
-    <div class="alert alert-danger" role="alert">
-        <p>{{ .Error }}</p>
-    </div>
-    {{ end }}
-
-    {{ if .Success }}
-        <div class="alert alert-success" role="alert">
-            <p>{{ .Success }}</p>
-        </div>
-    {{ end }}
-</section>
 <section class="post-section">
     <form>
         <div class="form-group">
@@ -22,7 +9,7 @@
           <textarea type="text" id="body" name="post">{{ .Post.Post }}</textarea>
         </div>
         <div class="form-group">
-          <label for="thumbnail">Image URL</label>
+          <label for="thumbnail">Thumbnail ID</label>
           <input type="text" id="thumbnail" name="thumbnail" value="{{ .Post.Thumbnail }}">
         </div>
         <div class="form-group">

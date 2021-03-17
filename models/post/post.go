@@ -97,6 +97,7 @@ func GetAllPosts() ([]Post, error) {
 	// i=0; i <rows.length; i++;
 	for rows.Next() { // loop over query results
 		var post Post // storage for every single iteration
+		var thumbnailID int64
 
 		if err := rows.Scan( // scan content of query results index into post variable
 			&post.ID,
@@ -106,12 +107,23 @@ func GetAllPosts() ([]Post, error) {
 			&post.Date,
 			&post.UserID,
 			&post.Archived,
-			&post.Thumbnail,
+			&thumbnailID,
 			&post.TotalImages); err != nil {
 			return nil, err
 		}
+
 		images, err := imageModel.GetImagesWithPostID(post.ID, db)
-		post.Thumbnail = images[0].URL
+
+		if len(images) > 0 {
+			thumbnail := imageModel.GetImageWithID(thumbnailID, db)
+
+			if thumbnail != nil {
+				post.Thumbnail = thumbnail.URL
+			} else {
+				post.Thumbnail = "https://i.ibb.co/3d3gpFW/example-featured.png"
+			}
+		}
+
 		if err != nil {
 			return nil, err
 		}

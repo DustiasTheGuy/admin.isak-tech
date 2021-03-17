@@ -1,5 +1,11 @@
+import { HTTP } from './utils/http';
+import { APIComponent } from './components/api';
+import { TableComponent } from './components/table';
+import { AnalyticsComponent } from './components/analytics';
+import { ProcessesComponent } from './components/processes'; 
 import { signInSubmit, signUpSubmit } from './utils/submit';
-import { 
+
+import {
     initSidenav,
     activeLink, 
     closeAlertEvent, 
@@ -11,23 +17,19 @@ import {
     editPostInitial,
     deletePageInitial
 } from './utils/utils';
-import { TableComponent } from './components/table';
-import { APIComponent } from './components/api';
-import { AnalyticsComponent } from './components/analytics';
-import { ProcessesComponent } from './components/processes'; 
 
+export const http = new HTTP(false); // create new http instance that can be used by components/utils
 
 const init = () => {
     activeLink(); // set active class on nav list item
-    initSidenav();
-    adminLevelInitial();
+    initSidenav(); // add event listeners to the open/close btn on sidenav
+    adminLevelInitial(); // change the admin level input value based on what the server has sent
     closeAlertEvent(); // add an event listener to errors so then can be closed
-    formGroupInitial(); // if <input> isn't empty add focused class to it's parent element
     optionInital(); // when editing an existing post, select the old value
     archivedInitial(); // when editing an existing post, set archived to the old value
-    galleryItemInital();
-    editPostInitial();
-    deletePageInitial();
+    galleryItemInital(); // add event listener to gallery items so they can be removed
+    editPostInitial(); // add event listeners to delete/update buttons
+    deletePageInitial(); // add event listeners to the delete buttons
 }
 
 const main = () => {

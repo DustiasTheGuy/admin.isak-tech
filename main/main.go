@@ -82,7 +82,6 @@ func main() {
 	mainRouter.Post("/post/:postID", users.UpdatePostController)                       // UPDATE | request existing post
 	mainRouter.Get("/post/:postID/:imageID/remove-image", users.RemoveImageController) // DELETE | request image get request ( might be changed to post request )
 	mainRouter.Get("/post/:postID/remove-post", users.RemovePostController)            // DELETE | request an existing post permanently
-	mainRouter.Get("/site-information", users.MainSiteInfoController)                  // RENDER | display information about the site
 
 	// A page is a row in mysql that contains all data associated with a page that I find interesting
 	// Group all routes that are related to portal.isak-tech.tk
@@ -96,16 +95,14 @@ func main() {
 	portalRouter.Get("/page/:pageID", users.PortalGetPageController)          // RENDER | display a single page template
 	portalRouter.Post("/page/:pageID/update", users.PortalUpdateController)   // UPDATE | request update an existing page
 	portalRouter.Get("/page/:pageID/delete", users.PortalDeleteOneController) // DELETE | request delete an existing page permanently
-	portalRouter.Get("/site-information", users.PortalSiteInfoController)     // RENDER | display information about the site
 
 	// Group all routes that are related to paste.isak-tech.tk
 	pasteRouter := app.Group("/site/paste", func(c *fiber.Ctx) error {
 		return c.Next()
 	})
 
-	pasteRouter.Get("/", users.PasteGetController)                      // RENDER | display all the pastes that have been submitted
-	pasteRouter.Get("/site-information", users.PasteSiteInfoController) // RENDER | display information about the site
-	pasteRouter.Get("/api", users.APIGetController)                     // REDNER | display template how the api works
+	pasteRouter.Get("/", users.PasteGetController)  // RENDER | display all the pastes that have been submitted
+	pasteRouter.Get("/api", users.APIGetController) // REDNER | display template how the api works
 
 	log.Fatal(app.Listen(":8084")) // attempt to listen for incomming requests, exit program with an error message
 }

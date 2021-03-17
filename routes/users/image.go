@@ -36,7 +36,7 @@ func RemoveImageController(c *fiber.Ctx) error { // level 3
 
 	if err := imageModel.RemoveImage(ImageID, PostID); err != nil {
 		return c.JSON(routes.HTTPResponse{
-			Message: "Internal Server Error",
+			Message: fmt.Sprintf("%v", err),
 			Success: false,
 			Data:    nil,
 		})
@@ -84,7 +84,7 @@ func AddImageGetController(c *fiber.Ctx) error {
 }
 
 func AddImagePostController(c *fiber.Ctx) error {
-	adminLevel := index.ParsePrivileges(index.GetSession(c))
+	adminLevel := index.ParsePrivileges(index.GetSession(c).Get("User"))
 
 	if !userModels.IsAllowedAccess(adminLevel, 1) { // level >= required
 		return c.Redirect("/users/sign-out?s=You have been signed out")

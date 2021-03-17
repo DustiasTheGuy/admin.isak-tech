@@ -1,18 +1,4 @@
 <section>
-    {{ if .Error }}
-    <div class="alert alert-danger" role="alert">
-        <p>{{ .Error }}</p>
-    </div>
-    {{ end }}
-
-    {{ if .Success }}
-        <div class="alert alert-success" role="alert">
-            <p>{{ .Success }}</p>
-        </div>
-    {{ end }}
-</section>
-
-<section>
     <form action="/site/portal/page/{{ .Page.ID }}/update" method="POST">
         <div class="form-group focused">
             <label for="ID">ID</label>

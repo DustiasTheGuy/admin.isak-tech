@@ -1,16 +1,16 @@
 import { HTTP } from './utils/http';
 import { APIComponent } from './components/api';
 import { TableComponent } from './components/table';
+import { ImagesComponent } from './components/images';
 import { AnalyticsComponent } from './components/analytics';
 import { ProcessesComponent } from './components/processes'; 
+import { AccountComponent } from './components/account';
 import { signInSubmit, signUpSubmit } from './utils/submit';
 
 import {
     initSidenav,
     activeLink, 
     closeAlertEvent, 
-    formGroupInitial, 
-    optionInital, 
     archivedInitial,
     adminLevelInitial,
     galleryItemInital,
@@ -25,7 +25,6 @@ const init = () => {
     initSidenav(); // add event listeners to the open/close btn on sidenav
     adminLevelInitial(); // change the admin level input value based on what the server has sent
     closeAlertEvent(); // add an event listener to errors so then can be closed
-    optionInital(); // when editing an existing post, select the old value
     archivedInitial(); // when editing an existing post, set archived to the old value
     galleryItemInital(); // add event listener to gallery items so they can be removed
     editPostInitial(); // add event listeners to delete/update buttons
@@ -42,7 +41,8 @@ const main = () => {
         case '/users/user_accounts': return new TableComponent().init();
         case '/site/portal': return new TableComponent().init();
         case '/users/analytics': return new AnalyticsComponent().init();
-        
+        case '/users/account': return new AccountComponent().init();
+        case '/users/images': return new ImagesComponent().init();
         case '/sign-in':
             return document.getElementsByClassName('btn-primary')[0]
             .addEventListener('click', () => signInSubmit());

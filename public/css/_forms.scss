@@ -1,3 +1,31 @@
+form.upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .dropzone.highlight {
+        background-color: rgb(70, 70, 70);
+    }
+
+    .dropzone {
+        width: 100%;
+        height: 200px;
+        border: 2px dashed #4E937A;
+        color: #4E937A;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        transition: all 200ms linear;
+    }    
+
+    input {
+        color: #fff;
+        width: 100%;
+    }
+}
+
 form {
     width: 100%;
     margin-top: 2em;
@@ -61,7 +89,11 @@ form {
         }
         
         #archived {
-            margin-left: 12px;
+            margin: 0;
+
+            &::-ms-check {
+                color: green;
+            }
         }
 
         input, select, textarea {
@@ -106,3 +138,4 @@ form {
         }
     }
 }
+

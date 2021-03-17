@@ -3,8 +3,9 @@
 .alert-container {
   position: fixed;
   bottom: 0;
-  right: 0;
-  margin: 0 3em 3em 0;
+  right: 50%;
+  transform: translateX(50%);
+  margin: 0 0 3em 0;
   min-width: 300px;
   text-align: center;
 }
@@ -16,6 +17,12 @@
   font-weight: 400;
   text-transform: capitalize;
   transition: all 200ms linear;
+}
+.alert-container .alert-error p,
+.alert-container .alert-success p {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .alert-container .alert-error:hover,
 .alert-container .alert-success:hover {
@@ -29,6 +36,31 @@
 .alert-container .alert-success {
   background-color: #4E937A;
   color: #fff;
+}
+
+form.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form.upload-form .dropzone.highlight {
+  background-color: #464646;
+}
+form.upload-form .dropzone {
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #4E937A;
+  color: #4E937A;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  transition: all 200ms linear;
+}
+form.upload-form input {
+  color: #fff;
+  width: 100%;
 }
 
 form {
@@ -85,7 +117,10 @@ form .form-group label {
   margin-bottom: 8px;
 }
 form .form-group #archived {
-  margin-left: 12px;
+  margin: 0;
+}
+form .form-group #archived::-ms-check {
+  color: green;
 }
 form .form-group input, form .form-group select, form .form-group textarea {
   padding: 0.58em;
@@ -144,7 +179,7 @@ form .button-group button {
 
 #sidenav.open {
   width: 300px;
-  border-right: 1px solid #424242;
+  border-right: 1px solid #4E937A;
 }
 
 #sidenav {
@@ -453,11 +488,18 @@ section .list .details {
   border-bottom: 1px solid #414141;
   color: #4E937A;
 }
+section .list .details p i {
+  margin-right: 10px;
+}
+section .list .details p span {
+  color: #fff;
+}
 section .list details {
   padding: 1em 0;
 }
-section .list details .body {
-  padding: 1em 0;
+section .list details .body form {
+  padding: 0;
+  margin: 0;
 }
 section .list details .body p {
   margin: 0;
@@ -480,6 +522,12 @@ section .list details summary p {
   margin: 0;
   color: #4E937A;
   transition: all 200ms linear;
+}
+section .list details summary p span {
+  color: #fff;
+}
+section .list details summary p i {
+  margin-right: 10px;
 }
 section .list details summary p:hover {
   color: #72aa95;
@@ -629,41 +677,6 @@ section .grid .grid-item div a:hover {
   white-space: pre-wrap;
 }
 
-.placeholder {
-  background-color: #333;
-  color: #4E937A;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 400px;
-  min-height: 300px;
-  padding: 3em;
-  gap: 20px;
-  overflow: hidden;
-  position: relative;
-  animation-duration: 3s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-direction: alternate-reverse;
-  animation-timing-function: linear;
-  animation-name: placeholderAnimate;
-  background-size: 1300px;
-  background: linear-gradient(to right, #333 2%, #3f3f3f 18%, #464646 33%);
-}
-.placeholder .title, .placeholder .line, .placeholder .button {
-  height: 22.5px;
-  width: 100%;
-  background-color: gray;
-}
-
-@keyframes placeholderAnimate {
-  0% {
-    background-position: -100% 0;
-  }
-  100% {
-    background-position: 100% 0;
-  }
-}
 .table-container {
   margin-top: 2em;
 }

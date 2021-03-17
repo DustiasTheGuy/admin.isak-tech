@@ -22,7 +22,7 @@ export const errorHandler = (message, isErr) => {
     div.classList.add('alert-container');
     div.innerHTML = `
         <div class="${ isErr ? 'alert-error' : 'alert-success' }">
-            <p>${message}</p>
+            <p>${message} <i class="fas ${ isErr ? 'fa-exclamation-triangle' : 'fa-check-square'}"></i></p>
         </div>
     `
     document.body.appendChild(div)
@@ -31,12 +31,6 @@ export const errorHandler = (message, isErr) => {
 };
 
 export const formatDate = (date) => moment(date).fromNow();
-
-export const formGroupFocusIn = (e) => 
-    e.path[0].value.length >= 1 ? e.path[1].classList.add('focused') : '';
-
-export const formGroupFocusOut = (e) => 
-    e.path[0].value.length <= 0 ? true : false;
 
 export const toggleSidenav = () => {
     toggleElement('sidenav');
@@ -164,21 +158,6 @@ export const adminLevelInitial = () => {
                 select[i].selected = true;
             }
         }
-    } catch(err) {
-        return;
-    }
-}
-
-export const optionInital = () => {
-    try {
-        let category = document.getElementById('post-category').textContent;
-        let options = document.getElementsByTagName('option');
-    
-        for(let i = 0; i < options.length; i++) {
-            if(options[i].value === category) 
-            return options[i].selected = true;
-        }
-
     } catch(err) {
         return;
     }

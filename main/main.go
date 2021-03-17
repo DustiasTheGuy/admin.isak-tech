@@ -68,6 +68,8 @@ func main() {
 	usersRouter.Get("/user_accounts", users.UsersAccountGetController)             // RENDER | show all user accounts
 	usersRouter.Get("/edit_account/:username", users.EditUserAccountGetController) // RENDER | render form where you can edit a user account
 	usersRouter.Post("/edit_account", users.EditUserAccountPostController)         // POST   | final step when modifying a user account
+	usersRouter.Get("/images", users.ManageImagesGetController)                    // RENDER | display template where you can see all images and add new images
+	usersRouter.Post("/upload", users.UploadImagePostController)                   // POST   |  upload one or more images
 	// Group all routes that are related to just isak-tech.tk the main site
 	mainRouter := app.Group("/site/main", func(c *fiber.Ctx) error {
 		return c.Next()

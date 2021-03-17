@@ -1,23 +1,20 @@
 <section>
     <div class="list">
         <div class="details">
-            <p>Unique Identifier: {{ .User.ID }}</p>
+            <p><i class="fas fa-user-shield"></i> <span id="adminLevel">{{ .User.Admin }}</span></p>
         </div>
 
         <div class="details">
-            <p>Administration Level: {{ .User.Admin }}</p>
-        </div>
-        <div class="details">
-            <p><i class="fas fa-calendar"></i> {{ FormatDate .User.Created}}</p>
+            <p><i class="fas fa-calendar"></i> <span class="created">{{ .User.Created }}</span></p>
         </div>
         
         <details>
             <summary>
-                <p><i class="fas fa-envelope"></i> {{ .User.Email }}</p>
+                <p><i class="fas fa-envelope"></i> <span>{{ .User.Email }}</span></p>
                 <i class="far fa-edit"></i>
             </summary>
             <div class="body">
-                <form action="/users/update/email" method="POST" style="margin-top:0;">
+                <form action="/users/update/email" method="POST">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email" value="{{ .User.Email }}" required>
@@ -32,11 +29,11 @@
         
         <details>
             <summary>
-                <p><i class="fas fa-user"></i> {{ .User.Username }}</p>
+                <p><i class="fas fa-user"></i> <span>{{ .User.Username }}</span></p>
                 <i class="far fa-edit"></i>
             </summary>
             <div class="body">
-                <form action="/users/update/username" method="POST" style="margin-top:0;">
+                <form action="/users/update/username" method="POST">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" value="{{ .User.Username }}" required>
@@ -52,11 +49,11 @@
 
         <details>
             <summary>
-                <p><i class="fas fa-key"></i> *************</p>
+                <p><i class="fas fa-key"></i> <span>*************</span></p>
                 <i class="far fa-edit"></i>
             </summary>
             <div class="body">
-                <form action="/users/update/password" method="POST" style="margin-top:0;">
+                <form action="/users/update/password" method="POST">
                     <div class="form-group">
                         <label for="current_password">Current Password</label>
                         <input type="password" name="current_password" id="current_password" required>

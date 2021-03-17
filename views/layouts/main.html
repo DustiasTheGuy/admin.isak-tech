@@ -34,13 +34,13 @@
     <div class="alert-container">
         {{ if .Error }}
         <div class="alert-error">
-            <p>{{ .Error }}</p>
+            <p>{{ .Error }} <i class="fas fa-exclamation-triangle"></i></p>
         </div>
         {{ end }}
     
         {{ if .Success }}
             <div class="alert-success">
-                <p>{{ .Success }}</p>
+                <p>{{ .Success }} <i class="fas fa-check-square"></i></p>
             </div>
         {{ end }}
     </div>

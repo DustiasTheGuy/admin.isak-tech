@@ -35,4 +35,12 @@ export class HTTP {
             body: JSON.stringify(data)
         }).then(response => response.json());
     }
+
+
+    UPLOAD(url, data) {
+        return fetch(this.serverAddr + url, {
+            method: 'POST',
+            body: data
+        }).then(response => response.json());
+    }
 }

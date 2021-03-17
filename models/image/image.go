@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-// Image is always accociated with a Post
+// Image is a struct for storing stuff related to a image row in mysql
 type Image struct {
 	ID        int64     // the unique identifer for an Image ( Auto Incremented in mysql )
 	URL       string    // when a user clicks on the image, where should they be taken?
@@ -51,7 +51,7 @@ func RemoveImage(ImageID, postID int64) error {
 }
 
 // SaveNewImage creates a new row in mysql
-func SaveNewImage(PostID int64, URL string, updateThumbnail bool) error {
+func SaveNewImage(PostID int64, URL string, updateThumbnail bool, alone bool) error {
 	db := database.Connect(&database.SQLConfig{
 		User:     "root",
 		Password: "password",
@@ -89,7 +89,9 @@ func SaveNewImage(PostID int64, URL string, updateThumbnail bool) error {
 		}
 	}
 
-	_, err = db.Exec("UPDATE posts SET total_images = total_images + 1 WHERE id = ?", PostID)
+	if !alone {
+		_, err = db.Exec("UPDATE posts SET total_images = total_images + 1 WHERE id = ?", PostID)
+	}
 
 	if err != nil {
 		return err
@@ -140,4 +142,38 @@ func GetImageWithID(imageID int64, db *sql.DB) *Image {
 	}
 
 	return &image
+}
+
+func GetAllImages() ([]Image, error) {
+	var images []Image
+
+	db := database.Connect(&database.SQLConfig{
+		User:     "root",
+		Password: "password",
+		Database: "isak_tech",
+	})
+	defer db.Close()
+
+	rows, err := db.Query("SELECT * FROM images")
+
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var image Image
+
+		if err := rows.Scan(
+			&image.ID,
+			&image.URL,
+			&image.Date,
+			&image.PostID,
+			&image.Thumbnail); err != nil {
+			return nil, err
+		}
+
+		images = append(images, image)
+	}
+
+	return images, nil
 }

@@ -1,0 +1,15 @@
+<section>
+    <form class="upload-form">
+        <div class="dropzone" id="dropzone">
+            <i class="fas fa-file-upload"></i>
+        </div>
+        <input type="file" id="file-input" accept="image/*" multiple>
+    </form>
+</section>
+<section>
+    <div class="gallery">
+        {{ range $index, $image := .Images }}
+            <img src="{{ $image.URL }}">
+        {{ end }}
+    </div>
+</section>

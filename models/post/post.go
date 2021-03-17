@@ -63,10 +63,10 @@ func (p *Post) SaveNewPost() error {
 		return err
 	}
 
-	err = imageModel.SaveNewImage(id, p.Thumbnail)
+	err = imageModel.SaveNewImage(id, p.Thumbnail, true)
 
 	if err != nil {
-		fmt.Println("err saving image")
+		fmt.Printf("err saving image: %v\n", err)
 		return err
 	}
 
@@ -87,6 +87,10 @@ func GetAllPosts() ([]Post, error) {
 
 	if err != nil {
 		// return an error
+		return nil, err
+	}
+
+	if rows.Err() != nil {
 		return nil, err
 	}
 

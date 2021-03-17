@@ -1,7 +1,7 @@
 import { timeSince, errorHandler } from '../utils/utils';
 import { HTTP } from '../utils/http';
 
-let http = new HTTP(false);
+let http = new HTTP(true);
 
 export class ProcessesComponent  {
 

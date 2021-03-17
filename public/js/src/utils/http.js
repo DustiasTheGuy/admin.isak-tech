@@ -3,10 +3,12 @@ export class HTTP {
     constructor(production) {
         this.serverAddr = this.getServerAddr(production);
         this.headers = { 'Content-Type': 'application/json' };
+
+        console.log(this.serverAddr);
     }
 
-    getServerAddr() {
-        return this.production ? 
+    getServerAddr(production) {
+        return production ? 
         'https://admin.isak-tech.tk' : 'http://localhost:8084';
     }
 

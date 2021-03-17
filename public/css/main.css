@@ -160,15 +160,6 @@ form .button-group button {
   padding: 0.8em;
 }
 
-@media only screen and (max-width: 875px) {
-  main .content, main .content.open {
-    width: 100%;
-  }
-
-  main .content {
-    padding: 8px;
-  }
-}
 #navbar-btn {
   position: fixed;
   bottom: 0;
@@ -841,6 +832,64 @@ section .grid .grid-item div a:hover {
   width: 24px;
   height: 24px;
   border-radius: 50%;
+}
+
+@media only screen and (max-width: 768px) {
+  main .content {
+    padding: 1em;
+  }
+  main .content.open {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .page-header h1 {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  .page-header p {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .table {
+    border-top-right-radius: 0;
+  }
+  .table .table-head {
+    display: none;
+  }
+  .table .table-head .table-row,
+.table .table-body .table-row {
+    flex-direction: column;
+  }
+  .table .table-head .table-row span,
+.table .table-body .table-row span {
+    overflow: hidden;
+  }
+  .table .table-body {
+    overflow-x: hidden;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+  }
+  .table .table-body .actions {
+    left: 0;
+  }
+  .table .table-body::-webkit-scrollbar-track {
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+  }
+  .table .table-body::-webkit-scrollbar-thumb {
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+  }
+  .table .table-body span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    justify-content: flex-start !important;
+    padding: 0.3em;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

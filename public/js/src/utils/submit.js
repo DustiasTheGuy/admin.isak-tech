@@ -4,7 +4,7 @@ import {
 
 import { errorHandler } from '../utils/utils';
 
-let http = new HTTP(false);
+let http = new HTTP(true);
 
 export const signUpSubmit = () => {
     let form = document.getElementById('signUp-form');

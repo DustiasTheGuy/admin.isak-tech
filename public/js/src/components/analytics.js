@@ -1,7 +1,7 @@
 import { TableComponent } from '../components/table';
 import { HTTP } from '../utils/http';
 
-let http = new HTTP(false);
+let http = new HTTP(true);
 
 export class AnalyticsComponent {
     constructor(data) {

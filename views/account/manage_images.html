@@ -9,7 +9,13 @@
 <section>
     <div class="gallery">
         {{ range $index, $image := .Images }}
-            <img src="{{ $image.URL }}">
+            <img 
+            src="{{ $image.URL }}" 
+            class="gallery--item"
+            data-id="{{ $image.ID }}"
+            data-created="{{ $image.Date }}"
+            data-post_id="{{ $image.PostID }}"
+            data-thumbnail="{{ $image.Thumbnail }}">
         {{ end }}
     </div>
 </section>

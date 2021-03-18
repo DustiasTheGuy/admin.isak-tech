@@ -5,7 +5,7 @@
     margin: 0 3em 3em 0;
     min-width: 300px;
     text-align: center;
-
+    z-index: 5;
     .alert-error,
     .alert-success {
         height: 100%;
@@ -19,6 +19,10 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
+
+            i {
+                margin-left: 20px;
+            }
         }
 
         &:hover {

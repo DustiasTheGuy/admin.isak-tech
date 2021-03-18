@@ -1,5 +1,6 @@
 import { http } from '../index';
 import { errorHandler } from '../utils/utils';
+import { ModalComponent } from './modal';
 
 export class ImagesComponent {
 
@@ -7,6 +8,7 @@ export class ImagesComponent {
         this.dropzone = document.getElementById('dropzone');
         this.input = document.getElementById('file-input');
         this.gallery = document.getElementsByClassName('gallery')[0];
+        this.modal = new ModalComponent();
     }
 
     init() {
@@ -31,15 +33,35 @@ export class ImagesComponent {
 
         this.input.addEventListener('change', (e) => 
         this.upload(e.target.files));
+
+        this.addEventListeners();
     }
 
     isAllowed(type) {
         switch(type) {
             case 'image/jpeg': return true;
             case 'image/jpg':  return true;
-            case 'image/png': return true;
+            case 'image/png':  return true;
             case 'image/gif':  return true;
             default:           return false;
+        }
+    }
+
+    addEventListeners() {
+        let galleryItems = document.getElementsByClassName('gallery--item');
+
+        for(let i = 0; i < galleryItems.length; i++) {
+            galleryItems[i].addEventListener('click', () => {
+                this.modal.setData({
+                    url: galleryItems[i].src,
+                    id: galleryItems[i].getAttribute('data-id'),
+                    created: galleryItems[i].getAttribute('data-created'),
+                    post_id: galleryItems[i].getAttribute('data-post_id'),
+                    thumbnail: galleryItems[i].getAttribute('data-thumbnail')
+                });
+
+                this.modal.open();
+            });
         }
     }
 
@@ -67,22 +89,16 @@ export class ImagesComponent {
 
         try {
             http.UPLOAD('/users/upload', formData)
-            .then(res => {
-                console.log(res);
-                
+            .then(res => { 
                 if(res.success) {
-                    res.data.forEach(imgData => {
-                        let img = document.createElement('img');
-                        img.src = imgData;
-                        this.gallery.appendChild(img);
-                    });
+                    window.location.reload();
                 }
-    
+                
                 return errorHandler(res.message, !res.success);
             });
 
         } catch(err) {
-            console.log(err);
+            return;
         }
     }
 }

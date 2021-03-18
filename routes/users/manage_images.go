@@ -11,6 +11,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+const serverAddr = "http://localhost:8084"
+
 func ManageImagesGetController(c *fiber.Ctx) error {
 	user := index.GetSession(c).Get("User")
 	images, err := imageModel.GetAllImages()
@@ -39,7 +41,7 @@ func ManageImagesGetController(c *fiber.Ctx) error {
 }
 
 func UploadImagePostController(c *fiber.Ctx) error {
-	var images []*string
+	var images []string
 	mpartForm, err := c.MultipartForm()
 
 	if err != nil {
@@ -51,34 +53,55 @@ func UploadImagePostController(c *fiber.Ctx) error {
 	}
 
 	for i := 0; i < len(mpartForm.File["file"]); i++ {
-		rand.Seed(time.Now().UnixNano())
-		file := mpartForm.File["file"][i]
-		selfHash := randSeq(25)
+		rand.Seed(time.Now().UnixNano())  // seed the rand
+		file := mpartForm.File["file"][i] // a big fat slice of bytes
+		// hash will look something like: CaL8cG90BWoNiB_PPLxFv6lGC
+		imageHash := randSeq(25)                           // grab a good unique file name
+		ext, ok := imgExt(file.Header.Get("Content-Type")) // check if file is an image and get the extention if it is
+		// allowed_file_types = [image/jpeg, image/png, image/jpg, image/gif]
+		fullURL := fmt.Sprintf("%s/public/images/uploads/%s.%s", serverAddr, imageHash, ext) // full url which can be used to access image on client
+		storage := fmt.Sprintf("./public/images/uploads/%s.%s", imageHash, ext)              // where should the images be stored?
 
-		if err := c.SaveFile(file, fmt.Sprintf("./public/images/uploads/%s_%s", selfHash, file.Filename)); err != nil {
-			return c.JSON(routes.HTTPResponse{
-				Message: fmt.Sprintf("%v", err),
-				Success: false,
-				Data:    nil,
-			})
+		if ok { // if the file type is an image
+			if err := c.SaveFile(file, storage); err != nil { // save image to disk
+				return c.JSON(routes.HTTPResponse{
+					Message: fmt.Sprintf("%v", err),
+					Success: false,
+					Data:    nil,
+				})
+			}
+
+			if err := imageModel.SaveNewImage(0, fullURL, false, true); err != nil { // save image url to mysql
+				return err
+			}
+
+			images = append(images, fullURL) // append imageurl to slice
 		}
-
-		if err := imageModel.SaveNewImage(0, fmt.Sprintf("https://admin.isak-tech.tk/public/images/uploads/%s_%s", selfHash, file.Filename), false, true); err != nil {
-			return err
-		}
-
-		url := fmt.Sprintf("https://admin.isak-tech.tk/public/images/uploads/%s_%s", selfHash, file.Filename)
-		images = append(images, &url)
 	}
 
 	return c.JSON(routes.HTTPResponse{
-		Message: fmt.Sprintf("Saved %d files", len(mpartForm.File["file"])),
+		Message: fmt.Sprintf("Saved %d files", len(images)),
 		Success: true,
 		Data:    images,
 	})
 }
 
 var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_")
+
+func imgExt(filetype string) (string, bool) {
+	switch filetype {
+	case "image/jpeg":
+		return "jpeg", true
+	case "image/jpg":
+		return "jpg", true
+	case "image/png":
+		return "png", true
+	case "image/gif":
+		return "gif", true
+	default:
+		return "", false
+	}
+}
 
 func randSeq(n int) string {
 	b := make([]rune, n)

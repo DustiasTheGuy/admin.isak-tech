@@ -33,26 +33,56 @@ export class ImagesComponent {
         this.upload(e.target.files));
     }
 
+    isAllowed(type) {
+        switch(type) {
+            case 'image/jpeg': return true;
+            case 'image/jpg':  return true;
+            case 'image/png': return true;
+            case 'image/gif':  return true;
+            default:           return false;
+        }
+    }
+
+    isTooLarge(size) {
+        return size / 1024 > 1000;
+    }
+
     upload(files) {
         let formData = new FormData();
-        
+        let filesLength = 0;
+
         for(let i = 0; i < files.length; i++) {
-            formData.append('file', files[i]);
+            
+            if(this.isTooLarge(files[i].size)) {
+                errorHandler("File Too Large", true);
+            } else if(filesLength >= 5) {
+                errorHandler("Maximum Files Reached", true);
+            } else if(this.isAllowed(files[i].type)) {
+                formData.append('file', files[i]);
+                filesLength++;
+            } else {
+                errorHandler("File Type Not Allowed", true);
+            }
         }
 
-        console.log(formData);
+        try {
+            http.UPLOAD('/users/upload', formData)
+            .then(res => {
+                console.log(res);
+                
+                if(res.success) {
+                    res.data.forEach(imgData => {
+                        let img = document.createElement('img');
+                        img.src = imgData;
+                        this.gallery.appendChild(img);
+                    });
+                }
+    
+                return errorHandler(res.message, !res.success);
+            });
 
-        http.UPLOAD('/users/upload', formData)
-        .then(res => {
-            if(res.success) {
-                res.data.forEach(imgData => {
-                    let img = document.createElement('img');
-                    img.src = imgData;
-                    this.gallery.appendChild(img);
-                });
-            }
-
-            return errorHandler(res.message, !res.success);
-        });
+        } catch(err) {
+            console.log(err);
+        }
     }
 }

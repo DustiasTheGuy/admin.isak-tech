@@ -51,7 +51,7 @@ func RemoveImage(ImageID, postID int64) error {
 }
 
 // SaveNewImage creates a new row in mysql
-func SaveNewImage(PostID int64, URL string, updateThumbnail bool, alone bool) error {
+func SaveNewImage(PostID int64, URL string, updateThumbnail bool, alone bool) (int64, error) {
 	db := database.Connect(&database.SQLConfig{
 		User:     "root",
 		Password: "password",
@@ -61,7 +61,7 @@ func SaveNewImage(PostID int64, URL string, updateThumbnail bool, alone bool) er
 
 	if !models.CheckLength(URL, 10) {
 		fmt.Println("Returning an error")
-		return errors.New("Image URL must be 10 characters long")
+		return 0, errors.New("Image URL must be 10 characters long")
 	}
 
 	result, err := db.Exec(
@@ -70,13 +70,13 @@ func SaveNewImage(PostID int64, URL string, updateThumbnail bool, alone bool) er
 
 	if err != nil {
 		fmt.Printf("Err When Saving Img %v\n", err)
-		return err
+		return 0, err
 	}
 
 	ImageID, err := result.LastInsertId()
 
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	if updateThumbnail {
@@ -85,7 +85,7 @@ func SaveNewImage(PostID int64, URL string, updateThumbnail bool, alone bool) er
 			ImageID, PostID)
 
 		if err != nil {
-			return err
+			return 0, err
 		}
 	}
 
@@ -94,10 +94,10 @@ func SaveNewImage(PostID int64, URL string, updateThumbnail bool, alone bool) er
 	}
 
 	if err != nil {
-		return err
+		return 0, err
 	}
 
-	return nil
+	return ImageID, nil
 }
 
 // GetImagesWithPostID is useful when querying posts but is still part of the IMAGE model

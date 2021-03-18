@@ -102,7 +102,7 @@ func AddImagePostController(c *fiber.Ctx) error {
 		return c.Redirect(fmt.Sprintf("/site/main/post/%d/add-image?err=unable to parse body", postID))
 	}
 
-	if err := imageModel.SaveNewImage(postID, body.URL, false, false); err != nil {
+	if _, err := imageModel.SaveNewImage(postID, body.URL, false, false); err != nil {
 		return c.Redirect(fmt.Sprintf("/site/main/post/%d/add-image?err=an error has occured, url might be too short", postID))
 	}
 

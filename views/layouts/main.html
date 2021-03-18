@@ -34,13 +34,15 @@
     <div class="alert-container">
         {{ if .Error }}
             <div class="alert-error">
-                <p>{{ .Error }} <i class="fas fa-exclamation-triangle"></i></p>
+                <i class="fas fa-times closeAlert"></i>
+                <p>{{ .Error }}</p>
             </div>
         {{ end }}
     
         {{ if .Success }}
             <div class="alert-success">
-                <p>{{ .Success }} <i class="fas fa-check"></i></p>
+                <i class="fas fa-times closeAlert"></i>
+                <p>{{ .Success }}</p>
             </div>
         {{ end }}
     </div>
@@ -48,9 +50,7 @@
     <div id="modal">
         <div class="modal-content">
             <i class="fas fa-times" id="closeModal"></i>
-            <div class="modal-body">
-                <h1>Hello, World</h1>
-            </div>
+            <div class="modal-body"></div>
         </div>
     </div>
 

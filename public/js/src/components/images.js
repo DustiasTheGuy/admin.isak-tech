@@ -53,7 +53,7 @@ export class ImagesComponent {
         for(let i = 0; i < galleryItems.length; i++) {
             galleryItems[i].addEventListener('click', () => {
                 this.modal.setData({
-                    url: galleryItems[i].src,
+                    url: galleryItems[i].getAttribute('src'),
                     id: galleryItems[i].getAttribute('data-id'),
                     created: galleryItems[i].getAttribute('data-created'),
                     post_id: galleryItems[i].getAttribute('data-post_id'),
@@ -90,10 +90,11 @@ export class ImagesComponent {
         try {
             http.UPLOAD('/users/upload', formData)
             .then(res => { 
-                if(res.success) {
-                    window.location.reload();
-                }
-                
+                if(res.success)
+                return window.location.href = 
+                       window.location.href = 
+                       '?s=uploaded: ' + res.data.length + ' files';
+
                 return errorHandler(res.message, !res.success);
             });
 

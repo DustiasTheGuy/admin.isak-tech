@@ -63,7 +63,7 @@ func (p *Post) SaveNewPost() error {
 		return err
 	}
 
-	err = imageModel.SaveNewImage(id, p.Thumbnail, true, false)
+	_, err = imageModel.SaveNewImage(id, p.Thumbnail, true, false)
 
 	if err != nil {
 		fmt.Printf("err saving image: %v\n", err)

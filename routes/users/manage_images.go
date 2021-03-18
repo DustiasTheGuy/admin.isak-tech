@@ -41,7 +41,7 @@ func ManageImagesGetController(c *fiber.Ctx) error {
 }
 
 func UploadImagePostController(c *fiber.Ctx) error {
-	var images []string
+	var images []map[string]interface{}
 	mpartForm, err := c.MultipartForm()
 
 	if err != nil {
@@ -71,11 +71,20 @@ func UploadImagePostController(c *fiber.Ctx) error {
 				})
 			}
 
-			if err := imageModel.SaveNewImage(0, fullURL, false, true); err != nil { // save image url to mysql
-				return err
+			ImageID, err := imageModel.SaveNewImage(0, fullURL, false, true)
+
+			if err != nil {
+				return c.JSON(routes.HTTPResponse{
+					Message: fmt.Sprintf("%v", err),
+					Success: false,
+					Data:    nil,
+				})
 			}
 
-			images = append(images, fullURL) // append imageurl to slice
+			images = append(images, map[string]interface{}{
+				"url": fullURL,
+				"id":  ImageID,
+			}) // append imageurl to slice
 		}
 	}
 

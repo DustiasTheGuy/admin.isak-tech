@@ -1,3 +1,4 @@
+@import "variables";
 .alert-container {
     position: fixed;
     bottom: 0;
@@ -10,34 +11,34 @@
     .alert-success {
         height: 100%;
         width: 100%;
-        padding: 1em;
+        padding: 1em 2em 1em 2em;
         font-weight: 400;
         text-transform: capitalize;
         transition: all 200ms linear;
-        
-        p {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+        position: relative;
 
-            i {
-                margin-left: 20px;
-            }
+        i.fas.fa-times {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 10px;
+            cursor: pointer;
         }
 
-        &:hover {
-            opacity: 50%;
-            cursor: pointer;
+        p {
+            display: flex;
+            align-items: center;
+            margin: 0;
         }
     }
 
     .alert-error {
         background-color: rgb(182, 65, 65);
-        color: #fff;
+        color: $color3;
     }
 
     .alert-success {
-        background-color: #4E937A;
-        color: #fff;
+        background-color: $color2;
+        color: $color3;
     }
 }

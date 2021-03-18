@@ -10,12 +10,12 @@ import { signInSubmit, signUpSubmit } from './utils/submit';
 import {
     initSidenav,
     activeLink, 
-    closeAlertEvent, 
     archivedInitial,
     adminLevelInitial,
     galleryItemInital,
     editPostInitial,
-    deletePageInitial
+    deletePageInitial,
+    closeAlertInitial
 } from './utils/utils';
 
 export const http = new HTTP(false); // create new http instance that can be used by components/utils
@@ -24,11 +24,11 @@ const init = () => {
     activeLink(); // set active class on nav list item
     initSidenav(); // add event listeners to the open/close btn on sidenav
     adminLevelInitial(); // change the admin level input value based on what the server has sent
-    closeAlertEvent(); // add an event listener to errors so then can be closed
     archivedInitial(); // when editing an existing post, set archived to the old value
     galleryItemInital(); // add event listener to gallery items so they can be removed
     editPostInitial(); // add event listeners to delete/update buttons
     deletePageInitial(); // add event listeners to the delete buttons
+    closeAlertInitial();
 }
 
 const main = () => {

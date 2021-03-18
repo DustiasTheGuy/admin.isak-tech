@@ -13,25 +13,25 @@
 .alert-container .alert-success {
   height: 100%;
   width: 100%;
-  padding: 1em;
+  padding: 1em 2em 1em 2em;
   font-weight: 400;
   text-transform: capitalize;
   transition: all 200ms linear;
+  position: relative;
+}
+.alert-container .alert-error i.fas.fa-times,
+.alert-container .alert-success i.fas.fa-times {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  cursor: pointer;
 }
 .alert-container .alert-error p,
 .alert-container .alert-success p {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-}
-.alert-container .alert-error p i,
-.alert-container .alert-success p i {
-  margin-left: 20px;
-}
-.alert-container .alert-error:hover,
-.alert-container .alert-success:hover {
-  opacity: 50%;
-  cursor: pointer;
+  margin: 0;
 }
 .alert-container .alert-error {
   background-color: #b64141;
@@ -46,6 +46,8 @@ form.upload-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fff;
+  padding: 0;
 }
 form.upload-form .dropzone.highlight {
   background-color: #464646;
@@ -61,6 +63,7 @@ form.upload-form .dropzone {
   align-items: center;
   font-size: 40px;
   transition: all 200ms linear;
+  background-color: #f3f3f3;
 }
 form.upload-form input {
   color: #fff;
@@ -116,7 +119,7 @@ form .form-group p {
 form .form-group label {
   display: flex;
   justify-content: space-between;
-  color: #ffffff;
+  color: #fff;
   transition: all 200ms linear;
   margin-bottom: 8px;
 }
@@ -173,7 +176,7 @@ form .button-group button {
   padding: 10px;
 }
 #navbar-btn:hover {
-  color: #3d7561;
+  color: #4E937A;
 }
 
 #navbar-btn.open {
@@ -183,7 +186,6 @@ form .button-group button {
 
 #sidenav.open {
   width: 300px;
-  border-right: 1px solid #4E937A;
 }
 
 #sidenav {
@@ -205,11 +207,11 @@ form .button-group button {
 #sidenav::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #333333;
+  background-color: #333;
 }
 #sidenav::-webkit-scrollbar {
   width: 12px;
-  background-color: #F5F5F5;
+  background-color: #dfdfdf;
 }
 #sidenav::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -217,7 +219,7 @@ form .button-group button {
   background-color: #4E937A;
 }
 #sidenav .logo {
-  background-color: #333333;
+  background-color: #333;
   height: 225px;
   display: flex;
   align-items: center;
@@ -237,7 +239,7 @@ form .button-group button {
   padding: 1.2rem;
 }
 #sidenav div:not(:last-of-type) {
-  border-bottom: 1px solid #414141;
+  border-bottom: 1px solid #424242;
 }
 #sidenav div h4 {
   text-transform: uppercase;
@@ -261,7 +263,7 @@ form .button-group button {
   text-decoration: none;
   display: block;
   cursor: pointer;
-  background-color: rgba(51, 51, 51, 0);
+  background-color: rgba(255, 255, 255, 0);
   border: none;
   padding: 6px 12px;
   font-family: "Open Sans", sans-serif;
@@ -309,7 +311,7 @@ form .button-group button {
   margin: 0;
 }
 .page-header p {
-  color: #ffffff;
+  color: #fff;
   width: 40%;
   text-align: center;
   margin: 20px 0;
@@ -319,7 +321,7 @@ form .button-group button {
   color: #4E937A;
 }
 .page-header nav a:not(:last-of-type) {
-  color: #ffffff;
+  color: #fff;
 }
 .page-header nav a:not(:last-of-type):hover {
   color: #c9c9c9;
@@ -328,7 +330,7 @@ form .button-group button {
   content: "/";
   margin: 0 10px;
   font-size: 14px;
-  color: #ffffff;
+  color: #fff;
 }
 
 .ph-item {
@@ -393,17 +395,17 @@ body {
   font-family: "Roboto", sans-serif;
   width: 100%;
   height: 100%;
-  color: #000;
+  color: #4E937A;
   background-color: #fff;
 }
 body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #333333;
+  background-color: #333;
 }
 body::-webkit-scrollbar {
   width: 12px;
-  background-color: #F5F5F5;
+  background-color: #dfdfdf;
 }
 body::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -448,7 +450,7 @@ section.body {
 }
 
 .btn-danger {
-  background-color: #931F1D;
+  background-color: #b64141;
 }
 .btn-danger:hover {
   background-color: #aa2927;
@@ -463,25 +465,6 @@ section.body {
   color: #fff;
 }
 
-section header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-section header h4 {
-  margin: 0;
-}
-section header a {
-  text-decoration: none;
-  background-color: #23967F;
-  color: #fff;
-  padding: 8px 12px;
-  cursor: pointer;
-}
-section header a:hover {
-  background-color: #2da78e;
-}
 section .list {
   background-color: #333;
   margin-top: 1em;
@@ -737,7 +720,7 @@ section .grid .grid-item div a:hover {
 .table .table-body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #333333;
+  background-color: #333;
 }
 .table .table-body::-webkit-scrollbar {
   width: 12px;
@@ -793,9 +776,7 @@ section .grid .grid-item div a:hover {
   background-color: rgba(51, 51, 51, 0.555);
   pointer-events: auto;
   z-index: 3;
-}
-#modal.open .modal-content {
-  background-color: #fff;
+  display: flex;
 }
 
 #modal {
@@ -805,22 +786,18 @@ section .grid .grid-item div a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 400ms linear;
+  display: none;
 }
 #modal .modal-content {
-  background-color: rgba(255, 255, 255, 0.486);
   width: 50%;
   height: 50%;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  background-color: white;
 }
 #modal .modal-content #closeModal {
   position: absolute;

@@ -10,24 +10,21 @@ export const navigate = (element) =>
     parseInt(element.getAttribute('data-id'));
 
 export const errorHandler = (message, isErr) => {
-    
-    try {
-        let alertsContainer = document.getElementsByClassName('alerts-container')[0];
-        alertsContainer.parentElement.removeChild(alertsContainer);
-    } catch(err) {
-        console.log('Zero errors found');
+    let container = document.getElementsByClassName('alert-container')[0];
+
+    for(let i = 0; i < container.childNodes.length; i++) {
+        container.removeChild(container.childNodes[i]);
     }
 
     let div = document.createElement('div');
-    div.classList.add('alert-container');
+    div.classList.add(isErr ? 'alert-error' : 'alert-success');
     div.innerHTML = `
-        <div class="${ isErr ? 'alert-error' : 'alert-success' }">
-            <p>${message} <i class="fas ${ isErr ? 'fa-exclamation-triangle' : 'fa-check-square'}"></i></p>
-        </div>
+        <i class="fas fa-times closeAlert"></i>
+        <p>${message}</p>
     `
-    document.body.appendChild(div)
-    closeAlertEvent();
-    //setTimeout(() => document.body.removeChild(div), 5000);
+    container.appendChild(div)
+    closeAlertInitial();
+    return;
 };
 
 export const formatDate = (date) => moment(date).fromNow();
@@ -120,23 +117,6 @@ export const activeLink = () => {
     }
 }
 
-export const closeAlertEvent = () => {
-    try {
-        let alerts = document.getElementsByClassName('alert-container');
-        
-        for(let i = 0; i < alerts.length; i++) {
-            alerts[i].addEventListener('click', () => {
-                alerts[i].style.display = 'none';
-            });
-        }
-
-        window.history.replaceState(null, null, window.location.pathname);
-        return;
-    } catch(err) {
-        return;
-    }
-}
-
 export const archivedInitial = () => {
     try {
         return document.getElementById('archived').checked = 
@@ -203,6 +183,22 @@ export const deletePageInitial = () => {
         for(let i = 0; i < deleteBtns.length; i++) {
             deleteBtns[i].addEventListener('click', () => 
             deletePageSubmit(deleteBtns[i].getAttribute('data-id')));
+        }
+
+    } catch(err) {
+        return;
+    }
+}
+
+export const closeAlertInitial = () => {
+    try {
+        let closeAlerts = document.getElementsByClassName('closeAlert');
+
+        for(let i = 0; i < closeAlerts.length; i++) {
+            closeAlerts[i].addEventListener('click', () => {
+                closeAlerts[i].parentElement.parentElement
+                .removeChild(closeAlerts[i].parentElement);
+            });
         }
 
     } catch(err) {

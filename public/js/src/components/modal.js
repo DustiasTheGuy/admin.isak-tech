@@ -26,11 +26,17 @@ export class ModalComponent {
     }
 
     deleteImage() {
-        if(confirm('Are you sure you wish to delete image:', this.data.id)) {
+        if(confirm('Are you sure you wish to delete image: ' + this.data.id)) {
             http.GET(`/site/main/post/${this.data.post_id}/${this.data.id}/remove-image`)
-            .then(response => 
-            response.success ? window.location.reload() :
-            errorHandler(response.message, !response.success));
+            .then(response => {
+                if(response.success) {
+                    return window.location.href = 
+                    window.location.href = 
+                    '?s=Removed image: ' + this.data.id;
+                }
+
+                return errorHandler(response.message, !response.success);
+            });
         }
     }
 

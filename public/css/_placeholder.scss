@@ -1,3 +1,5 @@
+@import "variables";
+
 .ph-item {
     direction: ltr;
     position: relative;
@@ -7,7 +9,7 @@
     align-items: center;
     padding: 2em;
     overflow: hidden;
-    background-color: #333;
+    background-color: $color1;
     min-height: 300px;
 
     .line {

@@ -2,6 +2,8 @@ form.upload-form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: $color3;
+    padding: 0;
 
     .dropzone.highlight {
         background-color: rgb(70, 70, 70);
@@ -10,18 +12,19 @@ form.upload-form {
     .dropzone {
         width: 100%;
         height: 200px;
-        border: 2px dashed #4E937A;
-        color: #4E937A;
+        border: 2px dashed $color2;
+        color: $color2;
         margin-bottom: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 40px;
         transition: all 200ms linear;
+        background-color: rgb(243, 243, 243);
     }    
 
     input {
-        color: #fff;
+        color: $color3;
         width: 100%;
     }
 }
@@ -29,20 +32,20 @@ form.upload-form {
 form {
     width: 100%;
     margin-top: 2em;
-    background-color: #333;
+    background-color: $color1;
     padding: 2em;
 
     h1 {
-        color: #fff;
+        color: $color3;
         font-size: 48px;
     }
 
     h3 {
-        color: #fff;
+        color: $color3;
     }
     
     a {
-        color: #4E937A;
+        color: $color2;
     }
 
     .hidden {
@@ -72,7 +75,7 @@ form {
         flex-direction: column;
         margin: 1.6em 0;
         position: relative;
-        background-color: #333;
+        background-color: $color1;
 
         p {
             margin: 0;
@@ -83,7 +86,7 @@ form {
         label {
             display: flex;
             justify-content: space-between;
-            color: #ffffff;
+            color: $color3;
             transition: all 200ms linear;
             margin-bottom: 8px;
         }
@@ -102,7 +105,7 @@ form {
             border: none;
             outline: none;
             border: 4px solid transparent;
-            color: #333;
+            color: $color1;
             transition: all 200ms linear;
 
             &::placeholder {
@@ -114,7 +117,7 @@ form {
             }
 
             &:focus {
-                border-color: #4E937A;
+                border-color: $color2;
             }
         }
 
@@ -123,7 +126,7 @@ form {
         }
 
         span {
-            color: #fff;
+            color: $color3;
             display: block;
             margin-top: 8px;
         }

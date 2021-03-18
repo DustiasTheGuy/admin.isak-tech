@@ -1,11 +1,10 @@
+@import "variables";
+
 #modal.open {
     background-color: rgba(51, 51, 51, 0.555);
     pointer-events: auto;
     z-index: 3;
-
-    .modal-content {
-        background-color: #fff;
-    }
+    display: flex;
 }
 
 #modal {
@@ -15,29 +14,24 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 1;
     pointer-events: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 400ms linear;
-
+    display: none;
     .modal-content {
-        background-color: rgba(255, 255, 255, 0.486);
         width: 50%;
         height: 50%;
         position: relative; 
-        border: 1px solid rgba(0, 0, 0, 0.3);
-        -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        background-color: rgb(255, 255, 255);
 
         #closeModal {
             position: absolute;
             bottom: 105%;
             left: 105%;
             font-size: 32px;
-            color: #fff;
+            color: $color3;
             cursor: pointer;
 
             &:hover {
@@ -69,7 +63,7 @@
                 
                 &:hover {
                     background-color: rgb(240, 66, 66);
-                    color: #fff;
+                    color: $color3;
                 }
             }
         }
